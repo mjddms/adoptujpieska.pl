@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -8,40 +9,44 @@ using AdoptujPieska.Models;
 
 namespace AdoptujPieska.Controllers
 {
+
     public class UserController : Controller
     {
         // GET: User
-        public ActionResult Register(int id=0)
+        public ActionResult Register(int id = 0)
         {
             User user = new User();
             return View(user);
         }
         [HttpPost]
-        public ActionResult Register(User user) 
+        public ActionResult Register(User user)
         {
-            using (DBUserModelDataContext db = new DBUserModelDataContext(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\natal\OneDrive\Pulpit\Nowy folder\AdoptujPieska\AdoptujPieska\App_Data\Database1.mdf"";Integrated Security=True"))
+
+            using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
             {
-                if(db.User.Any(x => x.USERNAME==user.USERNAME))
+                if (db.User.Any(x => x.USERNAME == user.USERNAME))
                 {
                     ViewBag.DuplicateMessage = "Użytkownik o takiej nazwie już istnieje!";
-                    return View("Register",user);
+                    return View("Register", user);
                 }
-                else 
+                else
                 {
                     db.User.InsertOnSubmit(user);
                     db.SubmitChanges();
                 }
-               
+
             }
             ModelState.Clear();
             ViewBag.SuccessMessage = "Zarejestrowano pomyślnie!";
-            return View("Login",new User());
+            return View("Login", new User());
         }
         public ActionResult Login(User user)
         {
-            DBUserModelDataContext db = new DBUserModelDataContext(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\dzied\OneDrive\Pulpit\AdoptujPieska\v1\AdoptujPieska\AdoptujPieska\App_Data\Database1.mdf"";Integrated Security=True");
-            var users=db.User.Where(x => x.USERNAME == user.USERNAME && x.PASSWORD == user.PASSWORD).Count();
-            if (users > 0) 
+            DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString);
+
+
+            var users = db.User.Where(x => x.USERNAME == user.USERNAME && x.PASSWORD == user.PASSWORD).Count();
+            if (users > 0)
             {
                 Session["UserName"] = user.USERNAME;
                 return RedirectToAction("Home");
@@ -52,7 +57,7 @@ namespace AdoptujPieska.Controllers
             }
 
         }
-        
+
         public ActionResult Home()
         {
             if (Session["UserName"] == null)
