@@ -16,7 +16,7 @@ namespace AdoptujPieska.Controllers
         // GET: Pieski
         public ActionResult Index()
         {
-            return View("All");
+            return View();
         }
 
         public ActionResult Add(Pieski piesek)
@@ -45,9 +45,6 @@ namespace AdoptujPieska.Controllers
             {
                 var pieski = db.Pieski.ToList();
                 ViewBag.Pieski = pieski;
-
-
-
             }
             return View();
 

@@ -1,0 +1,43 @@
+﻿<h1>Wszystkie pieski</h1>
+<style>
+	table {
+		font-family: Arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	th, td {
+		text-align: left;
+		padding: 8px;
+	}
+</style>
+<p>
+	@Html.ActionLink("+ Dodaj Pieska", "Add")
+</p>
+<table>
+	<thead>
+		<tr>
+			<th>Rasa</th>
+			<th>Imie</th>
+			<th>Wiek</th>
+			<th>Plec</th>
+			<th>Aktywny</th>
+			<th>Lubi dzieci</th>
+			<th>Lubi psy</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var piesek in ViewBag.Pieski)
+		{
+			<tr>
+				<td>@piesek.Rasa</td>
+				<td>@piesek.Imie</td>
+				<td>@piesek.Wiek</td>
+				<td>@(piesek.Plec ? "Samica" : "Samiec")</td>
+				<td>@(piesek.Aktywny ? "Tak" : "Nie") </td>
+				<td>@(piesek.Lubi_dzieci ? "Tak" : "Nie")</td>
+				<td>@(piesek.Lubi_psy ? "Tak" : "Nie" )</td>
+			</tr>
+		}
+	</tbody>
+</table>

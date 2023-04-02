@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Dodaj Pieska</title>
+	<style>
+
+		form {
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			max-width: 500px;
+			margin: 0 auto;
+		}
+
+		h1 {
+			text-align: center;
+			color: #333;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+			font-weight: bold;
+			color: #555;
+		}
+
+		input[type="text"],
+		input[type="number"],
+		select {
+			padding: 8px;
+			border-radius: 5px;
+			border: none;
+			margin-bottom: 20px;
+			box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+			width: 100%;
+		}
+
+		input[type="radio"],
+		input[type="checkbox"] {
+			margin-right: 10px;
+		}
+
+		input[type="file"] {
+			margin-bottom: 20px;
+		}
+
+		input[type="submit"] {
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+			margin-top: 20px;
+		}
+
+			input[type="submit"]:hover {
+				background-color: #3e8e41;
+			}
+	</style>
+</head>
+<body>
+	<form action="Add" method="POST">
+		<label for="rasa">Rasa:</label>
+		<input type="text" id="rasa" name="rasa"><br>
+
+		<label for="imie">Imię:</label>
+		<input type="text" id="imie" name="imie"><br>
+
+		<label for="wiek">Wiek:</label>
+		<input type="number" id="wiek" name="wiek"><br>
+
+		<label for="plec">Płeć:</label>
+		<select id="plec" name="plec">
+			<option value="True">Samica</option>
+			<option value="False">Samiec</option>
+		</select><br>
+
+		<label for="aktywny">Aktywny:</label>
+		<select id="aktywny" name="aktywny">
+			<option value="True">Tak</option>
+			<option value="False">Nie</option>
+		</select><br>
+
+		<label for="lubi_dzieci">Lubi dzieci:</label>
+		<select id="lubi_dzieci" name="lubi_dzieci">
+			<option value="True">Tak</option>
+			<option value="False">Nie</option>
+		</select><br>
+
+		<label for="lubi_psy">Lubi psy:</label>
+		<select id="lubi_psy" name="lubi_psy">
+			<option value="True">Tak</option>
+			<option value="False">Nie</option>
+		</select><br>
+
+		<input type="submit" value="Dodaj">
+	</form>
+</body>
+</html>

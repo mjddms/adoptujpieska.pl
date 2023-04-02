@@ -126,6 +126,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PieskiController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -204,6 +205,9 @@
     <Content Include="Views\User\Home.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPart.cshtml" />
+    <Content Include="Views\Pieski\Add.cshtml" />
+    <Content Include="Views\Pieski\All.cshtml" />
+    <Content Include="Views\Pieski\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
