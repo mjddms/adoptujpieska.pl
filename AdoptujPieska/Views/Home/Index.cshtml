@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Adoptuj pieska";
+}
+<body>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <img class="img-fluid" src="~/Pictures/banner2.jpg" alt="Banner" />
+            </div>
+        </div>
+
+
+        <div class="jumbotron">
+            <h1>Adoptuj pieska!</h1>
+            <p>U nas znajdziesz wiele wspaniałych psów, gotowych na adopcję.</p>
+            <p><a class="btn btn-custom btn-lg" href="@Url.Action("Index", "Dogs")" role="button">Zobacz psy</a></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h2>O nas</h2>
+                <p>
+                    Nasze schronisko dla psów działa od 2005 roku. Jesteśmy organizacją non-profit i naszym celem jest znalezienie
+                    domu dla jak największej liczby bezdomnych psów.
+                </p>
+                <p><a class="btn btn-default" href="#" role="button">Czytaj więcej &raquo;</a></p>
+            </div>
+
+            <div class="col-md-4">
+                <h2>Adopcja</h2>
+                <p>
+                    Adopcja psa z naszego schroniska to wspaniałe doświadczenie. Nasze psy są wychodzone, w pełni zaszczepione
+                    i gotowe na nowy dom.
+                </p>
+                <p><a class="btn btn-default" href="#" role="button">Zobacz, jak adoptować &raquo;</a></p>
+            </div>
+
+            <div class="col-md-4">
+                <h2>Wspomóż nas</h2>
+                <p>
+                    Nasze schronisko działa dzięki pomocy wolontariuszy i darowizn. Jeśli chcesz pomóc nam w ratowaniu psich żyć,
+                    możesz nas wesprzeć finansowo lub jako wolontariusz.
+                </p>
+                <p><a class="btn btn-default" href="#" role="button">Dowiedz się więcej &raquo;</a></p>
+            </div>
+        </div>
+
+
+
+        <style>
+            img {
+                display: block;
+                margin: auto;
+            }
+
+            .btn-custom {
+                background-color: #212529;
+                color: white;
+            }
+
+            .btn-custom:hover {
+                 background-color: #3e8e41;
+            }
+        </style>
+
+
+
+
+</body>

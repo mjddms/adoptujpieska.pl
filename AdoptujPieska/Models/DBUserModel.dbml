@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Database1" Class="DBUserModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.[User]" Member="User">
+    <Type Name="User">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="USERNAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PASSWORD" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pieski" Member="Pieski">
+    <Type Name="Pieski">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Rasa" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Imie" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Wiek" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Plec" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Zdjecie" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Aktywny" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[Lubi dzieci]" Member="Lubi_dzieci" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[Lubi psy]" Member="Lubi_psy" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

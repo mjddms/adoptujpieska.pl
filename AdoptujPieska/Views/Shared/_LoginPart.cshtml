@@ -1,0 +1,22 @@
+﻿@using AdoptujPieska.Controllers
+@if (Session["UserName"] != null)
+{
+	using (Html.BeginForm("LogOut", "User", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+	{
+		@Html.AntiForgeryToken()
+
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				@Html.ActionLink($"Witaj, {Session["UserName"]}!", "Manage", "User", new { area = "" }, new { @class = "nav-link" })
+			</li>
+			<li>@Html.ActionLink("Wyloguj", "LogOut", new { area = "" }, new { @class = "nav-link" })</li>
+		</ul>
+	}
+}
+else
+{
+	<ul class="nav navbar-nav navbar-right">
+
+		<li>@Html.ActionLink("Zaloguj", "Login", "User", new { area = "" }, new { @class = "nav-link" })</li>
+	</ul>
+}
