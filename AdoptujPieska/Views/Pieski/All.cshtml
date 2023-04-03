@@ -50,6 +50,7 @@
                     <td>@Html.ActionLink("Edytuj", "Edit", new { id = piesek.Id })</td>
                     <td>@Html.ActionLink("Usuń", "Delete", new { id = piesek.Id }, new { onclick = "return confirm('Czy na pewno chcesz usunąć tego psa?')" }) </td>
                 }
+                <td>@Html.ActionLink("Wyświetl profil", "Profile", new { id = piesek.Id })</td>
             </tr>
 
         }
