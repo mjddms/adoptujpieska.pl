@@ -50,5 +50,41 @@ namespace AdoptujPieska.Controllers
 
         }
 
+        public ActionResult Edit(int id)
+        {
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
+            {
+                var piesek = db.Pieski.FirstOrDefault(p => p.Id == id);
+                if (piesek != null)
+                {
+                    return View("Edit", piesek);
+                }
+            }
+            return RedirectToAction("All");
+        }
+
+
+        public ActionResult Update(Pieski piesek)
+        {
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
+
+            {
+                var piesekToUpdate = db.Pieski.FirstOrDefault(p => p.Id == piesek.Id);
+                if (piesekToUpdate != null)
+                {
+                    piesekToUpdate.Imie = piesek.Imie;
+                    piesekToUpdate.Rasa = piesek.Rasa;
+                    piesekToUpdate.Wiek = piesek.Wiek;
+                    piesekToUpdate.Plec = piesek.Plec;
+                    db.SubmitChanges();
+                    return RedirectToAction("All");
+                }
+
+            }
+            return RedirectToAction("Edit", new { id = piesek.Id });
+        }
+
+
+
     }
 }

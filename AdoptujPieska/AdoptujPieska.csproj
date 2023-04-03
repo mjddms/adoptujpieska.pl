@@ -208,6 +208,7 @@
     <Content Include="Views\Pieski\Add.cshtml" />
     <Content Include="Views\Pieski\All.cshtml" />
     <Content Include="Views\Pieski\Index.cshtml" />
+    <Content Include="Views\Pieski\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
