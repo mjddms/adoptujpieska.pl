@@ -1,0 +1,24 @@
+@model AdoptujPieska.Models.Pieski
+
+<h2>Profil psa</h2>
+
+<div class="row">
+	<div class="col-md-8">
+		<dl class="dl-horizontal">
+			<dt>Imie:</dt>
+			<dd>@Model.Imie</dd>
+			<dt>Rasa:</dt>
+			<dd>@Model.Rasa</dd>
+			<dt>Wiek:</dt>
+			<dd>@Model.Wiek</dd>
+			<dt>Plec:</dt>
+			<dd>@(Model.Plec.HasValue ? (Model.Plec.Value ? "Samica" : "Samiec") : "Nieznana")</dd>
+			<dt>Aktywny:</dt>
+			<dd>@(Model.Aktywny.HasValue ? (Model.Aktywny.Value ? "Tak" : "Nie") : "Nieznane")</dd>
+			<dt>Lubi dzieci:</dt>
+			<dd>@(Model.Lubi_dzieci.HasValue ? (Model.Lubi_dzieci.Value ? "Tak" : "Nie") : "Nieznane")</dd>
+			<dt>Lubi psy:</dt>
+			<dd>@(Model.Lubi_psy.HasValue ? (Model.Lubi_psy.Value ? "Tak" : "Nie") : "Nieznane")</dd>
+		</dl>
+	</div>
+</div>
