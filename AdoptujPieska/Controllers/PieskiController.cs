@@ -72,8 +72,8 @@ namespace AdoptujPieska.Controllers
                 var piesekToUpdate = db.Pieski.FirstOrDefault(p => p.Id == piesek.Id);
                 if (piesekToUpdate != null)
                 {
-                    piesekToUpdate.Imie = piesek.Imie;
                     piesekToUpdate.Rasa = piesek.Rasa;
+                    piesekToUpdate.Imie = piesek.Imie;
                     piesekToUpdate.Wiek = piesek.Wiek;
                     piesekToUpdate.Plec = piesek.Plec;
                     db.SubmitChanges();
