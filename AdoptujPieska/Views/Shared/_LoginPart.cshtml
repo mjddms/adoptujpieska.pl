@@ -7,7 +7,7 @@
 
 		<ul class="nav navbar-nav navbar-right">
 			<li>
-				@Html.ActionLink($"Witaj, {Session["UserName"]}!", "Manage", "User", new { area = "" }, new { @class = "nav-link" })
+				@Html.ActionLink($"Witaj, {Session["UserName"]}!", "Manage", "User/Home", new { area = "" }, new { @class = "nav-link" })
 			</li>
 			<li>@Html.ActionLink("Wyloguj", "LogOut", new { area = "" }, new { @class = "nav-link" })</li>
 		</ul>
