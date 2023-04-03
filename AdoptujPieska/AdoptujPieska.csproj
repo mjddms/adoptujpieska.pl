@@ -210,6 +210,7 @@
     <Content Include="Views\Pieski\Index.cshtml" />
     <Content Include="Views\Pieski\Edit.cshtml" />
     <Content Include="Views\Pieski\Delete.cshtml" />
+    <Content Include="Views\User\LogOut.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

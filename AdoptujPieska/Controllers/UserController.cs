@@ -85,7 +85,7 @@ namespace AdoptujPieska.Controllers
         public ActionResult LogOut()
         {
             Session.Abandon();
-            return RedirectToAction("Login");
+            return RedirectToAction("Home/Index");
         }
 
     }
