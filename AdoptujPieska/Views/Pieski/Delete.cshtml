@@ -1,0 +1,7 @@
+﻿
+<h2>Czy na pewno chcesz usunąć psa?</h2>
+
+@using (Html.BeginForm("Delete", "Pieski", new { id = Model.Id }))
+{
+    <button type="submit" class="btn btn-danger">Usuń</button>
+}

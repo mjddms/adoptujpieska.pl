@@ -85,6 +85,22 @@ namespace AdoptujPieska.Controllers
         }
 
 
+        public ActionResult Delete(int id)
+        {
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
+            {
+                var piesekToDelete = db.Pieski.FirstOrDefault(p => p.Id == id);
+                if (piesekToDelete != null)
+                {
+                    db.Pieski.DeleteOnSubmit(piesekToDelete);
+                    db.SubmitChanges();
+                }
+            }
+            return RedirectToAction("All");
+        }
+
+
+
 
     }
 }

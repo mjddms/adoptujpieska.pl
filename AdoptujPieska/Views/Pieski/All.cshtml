@@ -25,6 +25,7 @@
             <th>Lubi dzieci</th>
             <th>Lubi psy</th>
             <th>Edytuj</th>
+            <th>Usuń</th>
         </tr>
     </thead>
     <tbody>
@@ -40,6 +41,7 @@
                 <td>@(piesek.Lubi_dzieci ? "Tak" : "Nie")</td>
                 <td>@(piesek.Lubi_psy ? "Tak" : "Nie" )</td>
                 <td>@Html.ActionLink("Edytuj", "Edit", new { id = piesek.Id })</td>
+                <td>@Html.ActionLink("Usuń", "Delete", new { id = piesek.Id }, new { onclick = "return confirm('Czy na pewno chcesz usunąć tego psa?')" }) </td>
             </tr>
         }
 

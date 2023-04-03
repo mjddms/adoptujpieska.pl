@@ -209,6 +209,7 @@
     <Content Include="Views\Pieski\All.cshtml" />
     <Content Include="Views\Pieski\Index.cshtml" />
     <Content Include="Views\Pieski\Edit.cshtml" />
+    <Content Include="Views\Pieski\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
