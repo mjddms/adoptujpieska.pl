@@ -98,9 +98,19 @@ namespace AdoptujPieska.Controllers
             }
             return RedirectToAction("All");
         }
-
-
-
+        
+        public new ActionResult Profile(int? id)
+        {
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
+            {
+                var pies = db.Pieski.SingleOrDefault(p => p.Id == id);
+                if (pies == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(pies);
+            }
+        }
 
     }
 }
