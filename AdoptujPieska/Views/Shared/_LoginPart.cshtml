@@ -9,7 +9,7 @@
 			<li>
 				@Html.ActionLink($"Witaj, {Session["UserName"]}!", "Manage", "User/Home", new { area = "" }, new { @class = "nav-link" })
 			</li>
-			<li>@Html.ActionLink("Wyloguj", "LogOut" , "Home/Index" , new { area = "" }, new { @class = "nav-link" })</li>
+			<li>@Html.ActionLink("Wyloguj", "LogOut", "User" , new { area = "" }, new { @class = "nav-link" })</li>
 		</ul>
 	
 }
