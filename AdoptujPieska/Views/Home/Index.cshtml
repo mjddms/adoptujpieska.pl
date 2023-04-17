@@ -1,71 +1,121 @@
-﻿@{
+﻿@model AdoptujPieska.Models.Pieski
+@{
     ViewBag.Title = "Adoptuj pieska";
 }
 <body>
 
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <img class="img-fluid" src="~/Pictures/banner2.jpg" alt="Banner" />
+    <section class="pt-3 pt-md-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5">
+                    <div class="text-center text-md-start mt-5 mb-4">
+                        <h1 class="display-6 fw-bold text-shadow" data-localize="hero-text">Znajdź zwierzaka</h1>
+                        <p class="subtitle letter-spacing-4 mb-2 text-disabled text-shadow" data-localize="hero-text-secondary">Znajdź i pokochaj pupila</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-10 col-lg-10">
+                            <div class="row mt-4 mt-lg-4">
+                                <div class="col">
+                                    <input type="radio" class="btn-check" name="search-options-type" value="DOG" id="search-opt-dog" autocomplete="off">
+                                    <label class="btn btn-lg btn-outline-primary rounded-pill w-100 " for="search-opt-dog"><i class="fa fa-dog me-1"></i><span data-localize="search-label-dog">Pies</span></label>
+                                </div>
+                                <div class="col">
+                                    <input type="radio" class="btn-check" name="search-options-type" value="CAT" id="search-opt-cat" autocomplete="off">
+                                    <label class="btn btn-lg btn-outline-primary rounded-pill w-100 " for="search-opt-cat"><i class="fa fa-cat me-1"></i><span data-localize="search-label-cat">Kot</span></label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row mt-4 mt-lg-4">
+                                <p class="subtitle letter-spacing-4 mb-2 text-disabled text-shadow" data-localize="hero-text-secondary"><strong>Płeć</strong></p>
+
+                                <div class="col-4 text-center">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="search-options-gender" value="NONE" id="search-gender-none" autocomplete="off" checked>
+                                        <label class="w-100" for="search-gender-none"><span data-localize="search-opt-none">Dowolna</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="search-options-gender" value="MALE" id="search-gender-male" autocomplete="off">
+                                        <label class="w-100 " for="search-gender-male"><span data-localize="search-opt-male">On</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" name="search-options-gender" value="FEMALE" id="search-gender-female" autocomplete="off">
+                                        <label class="w-100 " for="search-gender-female"><span data-localize="search-opt-female">Ona</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4 mt-lg-4">
+                                <div class="col">
+                                    <button class="btn btn-lg btn-primary rounded-pill h-100 w-100" id="search-opt-submit" type="submit" data-localize="search-label-search">Szukaj</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 d-none d-lg-block align-self-end">
+                    <img class="img-fluid" src="~/Pictures/dog.png" alt="Banner" />
+                </div>
             </div>
+        </div>
+    </section>
+
+   <br> <br />
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>O nas</h2>
+            <p>
+                Nasze schronisko dla psów działa od 2005 roku. Jesteśmy organizacją non-profit i naszym celem jest znalezienie
+                domu dla jak największej liczby bezdomnych psów.
+            </p>
+            <p><a class="btn btn-default" href="#" role="button">Czytaj więcej &raquo;</a></p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Adopcja</h2>
+            <p>
+                Adopcja psa z naszego schroniska to wspaniałe doświadczenie. Nasze psy są wychodzone, w pełni zaszczepione
+                i gotowe na nowy dom.
+            </p>
+            <p><a class="btn btn-default" href="#" role="button">Zobacz, jak adoptować &raquo;</a></p>
+        </div>
+
+        <div class="col-md-4">
+            <h2>Wspomóż nas</h2>
+            <p>
+                Nasze schronisko działa dzięki pomocy wolontariuszy i darowizn. Jeśli chcesz pomóc nam w ratowaniu psich żyć,
+                możesz nas wesprzeć finansowo lub jako wolontariusz.
+            </p>
+            <p><a class="btn btn-default" href="#" role="button">Dowiedz się więcej &raquo;</a></p>
         </div>
     </div>
 
 
-        <div class="jumbotron">
-            <h1>Adoptuj Pieska!</h1>
-            <p>U nas znajdziesz wiele wspaniałych psów, gotowych na adopcję.</p>
-            <p><a class="btn btn-custom btn-lg" href="@Url.Action("All", "Pieski")" role="button">Zobacz psy</a></p>
-        </div>
 
-        <div class="row">
-            <div class="col-md-4">
-                <h2>O nas</h2>
-                <p>
-                    Nasze schronisko dla psów działa od 2005 roku. Jesteśmy organizacją non-profit i naszym celem jest znalezienie
-                    domu dla jak największej liczby bezdomnych psów.
-                </p>
-                <p><a class="btn btn-default" href="#" role="button">Czytaj więcej &raquo;</a></p>
-            </div>
+    <style>
+        img {
+            display: block;
+            margin: auto;
+        }
 
-            <div class="col-md-4">
-                <h2>Adopcja</h2>
-                <p>
-                    Adopcja psa z naszego schroniska to wspaniałe doświadczenie. Nasze psy są wychodzone, w pełni zaszczepione
-                    i gotowe na nowy dom.
-                </p>
-                <p><a class="btn btn-default" href="#" role="button">Zobacz, jak adoptować &raquo;</a></p>
-            </div>
+        .btn-custom {
+            background-color: #212529;
+            color: white;
+        }
 
-            <div class="col-md-4">
-                <h2>Wspomóż nas</h2>
-                <p>
-                    Nasze schronisko działa dzięki pomocy wolontariuszy i darowizn. Jeśli chcesz pomóc nam w ratowaniu psich żyć,
-                    możesz nas wesprzeć finansowo lub jako wolontariusz.
-                </p>
-                <p><a class="btn btn-default" href="#" role="button">Dowiedz się więcej &raquo;</a></p>
-            </div>
-        </div>
-
-
-
-        <style>
-            img {
-                display: block;
-                margin: auto;
+            .btn-custom:hover {
+                background-color: #292E33;
+                color: grey;
             }
-
-            .btn-custom {
-                background-color: #212529;
-                color: white;
-            }
-
-                .btn-custom:hover {
-                    background-color: #292E33;
-                    color: grey;
-                }
-        </style>
+    </style>
 
 
 

@@ -62,7 +62,7 @@
 	</style>
 </head>
 <body>
-    <form action="Add" method="POST">
+    <form action="Add" method="POST" enctype="multipart/form-data">
         <label for="rasa">Rasa:</label>
         <input type="text" id="rasa" name="rasa"><br>
 
@@ -71,6 +71,11 @@
 
         <label for="wiek">Wiek:</label>
         <input type="number" id="wiek" name="wiek"><br>
+
+        <!--
+    <label for="zdjecie">Zdjęcie:</label>
+    <input type="file"id="zdjecie" name="zdjecie">
+    -->
 
         <label for="plec">Płeć:</label>
         <select id="plec" name="plec">

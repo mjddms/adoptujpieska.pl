@@ -25,6 +25,7 @@ namespace AdoptujPieska.Controllers
             {
                 if (piesek.Imie != null)
                 {
+                    //piesek.Zdjecie = null;
                     db.Pieski.InsertOnSubmit(piesek);
                     db.SubmitChanges();
                 }
