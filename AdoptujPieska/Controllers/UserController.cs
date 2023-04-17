@@ -22,7 +22,7 @@ namespace AdoptujPieska.Controllers
         public ActionResult Register(User user)
         {
 
-            using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
+            using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
                 if (db.User.Any(x => x.USERNAME == user.USERNAME))
                 {
@@ -42,7 +42,7 @@ namespace AdoptujPieska.Controllers
         }
         public ActionResult Login(User user)
         {
-            DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString);
+            DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString);
 
 
             var users = db.User.Where(x => x.USERNAME == user.USERNAME && x.PASSWORD == user.PASSWORD).Count();
