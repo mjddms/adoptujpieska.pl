@@ -21,7 +21,7 @@ namespace AdoptujPieska.Controllers
 
         public ActionResult Add(Pieski piesek)
         {
-            using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
+            using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
                 if (piesek.Imie != null)
                 {
@@ -42,7 +42,7 @@ namespace AdoptujPieska.Controllers
         }
         public ActionResult All(Pieski piesek)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
                 var pieski = db.Pieski.ToList();
                 ViewBag.Pieski = pieski;
@@ -53,7 +53,7 @@ namespace AdoptujPieska.Controllers
 
         public ActionResult Edit(int id)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
                 var piesek = db.Pieski.FirstOrDefault(p => p.Id == id);
                 if (piesek != null)
@@ -67,7 +67,7 @@ namespace AdoptujPieska.Controllers
 
         public ActionResult Update(Pieski piesek)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
 
             {
                 var piesekToUpdate = db.Pieski.FirstOrDefault(p => p.Id == piesek.Id);
@@ -88,7 +88,7 @@ namespace AdoptujPieska.Controllers
 
         public ActionResult Delete(int id)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
                 var piesekToDelete = db.Pieski.FirstOrDefault(p => p.Id == id);
                 if (piesekToDelete != null)
@@ -102,7 +102,7 @@ namespace AdoptujPieska.Controllers
         
         public new ActionResult Profile(int? id)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString))
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
                 var pies = db.Pieski.SingleOrDefault(p => p.Id == id);
                 if (pies == null)
