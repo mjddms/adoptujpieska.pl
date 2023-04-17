@@ -39,7 +39,7 @@
         {
             <tr>
                 <td>@piesek.Rasa</td>
-                <td>@piesek.Imie</td>
+                <td>@Html.ActionLink($"{piesek.Imie}", "Profile", new { id = @piesek.Id })</td>
                 <td>@piesek.Wiek</td>
                 <td>@(piesek.Plec ? "Samica" : "Samiec")</td>
                 <td>@(piesek.Aktywny ? "Tak" : "Nie") </td>
@@ -50,7 +50,6 @@
                     <td>@Html.ActionLink("Edytuj", "Edit", new { id = piesek.Id })</td>
                     <td>@Html.ActionLink("Usuń", "Delete", new { id = piesek.Id }, new { onclick = "return confirm('Czy na pewno chcesz usunąć tego psa?')" }) </td>
                 }
-                <td>@Html.ActionLink("Wyświetl profil", "Profile", new { id = piesek.Id })</td>
             </tr>
 
         }
