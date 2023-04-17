@@ -11,50 +11,52 @@
         padding: 8px;
     }
 </style>
+@if (Session["UserName"] != null)
+{
+    <p>
+        @Html.ActionLink("+ Dodaj Pieska", "Add")
+    </p>
+}
 
-<p>
-    @Html.ActionLink("+ Dodaj Pieska", "Add")
-</p>
-
-<table>
-    <thead>
-        <tr>
-            <th>Rasa</th>
-            <th>Imie</th>
-            <th>Wiek</th>
-            <th>Plec</th>
-            <th>Aktywny</th>
-            <th>Lubi dzieci</th>
-            <th>Lubi psy</th>
-            @if (Session["UserName"] != null)
-            {
-                <th>Edytuj</th>
-                <th>Usuń</th>
-            }
-            </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var piesek in ViewBag.Pieski)
-        {
+    <table>
+        <thead>
             <tr>
-                <td>@piesek.Rasa</td>
-                <td>@Html.ActionLink($"{piesek.Imie}", "Profile", new { id = @piesek.Id })</td>
-                <td>@piesek.Wiek</td>
-                <td>@(piesek.Plec ? "Samica" : "Samiec")</td>
-                <td>@(piesek.Aktywny ? "Tak" : "Nie") </td>
-                <td>@(piesek.Lubi_dzieci ? "Tak" : "Nie")</td>
-                <td>@(piesek.Lubi_psy ? "Tak" : "Nie" )</td>
+                <th>Rasa</th>
+                <th>Imie</th>
+                <th>Wiek</th>
+                <th>Plec</th>
+                <th>Aktywny</th>
+                <th>Lubi dzieci</th>
+                <th>Lubi psy</th>
                 @if (Session["UserName"] != null)
                 {
-                    <td>@Html.ActionLink("Edytuj", "Edit", new { id = piesek.Id })</td>
-                    <td>@Html.ActionLink("Usuń", "Delete", new { id = piesek.Id }, new { onclick = "return confirm('Czy na pewno chcesz usunąć tego psa?')" }) </td>
+                    <th>Edytuj</th>
+                    <th>Usuń</th>
                 }
             </tr>
+        </thead>
+        <tbody>
 
-        }
-                
+            @foreach (var piesek in ViewBag.Pieski)
+            {
+                <tr>
+                    <td>@piesek.Rasa</td>
+                    <td>@Html.ActionLink($"{piesek.Imie}", "Profile", new { id = @piesek.Id })</td>
+                    <td>@piesek.Wiek</td>
+                    <td>@(piesek.Plec ? "Samica" : "Samiec")</td>
+                    <td>@(piesek.Aktywny ? "Tak" : "Nie") </td>
+                    <td>@(piesek.Lubi_dzieci ? "Tak" : "Nie")</td>
+                    <td>@(piesek.Lubi_psy ? "Tak" : "Nie" )</td>
+                    @if (Session["UserName"] != null)
+                    {
+                        <td>@Html.ActionLink("Edytuj", "Edit", new { id = piesek.Id })</td>
+                        <td>@Html.ActionLink("Usuń", "Delete", new { id = piesek.Id }, new { onclick = "return confirm('Czy na pewno chcesz usunąć tego psa?')" }) </td>
+                    }
+                </tr>
+
+            }
 
 
-     </tbody>
-</table>
+
+        </tbody>
+    </table>
