@@ -22,6 +22,7 @@
             position: absolute;
             top: 0;
             left: 0;
+            transition: transform 0.3s ease-in-out; 
         }
 
         .kafel p {
@@ -34,9 +35,19 @@
             color: #fff;
             text-align: center;
             margin: 0;
+            opacity: 0; 
+            transition: opacity 0.3s ease-in-out; 
+        }
+
+        .kafel:hover img {
+            transform: scale(1.1);
+        }
+
+
+        .kafel:hover p {
+            opacity: 1;
         }
 </style>
-
 
 
 @if (Session["UserName"] != null)
@@ -47,7 +58,6 @@
 }
 
 <body>
-
     <div class="kafle-container">
         @foreach (var piesek in ViewBag.Pieski)
         {
@@ -59,5 +69,4 @@
             </div>
         }
     </div>
-
 </body>
