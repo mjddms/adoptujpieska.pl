@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Security.Cryptography;
+using System.IO;
 
 namespace AdoptujPieska.Controllers
 {
@@ -18,28 +19,38 @@ namespace AdoptujPieska.Controllers
         {
             return View();
         }
-
-        public ActionResult Add(Pieski piesek)
+        public ActionResult Add(int id = 0)
         {
-            using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
-                if (piesek.Imie != null)
-                {
-                    //piesek.Zdjecie = null;
-                    db.Pieski.InsertOnSubmit(piesek);
-                    db.SubmitChanges();
-                }
-                else
-                {
-                    ViewBag.DuplicateMessage = "Wystąpił błąd!";
-                }
-
-            }
-            ModelState.Clear();
-            ViewBag.SuccessMessage = "Dodoano pomyślnie!";
-            return View();
-
+            Pieski pieski = new Pieski();
+            return View(pieski);
         }
+
+        [HttpPost]
+        public ActionResult Add(Pieski piesek, HttpPostedFileBase file)
+        {
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
+            {
+                if (file != null && file.ContentLength > 0) // sprawdza, czy plik został przesłany
+                {
+                    // zapisuje zdjęcie na serwerze
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/uploads/"), fileName);
+                    file.SaveAs(path);
+
+                    // zapisuje ścieżkę do bazy danych
+                    piesek.Zdjecie = "/uploads/" + fileName;
+                }
+
+                db.Pieski.InsertOnSubmit(piesek);
+                db.SubmitChanges();
+            }
+
+            return RedirectToAction("All");
+        }
+
+
+
+
         public ActionResult All(Pieski piesek)
         {
             using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
@@ -65,28 +76,59 @@ namespace AdoptujPieska.Controllers
         }
 
 
-        public ActionResult Update(Pieski piesek)
+        public ActionResult Update(int id)
         {
             using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-
             {
-                var piesekToUpdate = db.Pieski.FirstOrDefault(p => p.Id == piesek.Id);
-                if (piesekToUpdate != null)
+                Pieski piesek = db.Pieski.SingleOrDefault(x => x.Id == id);
+                if (piesek == null)
                 {
-                    piesekToUpdate.Rasa = piesek.Rasa;
-                    piesekToUpdate.Imie = piesek.Imie;
-                    piesekToUpdate.Wiek = piesek.Wiek;
-                    piesekToUpdate.Plec = piesek.Plec;
-                    db.SubmitChanges();
-                    return RedirectToAction("All");
+                    return HttpNotFound();
                 }
 
+                return View(piesek);
             }
-            return RedirectToAction("Edit", new { id = piesek.Id });
+        }
+
+        [HttpPost]
+        public ActionResult Update(Pieski piesek, HttpPostedFileBase file)
+        {
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
+            {
+                Pieski piesekToUpdate = db.Pieski.SingleOrDefault(x => x.Id == piesek.Id);
+                if (piesekToUpdate == null)
+                {
+                    return HttpNotFound();
+                }
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/uploads/"), fileName);
+                    file.SaveAs(path);
+
+                    piesekToUpdate.Zdjecie = "/uploads/" + fileName;
+                }
+
+                piesekToUpdate.Rasa = piesek.Rasa;
+                piesekToUpdate.Imie = piesek.Imie;
+                piesekToUpdate.Wiek = piesek.Wiek;
+                piesekToUpdate.Plec = piesek.Plec;
+                piesekToUpdate.Aktywny = piesek.Aktywny;
+                piesekToUpdate.Lubi_dzieci = piesek.Lubi_dzieci;
+                piesekToUpdate.Lubi_psy = piesek.Lubi_psy;
+                piesekToUpdate.Opis = piesek.Opis;
+
+
+                db.SubmitChanges();
+            }
+
+            return RedirectToAction("All");
         }
 
 
-        public ActionResult Delete(int id)
+
+    public ActionResult Delete(int id)
         {
             using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
@@ -112,6 +154,7 @@ namespace AdoptujPieska.Controllers
                 return View(pies);
             }
         }
+
 
     }
 }

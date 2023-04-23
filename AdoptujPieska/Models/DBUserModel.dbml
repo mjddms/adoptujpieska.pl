@@ -14,11 +14,11 @@
       <Column Name="Imie" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Wiek" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Plec" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Zdjecie" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Zdjecie" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Aktywny" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="[Lubi dzieci]" Member="Lubi_dzieci" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="[Lubi psy]" Member="Lubi_psy" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Opis" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Opis" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

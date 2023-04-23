@@ -205,14 +205,17 @@
     <Content Include="Views\User\Home.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPart.cshtml" />
-    <Content Include="Views\Pieski\Add.cshtml" />
     <Content Include="Views\Pieski\All.cshtml" />
     <Content Include="Views\Pieski\Index.cshtml" />
-    <Content Include="Views\Pieski\Edit.cshtml" />
     <Content Include="Views\Pieski\Delete.cshtml" />
     <Content Include="Views\Pieski\Profile.cshtml" />
+    <Content Include="Views\Pieski\Add.cshtml" />
+    <Content Include="Views\Pieski\Update.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\uploads\" />
+    <Folder Include="uploads\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
