@@ -5,13 +5,13 @@
     .profil-details dt {
         float: left;
         clear: both;
-        width: 100px; 
+        width: 100px;
         font-weight: bold;
     }
 
     .profil-details dd {
-        margin-left: 120px; 
-        margin-bottom: 10px; 
+        margin-left: 120px;
+        margin-bottom: 10px;
     }
 
     .profil-container {
@@ -60,6 +60,42 @@
             font-size: 16px;
             margin-top: 20px;
         }
+
+    .btn-edit {
+        display: inline-block;
+        padding: 8px 13px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: auto;
+        margin-right: 10px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+        .btn-edit:hover {
+            transform: scale(1.05);
+        }
+
+    .btn-delete {
+        display: inline-block;
+        padding: 8px 13px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: auto;
+        margin-left: 10px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+        .btn-delete:hover {
+            transform: scale(1.05);
+        }
 </style>
 
 <div class="profil-container">
@@ -85,6 +121,12 @@
         <dd>@Model.Opis</dd>
 
     </div>
+    @if (Session["UserName"] != null)
+    {
+        <td>@Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+        <td>@Html.ActionLink("Usuñ", "Delete", new { id = Model.Id }, new { onclick = "return confirm('Czy na pewno chcesz usun¹æ tego psa?')", @class = "btn-delete" })</td>
+    }
+
 </div>
 
 
