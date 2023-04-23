@@ -1,16 +1,44 @@
 ﻿<h1>Wszystkie pieski</h1>
+
 <style>
-    table {
-        font-family: Arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
+    .kafle-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
     }
 
-    th, td {
-        text-align: left;
-        padding: 8px;
+    .kafel {
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+        position: relative;
     }
+
+        .kafel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .kafel p {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+        }
 </style>
+
+
+
 @if (Session["UserName"] != null)
 {
     <p>
@@ -18,47 +46,18 @@
     </p>
 }
 
-    <table>
-        <thead>
-            <tr>
-                <th>Zdjecie</th>
-                <th>Rasa</th>
-                <th>Imie</th>
-                <th>Wiek</th>
-                <th>Plec</th>
-                <th>Aktywny</th>
-                <th>Lubi dzieci</th>
-                <th>Lubi psy</th>
-                @if (Session["UserName"] != null)
-                {
-                    <th>Edytuj</th>
-                    <th>Usuń</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
+<body>
 
-            @foreach (var piesek in ViewBag.Pieski)
-            {
-				<tr>
-					<td><img src="@piesek.Zdjecie" alt="Zdjęcie psa" style="max-width: 100px;"></td>
-					<td>@piesek.Rasa</td>
-					<td>@Html.ActionLink($"{piesek.Imie}", "Profile", new { id = @piesek.Id })</td>
-					<td>@piesek.Wiek</td>
-					<td>@(piesek.Plec ? "Samica" : "Samiec")</td>
-					<td>@(piesek.Aktywny ? "Tak" : "Nie") </td>
-					<td>@(piesek.Lubi_dzieci ? "Tak" : "Nie")</td>
-					<td>@(piesek.Lubi_psy ? "Tak" : "Nie" )</td>
-					@if (Session["UserName"] != null)
-					{
-						<td>@Html.ActionLink("Edytuj", "Update", new { id = piesek.Id })</td>
-						<td>@Html.ActionLink("Usuń", "Delete", new { id = piesek.Id }, new { onclick = "return confirm('Czy na pewno chcesz usunąć tego psa?')" }) </td>
-					}
-				</tr>
+    <div class="kafle-container">
+        @foreach (var piesek in ViewBag.Pieski)
+        {
+            <div class="kafel">
+                <a href="@Url.Action("Profile", new { id = piesek.Id })">
+                    <img src="@piesek.Zdjecie" alt="Zdjęcie psa">
+                </a>
+                <p>@piesek.Imie</p>
+            </div>
+        }
+    </div>
 
-            }
-
-
-
-        </tbody>
-    </table>
+</body>
