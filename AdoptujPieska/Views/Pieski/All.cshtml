@@ -21,6 +21,7 @@
     <table>
         <thead>
             <tr>
+                <th>Zdjecie</th>
                 <th>Rasa</th>
                 <th>Imie</th>
                 <th>Wiek</th>
@@ -39,20 +40,21 @@
 
             @foreach (var piesek in ViewBag.Pieski)
             {
-                <tr>
-                    <td>@piesek.Rasa</td>
-                    <td>@Html.ActionLink($"{piesek.Imie}", "Profile", new { id = @piesek.Id })</td>
-                    <td>@piesek.Wiek</td>
-                    <td>@(piesek.Plec ? "Samica" : "Samiec")</td>
-                    <td>@(piesek.Aktywny ? "Tak" : "Nie") </td>
-                    <td>@(piesek.Lubi_dzieci ? "Tak" : "Nie")</td>
-                    <td>@(piesek.Lubi_psy ? "Tak" : "Nie" )</td>
-                    @if (Session["UserName"] != null)
-                    {
-                        <td>@Html.ActionLink("Edytuj", "Edit", new { id = piesek.Id })</td>
-                        <td>@Html.ActionLink("Usuń", "Delete", new { id = piesek.Id }, new { onclick = "return confirm('Czy na pewno chcesz usunąć tego psa?')" }) </td>
-                    }
-                </tr>
+				<tr>
+					<td><img src="@piesek.Zdjecie" alt="Zdjęcie psa" style="max-width: 100px;"></td>
+					<td>@piesek.Rasa</td>
+					<td>@Html.ActionLink($"{piesek.Imie}", "Profile", new { id = @piesek.Id })</td>
+					<td>@piesek.Wiek</td>
+					<td>@(piesek.Plec ? "Samica" : "Samiec")</td>
+					<td>@(piesek.Aktywny ? "Tak" : "Nie") </td>
+					<td>@(piesek.Lubi_dzieci ? "Tak" : "Nie")</td>
+					<td>@(piesek.Lubi_psy ? "Tak" : "Nie" )</td>
+					@if (Session["UserName"] != null)
+					{
+						<td>@Html.ActionLink("Edytuj", "Edit", new { id = piesek.Id })</td>
+						<td>@Html.ActionLink("Usuń", "Delete", new { id = piesek.Id }, new { onclick = "return confirm('Czy na pewno chcesz usunąć tego psa?')" }) </td>
+					}
+				</tr>
 
             }
 

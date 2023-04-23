@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Security.Cryptography;
+using System.IO;
 
 namespace AdoptujPieska.Controllers
 {
@@ -18,28 +19,38 @@ namespace AdoptujPieska.Controllers
         {
             return View();
         }
-
-        public ActionResult Add(Pieski piesek)
+        public ActionResult Add(int id = 0)
         {
-            using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
-                if (piesek.Imie != null)
-                {
-                    //piesek.Zdjecie = null;
-                    db.Pieski.InsertOnSubmit(piesek);
-                    db.SubmitChanges();
-                }
-                else
-                {
-                    ViewBag.DuplicateMessage = "Wystąpił błąd!";
-                }
-
-            }
-            ModelState.Clear();
-            ViewBag.SuccessMessage = "Dodoano pomyślnie!";
-            return View();
-
+            Pieski pieski = new Pieski();
+            return View(pieski);
         }
+
+        [HttpPost]
+        public ActionResult Add(Pieski piesek, HttpPostedFileBase file)
+        {
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
+            {
+                if (file != null && file.ContentLength > 0) // sprawdza, czy plik został przesłany
+                {
+                    // zapisuje zdjęcie na serwerze
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/uploads/"), fileName);
+                    file.SaveAs(path);
+
+                    // zapisuje ścieżkę do bazy danych
+                    piesek.Zdjecie = "/uploads/" + fileName;
+                }
+
+                db.Pieski.InsertOnSubmit(piesek);
+                db.SubmitChanges();
+            }
+
+            return RedirectToAction("All");
+        }
+
+
+
+
         public ActionResult All(Pieski piesek)
         {
             using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
@@ -112,6 +123,7 @@ namespace AdoptujPieska.Controllers
                 return View(pies);
             }
         }
+
 
     }
 }
