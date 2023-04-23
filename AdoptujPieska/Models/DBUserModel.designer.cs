@@ -20,9 +20,9 @@ namespace AdoptujPieska.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
+    using System.ComponentModel.DataAnnotations;
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
 	public partial class DBUserModelDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -133,7 +133,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USERNAME", DbType="VarChar(50)")]
-		public string USERNAME
+        [DisplayName("Nazwa:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string USERNAME
 		{
 			get
 			{
@@ -153,7 +155,10 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMAIL", DbType="VarChar(50)")]
-		public string EMAIL
+        [DisplayName("Email:")]
+        [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string EMAIL
 		{
 			get
 			{
@@ -173,7 +178,10 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="VarChar(50)")]
-		public string PASSWORD
+        [DisplayName("Hasło:")]
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string PASSWORD
 		{
 			get
 			{
@@ -291,7 +299,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rasa", DbType="VarChar(50)")]
-		public string Rasa
+        [DisplayName("Rasa:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string Rasa
 		{
 			get
 			{
@@ -311,7 +321,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Imie", DbType="VarChar(50)")]
-		public string Imie
+        [DisplayName("Imie:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string Imie
 		{
 			get
 			{
@@ -331,7 +343,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Wiek", DbType="Int")]
-		public System.Nullable<int> Wiek
+        [DisplayName("Wwiek:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<int> Wiek
 		{
 			get
 			{
@@ -351,7 +365,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plec", DbType="Bit")]
-		public System.Nullable<bool> Plec
+        [DisplayName("Płeć:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<bool> Plec
 		{
 			get
 			{
@@ -371,7 +387,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zdjecie", DbType="NVarChar(MAX)")]
-		public string Zdjecie
+        [DisplayName("Zdjęcie:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string Zdjecie
 		{
 			get
 			{
@@ -391,7 +409,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aktywny", DbType="Bit")]
-		public System.Nullable<bool> Aktywny
+        [DisplayName("Czy jest aktywny?")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<bool> Aktywny
 		{
 			get
 			{
@@ -411,7 +431,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Lubi dzieci]", Storage="_Lubi_dzieci", DbType="Bit")]
-		public System.Nullable<bool> Lubi_dzieci
+        [DisplayName("Czy lubi dzieci?")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<bool> Lubi_dzieci
 		{
 			get
 			{
@@ -431,7 +453,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Lubi psy]", Storage="_Lubi_psy", DbType="Bit")]
-		public System.Nullable<bool> Lubi_psy
+        [DisplayName("Czy toleruje inne psy?")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<bool> Lubi_psy
 		{
 			get
 			{
@@ -450,8 +474,10 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Opis", DbType="NVarChar(250)")]
-		public string Opis
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Opis", DbType="NVarChar(MAX)")]
+        [DisplayName("Opis:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string Opis
 		{
 			get
 			{

@@ -51,7 +51,7 @@
 					<td>@(piesek.Lubi_psy ? "Tak" : "Nie" )</td>
 					@if (Session["UserName"] != null)
 					{
-						<td>@Html.ActionLink("Edytuj", "Edit", new { id = piesek.Id })</td>
+						<td>@Html.ActionLink("Edytuj", "Update", new { id = piesek.Id })</td>
 						<td>@Html.ActionLink("Usuń", "Delete", new { id = piesek.Id }, new { onclick = "return confirm('Czy na pewno chcesz usunąć tego psa?')" }) </td>
 					}
 				</tr>

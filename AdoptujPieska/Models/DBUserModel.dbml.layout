@@ -8,10 +8,10 @@
         <elementListCompartment Id="ddd3b617-f42b-4ec3-b79b-dbe3e7bad1a1" absoluteBounds="0.76500000000000012, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8d6dcd45-9c81-4d2e-8635-83811340cebd" absoluteBounds="3.625, 0.75, 2, 2.7324039713541666">
+    <classShape Id="b4a8487d-0e8b-4b29-9d30-354471ef2b2c" absoluteBounds="4, 0.875, 2, 2.7324039713541666">
       <DataClassMoniker Name="/DBUserModelDataContext/Pieski" />
       <nestedChildShapes>
-        <elementListCompartment Id="478af21a-27ae-4836-b626-cd42d6f52dda" absoluteBounds="3.6399999999999997, 1.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="374a28e6-1298-4010-b383-a86055920448" absoluteBounds="4.015, 1.335, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
