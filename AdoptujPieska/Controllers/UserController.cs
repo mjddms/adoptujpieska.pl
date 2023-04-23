@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AdoptujPieska.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace AdoptujPieska.Controllers
 {
@@ -21,6 +22,11 @@ namespace AdoptujPieska.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return View("Register", user);
+            }
 
             using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
