@@ -207,7 +207,6 @@
     <Content Include="Views\Shared\_LoginPart.cshtml" />
     <Content Include="Views\Pieski\All.cshtml" />
     <Content Include="Views\Pieski\Index.cshtml" />
-    <Content Include="Views\Pieski\Edit.cshtml" />
     <Content Include="Views\Pieski\Delete.cshtml" />
     <Content Include="Views\Pieski\Profile.cshtml" />
     <Content Include="Views\Pieski\Add.cshtml" />
