@@ -211,6 +211,7 @@
     <Content Include="Views\Pieski\Profile.cshtml" />
     <Content Include="Views\Pieski\Add.cshtml" />
     <Content Include="Views\Pieski\Update.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\uploads\" />
