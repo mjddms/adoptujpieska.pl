@@ -87,12 +87,84 @@ namespace AdoptujPieska.Controllers
                 return View();
             }
         }
+        public ActionResult Edit()
+        {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                string username = Session["UserName"].ToString();
+
+                using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
+                {
+                    User user = db.User.SingleOrDefault(x => x.USERNAME == username);
+
+                    if (user == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    else
+                    {
+                        return View(user);
+                    }
+                }
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(User user)
+        {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+            else
+            {
+                string username = Session["UserName"].ToString();
+
+                using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
+                {
+                    User existingUser = db.User.SingleOrDefault(x => x.USERNAME == username);
+
+                    if (existingUser == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    else
+                    {
+                    if (db.User.Any(x => x.USERNAME == user.USERNAME && x.Id != user.Id))
+                    {
+                        ViewBag.DuplicateMessage = "Użytkownik o takiej nazwie już istnieje!";
+                        return View("Edit", user);
+                     }
+                        existingUser.USERNAME = user.USERNAME;
+                        
+                        existingUser.EMAIL = user.EMAIL;
+                        existingUser.PASSWORD = user.PASSWORD;
+                        db.SubmitChanges();
+
+                        Session["UserName"] = user.USERNAME;
+
+                        ViewBag.SuccessMessage = "Dane użytkownika zostały zaktualizowane.";
+                        return View("Home", existingUser);
+                    }
+                }
+            }
+        }
+
 
         public ActionResult LogOut()
         {
             Session.Abandon();
             return RedirectToAction("Home/Index");
         }
+        
 
     }
 }

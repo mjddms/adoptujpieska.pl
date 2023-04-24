@@ -1,0 +1,28 @@
+﻿@model AdoptujPieska.Models.User
+
+@using (Html.BeginForm("Edit", "User", FormMethod.Post))
+{
+	@Html.AntiForgeryToken()
+
+	@Html.HiddenFor(x => x.Id)
+
+	<div class="form-group">
+		@Html.LabelFor(x => x.USERNAME)
+		@Html.EditorFor(x => x.USERNAME, new { htmlAttributes = new { @class = "form-control" } })
+		@Html.ValidationMessageFor(x => x.USERNAME)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(x => x.PASSWORD)
+		@Html.EditorFor(x => x.PASSWORD, new { htmlAttributes = new { @class = "form-control" } })
+		@Html.ValidationMessageFor(x => x.PASSWORD)
+	</div>
+
+	<div class="form-group">
+		@Html.LabelFor(x => x.EMAIL)
+		@Html.EditorFor(x => x.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
+		@Html.ValidationMessageFor(x => x.EMAIL)
+	</div>
+
+	<button type="submit" class="btn btn-primary">Save</button>
+}

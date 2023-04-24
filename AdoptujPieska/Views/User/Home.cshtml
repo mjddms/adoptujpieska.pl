@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Adoptuj pieska";
 }
-
+@model AdoptujPieska.Models.User
 <html>
 
 <head>
@@ -153,36 +153,44 @@
 
 
     <div class="header">
-        <div class="container">
-            <div class="left_col">
-                <br></br>
-                <div class="zdjecie">
-                    <img src="~/Pictures/Logo.png" alt=" " />
-                    <span></span>
-                </div>
+        @if (Session["UserName"] != null)
+			{
+				<p>
+					@Html.ActionLink("Edytuj profil", "Edit")
+				</p>
+			}
+		<div class="container">
+			<div class="left_col">
+				<br></br>
+				<div class="zdjecie">
+					<img src="~/Pictures/Logo.png" alt=" " />
+					<span></span>
+				</div>
 
-               
-                <h2>@Session["UserName"]</h2>
-                <p>Schronisko dla psów</p>
-                <p>adoptuj.pieska@gmail.com</p>
 
-                <ul class="ile">
-                    <li><span>75</span>Dom znalazło</li>
-                </ul>
+				<h2>@Session["UserName"]</h2>
+				<p>Schronisko dla psów</p>
+				<p>adoptuj.pieska@gmail.com</p>
+			
 
-                <div class="content">
-                    <p>
-                        Pomóż naszym czworonożnym przyjacielom znaleźć ciepły dom!
-                        Podaruj im miłość na jaką zasługują!
-                        Pokaż mu, że jest życie poza schroniskiem. Nie pozwól,
-                        aby resztę lat życia, które mu pozostały, spędził w zimnym,
-                        betonowym boksie. Jeśli okażesz mu trochę serca, on odpłaci Ci z nawiązką.
-                    </p>
 
-                </div>
-            </div>
+				<ul class="ile">
+					<li><span>75</span>Dom znalazło</li>
+				</ul>
 
-        </div>
+				<div class="content">
+					<p>
+						Pomóż naszym czworonożnym przyjacielom znaleźć ciepły dom!
+						Podaruj im miłość na jaką zasługują!
+						Pokaż mu, że jest życie poza schroniskiem. Nie pozwól,
+						aby resztę lat życia, które mu pozostały, spędził w zimnym,
+						betonowym boksie. Jeśli okażesz mu trochę serca, on odpłaci Ci z nawiązką.
+					</p>
+
+				</div>
+			</div>
+
+		</div>
     </div>
 
 </body>
