@@ -51,15 +51,35 @@ namespace AdoptujPieska.Controllers
 
 
 
-        public ActionResult All(Pieski piesek)
+        public ActionResult All(Pieski piesek, string aktywny, string lubi_dzieci, string lubi_psy)
         {
             using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
-                var pieski = db.Pieski.ToList();
-                ViewBag.Pieski = pieski;
-            }
-            return View();
+                var pieski = db.Pieski.AsQueryable();
 
+                if (!string.IsNullOrEmpty(aktywny))
+                {
+                    bool aktywnyBool = aktywny == "tak";
+                    pieski = pieski.Where(p => p.Aktywny == aktywnyBool);
+                }
+
+                if (!string.IsNullOrEmpty(lubi_dzieci))
+                {
+                    bool lubiDzieciBool = lubi_dzieci == "tak";
+                    pieski = pieski.Where(p => p.Lubi_dzieci == lubiDzieciBool);
+                }
+
+                if (!string.IsNullOrEmpty(lubi_psy))
+                {
+                    bool lubiPsyBool = lubi_psy == "tak";
+                    pieski = pieski.Where(p => p.Lubi_psy == lubiPsyBool);
+                }
+
+
+                ViewBag.Pieski = pieski.ToList();
+            }
+
+            return View();
         }
 
         public ActionResult Edit(int id)

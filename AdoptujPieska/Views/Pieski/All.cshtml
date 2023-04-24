@@ -22,7 +22,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            transition: transform 0.3s ease-in-out; 
+            transition: transform 0.3s ease-in-out;
         }
 
         .kafel p {
@@ -35,8 +35,8 @@
             color: #fff;
             text-align: center;
             margin: 0;
-            opacity: 0; 
-            transition: opacity 0.3s ease-in-out; 
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
         }
 
         .kafel:hover img {
@@ -56,6 +56,27 @@
         @Html.ActionLink("+ Dodaj Pieska", "Add")
     </p>
 }
+<form method="get">
+    <label for="aktywny">Aktywny:</label>
+    <select name="aktywny" id="aktywny">
+        <option value="">Wszystkie</option>
+        <option value="tak" @if (Request.QueryString["aktywny"] == "tak") { <text> selected</text> }>Tak</option>
+        <option value="nie" @if (Request.QueryString["aktywny"] == "nie") { <text> selected</text> }>Nie</option>
+    </select>
+    <label for="lubi_dzieci">Lubi dzieci:</label>
+    <select name="lubi_dzieci" id="lubi_dzieci">
+        <option value="">Wszystkie</option>
+        <option value="tak" @if (Request.QueryString["lubi_dzieci"] == "tak") { <text> selected</text> }>Tak</option>
+        <option value="nie" @if (Request.QueryString["lubi_dzieci"] == "nie") { <text> selected</text> }>Nie</option>
+    </select>
+    <label for="lubi_psy">Lubi psy:</label>
+    <select name="lubi_psy" id="lubi_psy">
+        <option value="">Wszystkie</option>
+        <option value="tak" @if (Request.QueryString["lubi_psy"] == "tak") { <text> selected</text> }>Tak</option>
+        <option value="nie" @if (Request.QueryString["lubi_psy"] == "nie") { <text> selected</text> }>Nie</option>
+    </select>
+    <button type="submit">Filtruj</button>
+</form>
 
 <body>
     <div class="kafle-container">
