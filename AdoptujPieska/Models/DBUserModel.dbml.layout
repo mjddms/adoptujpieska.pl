@@ -14,5 +14,18 @@
         <elementListCompartment Id="374a28e6-1298-4010-b383-a86055920448" absoluteBounds="4.015, 1.335, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="be2d8e6d-58f2-4adf-84c8-7d7ce4449be2" absoluteBounds="1.25, 2.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DBUserModelDataContext/Photo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e8604edb-8dc1-4c92-994d-cb5a1d50d9e4" absoluteBounds="1.2650000000000001, 3.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4 : 3.17870198567708); (3.25 : 3.17870198567708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBUserModelDataContext/Pieski/Pieski_Photo" />
+      <nodes>
+        <classShapeMoniker Id="b4a8487d-0e8b-4b29-9d30-354471ef2b2c" />
+        <classShapeMoniker Id="be2d8e6d-58f2-4adf-84c8-7d7ce4449be2" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

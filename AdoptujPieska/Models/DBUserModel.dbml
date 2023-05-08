@@ -19,6 +19,15 @@
       <Column Name="[Lubi dzieci]" Member="Lubi_dzieci" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="[Lubi psy]" Member="Lubi_psy" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Opis" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Pieski_Photo" Member="Photo" ThisKey="Id" OtherKey="IdDog" Type="Photo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Photo" Member="Photo">
+    <Type Name="Photo">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Photos" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IdDog" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Pieski_Photo" Member="Pieski" ThisKey="IdDog" OtherKey="Id" Type="Pieski" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
