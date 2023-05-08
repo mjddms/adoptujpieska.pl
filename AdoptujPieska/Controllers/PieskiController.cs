@@ -30,14 +30,12 @@ namespace AdoptujPieska.Controllers
         {
             using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
-                if (file != null && file.ContentLength > 0) // sprawdza, czy plik został przesłany
+                if (file != null && file.ContentLength > 0) 
                 {
-                    // zapisuje zdjęcie na serwerze
                     var fileName = Path.GetFileName(file.FileName);
                     var path = Path.Combine(Server.MapPath("~/uploads/"), fileName);
                     file.SaveAs(path);
 
-                    // zapisuje ścieżkę do bazy danych
                     piesek.Zdjecie = "/uploads/" + fileName;
                 }
 
@@ -47,8 +45,6 @@ namespace AdoptujPieska.Controllers
 
             return RedirectToAction("All");
         }
-
-
 
 
         public ActionResult All(Pieski piesek, string aktywny, string lubi_dzieci, string lubi_psy)
@@ -174,6 +170,43 @@ namespace AdoptujPieska.Controllers
                 return View(pies);
             }
         }
+        public ActionResult Photos(int id)
+        {
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
+            {
+                Pieski piesek = db.Pieski.SingleOrDefault(x => x.Id == id);
+                if (piesek == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(piesek);
+            }
+        }
+        [HttpPost]
+        public ActionResult Photos(HttpPostedFileBase file, int id)
+        {
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
+            {
+                var piesek = db.Pieski.FirstOrDefault(p => p.Id == id);
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/uploads/"), fileName);
+                    file.SaveAs(path);
+
+                    Photo photo = new Photo();
+                    photo.Photos = "/uploads/" + fileName;
+                    photo.Pieski = piesek;
+                    piesek.Photo.Add(photo);
+                    db.SubmitChanges();
+                } 
+                return View("Profile",piesek);
+            }
+           
+        }
+
+
 
 
     }

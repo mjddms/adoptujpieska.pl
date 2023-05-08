@@ -1,0 +1,5 @@
+﻿@using (Html.BeginForm("Photos", "Pieski", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+	<input type="file" name="file" />
+	<input type="submit" value="Dodaj zdjęcie" />
+}
