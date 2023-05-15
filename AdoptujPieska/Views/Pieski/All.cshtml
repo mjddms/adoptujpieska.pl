@@ -1,4 +1,5 @@
-﻿<h1>Wszystkie pieski</h1>
+﻿<h1 style="font-family: Arial, sans-serif; color: #86A612; font-size: 60px; font-weight: bold;">Pieski do adopcji</h1>
+<br>
 
 <style>
     .kafle-container {
@@ -56,27 +57,35 @@
         @Html.ActionLink("+ Dodaj Pieska", "Add")
     </p>
 }
-<form method="get">
-    <label for="aktywny">Aktywny:</label>
-    <select name="aktywny" id="aktywny">
-        <option value="">Wszystkie</option>
-        <option value="tak" @if (Request.QueryString["aktywny"] == "tak") { <text> selected</text> }>Tak</option>
-        <option value="nie" @if (Request.QueryString["aktywny"] == "nie") { <text> selected</text> }>Nie</option>
-    </select>
-    <label for="lubi_dzieci">Lubi dzieci:</label>
-    <select name="lubi_dzieci" id="lubi_dzieci">
-        <option value="">Wszystkie</option>
-        <option value="tak" @if (Request.QueryString["lubi_dzieci"] == "tak") { <text> selected</text> }>Tak</option>
-        <option value="nie" @if (Request.QueryString["lubi_dzieci"] == "nie") { <text> selected</text> }>Nie</option>
-    </select>
-    <label for="lubi_psy">Lubi psy:</label>
-    <select name="lubi_psy" id="lubi_psy">
-        <option value="">Wszystkie</option>
-        <option value="tak" @if (Request.QueryString["lubi_psy"] == "tak") { <text> selected</text> }>Tak</option>
-        <option value="nie" @if (Request.QueryString["lubi_psy"] == "nie") { <text> selected</text> }>Nie</option>
-    </select>
-    <button type="submit">Filtruj</button>
+
+<form method="get" style="display: flex; gap: 10px; margin-bottom: 10px;">
+    <div style="display: flex; align-items: center;">
+        <label for="aktywny" style="margin-right: 5px;">Aktywny:</label>
+        <select name="aktywny" id="aktywny" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;">
+            <option value="">Wszystkie</option>
+            <option value="tak" @if (Request.QueryString["aktywny"] == "tak") { <text> selected</text> }>Tak</option>
+            <option value="nie" @if (Request.QueryString["aktywny"] == "nie") { <text> selected</text> }>Nie</option>
+        </select>
+    </div>
+    <div style="display: flex; align-items: center;">
+        <label for="lubi_dzieci" style="margin-right: 5px;">Lubi dzieci:</label>
+        <select name="lubi_dzieci" id="lubi_dzieci" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;">
+            <option value="">Wszystkie</option>
+            <option value="tak" @if (Request.QueryString["lubi_dzieci"] == "tak") { <text> selected</text> }>Tak</option>
+            <option value="nie" @if (Request.QueryString["lubi_dzieci"] == "nie") { <text> selected</text> }>Nie</option>
+        </select>
+    </div>
+    <div style="display: flex; align-items: center;">
+        <label for="lubi_psy" style="margin-right: 5px;">Lubi psy:</label>
+        <select name="lubi_psy" id="lubi_psy" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;">
+            <option value="">Wszystkie</option>
+            <option value="tak" @if (Request.QueryString["lubi_psy"] == "tak") { <text> selected</text> }>Tak</option>
+            <option value="nie" @if (Request.QueryString["lubi_psy"] == "nie") { <text> selected</text> }>Nie</option>
+        </select>
+    </div>
+    <button type="submit" style="background-color: #86A612; color: #fff; border: none; padding: 7px; border-radius: 5px;">Filtruj</button>
 </form>
+
 
 <body>
     <div class="kafle-container">
