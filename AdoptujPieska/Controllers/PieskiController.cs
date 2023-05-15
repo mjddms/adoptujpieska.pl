@@ -47,11 +47,23 @@ namespace AdoptujPieska.Controllers
         }
 
 
-        public ActionResult All(Pieski piesek, string aktywny, string lubi_dzieci, string lubi_psy)
+        public ActionResult All(Pieski piesek, string aktywny, string lubi_dzieci, string lubi_psy, string plec, string rasa, int? wiek)
         {
             using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
                 var pieski = db.Pieski.AsQueryable();
+
+                if (!string.IsNullOrEmpty(rasa))
+                {
+                    pieski = pieski.Where(p => p.Rasa.Contains(rasa));
+                    ViewBag.WybranaRasa = rasa;
+                }
+
+                if (wiek.HasValue)
+                {
+                    pieski = pieski.Where(p => p.Wiek == wiek);
+                    ViewBag.WybranyWiek = wiek;
+                }
 
                 if (!string.IsNullOrEmpty(aktywny))
                 {
@@ -69,6 +81,12 @@ namespace AdoptujPieska.Controllers
                 {
                     bool lubiPsyBool = lubi_psy == "tak";
                     pieski = pieski.Where(p => p.Lubi_psy == lubiPsyBool);
+                }
+
+                if (!string.IsNullOrEmpty(plec))
+                {
+                    bool plecBool = plec == "samica";
+                    pieski = pieski.Where(p => p.Plec == plecBool);
                 }
 
 

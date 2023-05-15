@@ -60,6 +60,45 @@
 
 <form method="get" style="display: flex; gap: 10px; margin-bottom: 10px;">
     <div style="display: flex; align-items: center;">
+        <label for="rasa" style="margin-right: 5px;">Rasa:</label>
+        <input type="text" name="rasa" id="rasa" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;" list="rasa-list" value="@ViewBag.WybranaRasa">
+        <datalist id="rasa-list">
+            <option value="">Wszystkie</option>
+            <option value="labrador">Labrador Retriever</option>
+            <option value="owczarek">Owczarek niemiecki</option>
+            <option value="golden">Golden Retriever</option>
+            <option value="yorkshire">Yorkshire Terrier</option>
+            <option value="buldog">Bulldog francuski</option>
+            <option value="jackrussell">Jack Russell Terrier</option>
+            <option value="bordercollie">Border Collie</option>
+            <option value="sznaucer">Sznaucer miniaturowy</option>
+            <option value="shihtzu">Shih Tzu</option>
+            <option value="chihuahua">Chihuahua</option>
+            <option value="beagle">Beagle</option>
+            <option value="cockerspaniel">Cocker Spaniel</option>
+            <option value="goldendoodle">Golden Doodle</option>
+            <option value="bernersennenhund">Berner Sennenhund</option>
+            <option value="amstaff">Amstaff</option>
+            <option value="westhighland">West Highland White Terrier</option>
+            <option value="husky">Siberian Husky</option>
+            <option value="boxer">Boxer</option>
+            <option value="cavalierkingcharles">Cavalier King Charles Spaniel</option>
+            <option value="rottweiler">Rottweiler</option>
+        </datalist>
+    </div>
+    <div style="display: flex; align-items: center;">
+        <label for="plec" style="margin-right: 5px;">Płeć:</label>
+        <select name="plec" id="plec" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;">
+            <option value="">Wszystkie</option>
+            <option value="samiec" @if (Request.QueryString["plec"] == "samiec") { <text> selected</text> }>Samiec</option>
+            <option value="samica" @if (Request.QueryString["plec"] == "samica") { <text> selected</text> }>Samica</option>
+        </select>
+    </div>
+    <div style="display: flex; align-items: center;">
+        <label for="wiek" style="margin-right: 5px;">Wiek:</label>
+        <input type="number" name="wiek" id="wiek" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;" value="@ViewBag.WybranyWiek" min="0">
+    </div>
+    <div style="display: flex; align-items: center;">
         <label for="aktywny" style="margin-right: 5px;">Aktywny:</label>
         <select name="aktywny" id="aktywny" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;">
             <option value="">Wszystkie</option>
