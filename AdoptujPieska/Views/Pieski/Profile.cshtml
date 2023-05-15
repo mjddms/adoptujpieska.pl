@@ -1,148 +1,288 @@
 @model AdoptujPieska.Models.Pieski
 
+<head>
+    <style>
+        .h1 {
+            font-weight: bold;
+            font-size: 46px;
+        }
 
-<style>
+        .profil-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: start;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
 
-	.profil-details dt {
-		float: left;
-		clear: both;
-		width: 100px;
-		font-weight: bold;
-	}
+            .profil-container h1 {
+                font-size: 38px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                grid-column: 1 / 3;
+            }
 
-	.profil-details dd {
-		margin-left: 120px;
-		margin-bottom: 10px;
-	}
+        .profil-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
 
-	.profil-container {
-		display: flex;
-		align-items: flex-start;
-		padding: 20px;
-		background-color: #fff;
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-		max-width: 800px;
-		margin: 0 auto;
-	}
-
-	.profil-img {
-		width: 300px;
-		height: 500px;
-		margin-right: 20px;
-		overflow: hidden;
-		flex-shrink: 0;
-	}
-
-		.profil-img img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			object-position: center center;
-		}
-
-	.profil-details {
-		flex-grow: 1;
-	}
-
-		.profil-details .all-img img{
-			width: 300px;
-			height: 200px;
-		}
-		.profil-details h1 {
-			font-size: 38px;
-			font-weight: bold;
-			margin-bottom: 20px;
-		}
-
-		.profil-details p {
-			font-size: 16px;
-			margin: 5px 0;
-		}
-
-		.profil-details .opis {
-			font-size: 16px;
-			margin-top: 20px;
-		}
-
-	.btn-edit {
-		display: inline-block;
-		padding: 8px 13px;
-		background-color: black;
-		color: white;
-		text-decoration: none;
-		border: none;
-		cursor: pointer;
-		border-radius: 5px;
-		margin-top: auto;
-		margin-right: 10px;
-		transition: transform 0.2s ease-in-out;
-	}
-
-		.btn-edit:hover {
-			transform: scale(1.05);
-		}
-
-	.btn-delete {
-		display: inline-block;
-		padding: 8px 13px;
-		background-color: black;
-		color: white;
-		text-decoration: none;
-		border: none;
-		cursor: pointer;
-		border-radius: 5px;
-		margin-top: auto;
-		margin-left: 10px;
-		transition: transform 0.2s ease-in-out;
-	}
-
-		.btn-delete:hover {
-			transform: scale(1.05);
-		}
-</style>
-
-<div class="profil-container">
-	<div class="profil-img">
-		<img src="@Model.Zdjecie" alt="Zdjêcie psa">
-	</div>
-	<div class="profil-details">
-
-		<h1><dd>@Model.Imie</dd></h1>
-		<dt>Rasa:</dt>
-		<dd>@Model.Rasa</dd>
-		<dt>Wiek:</dt>
-		<dd>@Model.Wiek</dd>
-		<dt>Plec:</dt>
-		<dd>@(Model.Plec.HasValue ? (Model.Plec.Value ? "Samica" : "Samiec") : "Nieznana")</dd>
-		<dt>Aktywny:</dt>
-		<dd>@(Model.Aktywny.HasValue ? (Model.Aktywny.Value ? "Tak" : "Nie") : "Nieznane")</dd>
-		<dt>Lubi dzieci:</dt>
-		<dd>@(Model.Lubi_dzieci.HasValue ? (Model.Lubi_dzieci.Value ? "Tak" : "Nie") : "Nieznane")</dd>
-		<dt>Lubi psy:</dt>
-		<dd>@(Model.Lubi_psy.HasValue ? (Model.Lubi_psy.Value ? "Tak" : "Nie") : "Nieznane")</dd>
-		<dt>Opis:</dt>
-		<dd>@Model.Opis</dd>
-		<td>@Html.ActionLink("Dodaj zdjecia", "Photos", new { id = Model.Id }, new { @class = "btn-edit" })</td>
-		<div class="all-img">
-
-				@foreach (var photo in ViewBag.Photos)
-				{
-
-				<img src="@photo.Photos" />
-
-				}
-			
-
-		</div>
-			</div>
-			@if (Session["UserName"] != null)
-			{
-				<td>@Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn-edit" })</td>
-				<td>@Html.ActionLink("Usuñ", "Delete", new { id = Model.Id }, new { onclick = "return confirm('Czy na pewno chcesz usun¹æ tego psa?')", @class = "btn-delete" })</td>
-			}
-
-</div>
+            .profil-details .column {
+                text-align: left;
+                position: relative;
+            }
 
 
+
+            .profil-details .opis {
+                grid-column: 1 / 5;
+            }
+
+
+        .profil-container .profil-details dt {
+            font-weight: bold;
+        }
+
+        .profil-container .profil-details dd {
+            margin-left: 0;
+            margin-bottom: 10px;
+        }
+
+        .profil-container .profil-img {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            grid-column: 1;
+        }
+
+            .profil-container .profil-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center center;
+            }
+
+        .profil-container .all-img {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+            grid-column: 2;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+            .profil-container .all-img img {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                object-position: center center;
+                margin-right: 10px;
+                margin-bottom: 15px;
+            }
+
+        .btn-edit {
+            display: inline-block;
+            padding: 8px 13px;
+            background-color: #8BC34A;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-right: 10px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+            .btn-edit:hover {
+                transform: scale(1.05);
+                color: white;
+            }
+
+        .btn-delete {
+            display: inline-block;
+            padding: 8px 13px;
+            background-color: #8BC34A;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-left: 10px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .form-check-input:checked {
+            background-color: #8BC34A;
+            border-color: #8BC34A;
+            box-shadow: 0 0 7px #8BC34A;
+        }
+
+        .form-control-lg:checked {
+            background-color: #8BC34A;
+            border-color: #8BC34A;
+            box-shadow: 0 0 7px #8BC34A;
+        }
+
+        .btn-delete:hover {
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .form-control:focus {
+            border-color: #8BC34A;
+            box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25);
+        }
+
+ 
+    </style>
+
+    <script>
+
+        const formInputs = document.querySelectorAll('.form-control');
+        formInputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.style.borderColor = '#8BC34A';
+                input.style.boxShadow = '0 0 0 0.2rem rgba(139, 195, 74, 0.25)';
+            });
+
+            input.addEventListener('blur', () => {
+                input.style.borderColor = '';
+                input.style.boxShadow = '';
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="profil-container">
+
+
+        <h1>@Model.Imie</h1>
+
+        <div class="profil-img">
+            <img src="@Model.Zdjecie" alt="Zdjêcie psa">
+        </div>
+
+        <div class="all-img">
+            @foreach (var photo in ViewBag.Photos)
+            {
+                <img src="@photo.Photos" />
+                <br />
+            }
+        </div>
+
+        <div class="profil-details">
+            <div class="column">
+                Rasa:
+                <dd>@Model.Rasa</dd>
+                <dt>Wiek:</dt>
+                <dd>@Model.Wiek</dd>
+            </div>
+            <div class="column">
+                <dt>P³eæ:</dt>
+                <dd>@(Model.Plec.HasValue ? (Model.Plec.Value ? "Samica" : "Samiec") : "Nieznana")</dd>
+                <dt>Aktywny:</dt>
+                <dd>@(Model.Aktywny.HasValue ? (Model.Aktywny.Value ? "Tak" : "Nie") : "Nieznane")</dd>
+            </div>
+            <div class="column">
+                <dt>Lubi dzieci:</dt>
+                <dd>@(Model.Lubi_dzieci.HasValue ? (Model.Lubi_dzieci.Value ? "Tak" : "Nie") : "Nieznane")</dd>
+                <dt>Lubi psy:</dt>
+                <dd>@(Model.Lubi_psy.HasValue ? (Model.Lubi_psy.Value ? "Tak" : "Nie") : "Nieznane")</dd>
+            </div>
+
+            <div class="opis">
+                <dt>Opis:</dt>
+                <dd>@Model.Opis</dd>
+            </div>
+
+        </div>
+
+
+        <div style="display: flex; justify-content: center;">
+            <div style="max-width: 400px;">
+                <div class="ps-xl-3">
+                    <div class="card border-0 shadow mb-5">
+                        <div class="card-header bg-gray-50" style="height: 50px; text-align: center;" ">
+                            <div class="d-flex align-items-center justify-content-between">
+
+                                <h4 style="font-weight: bold; text-align: center; ">Kontakt ze schroniskiem</h4>
+
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <form id="form">
+                                <div class="mb-4">
+                                    <input class="form-control form-control-lg rounded-pill" name="formName" id="formName" type="text" placeholder="Imiê" autocomplete="off" required data-msg="Podaj swoje imiê" style="font-size: 14px; ">
+                                </div>
+                                <div class="mb-4">
+                                    <input class="form-control form-control-lg rounded-pill" name="formPhone" id="formPhone" type="tel" placeholder="numer telefonu" autocomplete="off" required data-msg="Podaj swój numer telefonu" style="font-size: 14px;">
+                                </div>
+                                <div class="mb-4">
+                                    <input class="form-control form-control-lg rounded-pill" name="formEmail" id="formEmail" type="email" placeholder="adres email" autocomplete="off" required data-msg="Podaj swój adres email" style="font-size: 14px;">
+                                </div>
+                                <div class="mb-2">
+                                    <textarea class="form-control form-control-lg rounded" rows="4" name="formMessage" id="formMessage" placeholder="Wpisz swoj¹ wiadomoœæ" required data-msg="Wpisz swoj¹ wiadomoœæ" style="font-size: 14px;"></textarea>
+                                </div>
+                                <div class="mb-4">
+                                    <input class="form-check-input" id="formAgree" type="checkbox" required>
+                                    <label class="form-check-label text-muted" for="formAgree">
+                                        <span class="text-sm" data-localize="contact-agree" style="font-size: 15px;">
+                                            Akceptujê <a href='/assets/pp.pdf'>warunki</a> przetwarzania moich danych osobowych
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <div class="mb-4 d-none alert alert-success" role="alert" id="formAlert" data-localize="contact-success">Twoja wiadomoœæ zosta³a wys³ana!</div>
+                                <div class="d-grid text-center mb-2">
+                                    <a class="btn btn-primary rounded-pill border-0" href="#" id="button-send" style="background-color: #8BC34A; border: 2px solid #8BC34A; ">
+                                        <i class="far fa-paper-plane me-2"></i>
+                                        <span data-localize="contact-send">Wyœlij wiadomoœæ</span>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="column">
+
+            @if (Session["UserName"] != null)
+            {
+            
+                <td>@Html.ActionLink("Dodaj zdjecia", "Photos", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+            }
+        </div>
+
+
+
+
+        <div class="columna" style="text-align: right;">
+
+            @if (Session["UserName"] != null)
+            {
+                <td>@Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+                <td>@Html.ActionLink("Usuñ", "Delete", new { id = Model.Id }, new { onclick = "return confirm('Czy na pewno chcesz usun¹æ tego psa?')", @class = "btn-delete" })</td>
+            }
+        </div>
+
+    </div>
+
+
+</body>
