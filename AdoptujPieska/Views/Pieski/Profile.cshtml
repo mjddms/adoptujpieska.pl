@@ -46,6 +46,10 @@
 		flex-grow: 1;
 	}
 
+		.profil-details .all-img img{
+			width: 300px;
+			height: 200px;
+		}
 		.profil-details h1 {
 			font-size: 38px;
 			font-weight: bold;
@@ -121,18 +125,23 @@
 		<dt>Opis:</dt>
 		<dd>@Model.Opis</dd>
 		<td>@Html.ActionLink("Dodaj zdjecia", "Photos", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+		<div class="all-img">
 
-		@foreach( var photos in Model.Photo)
+				@foreach (var photo in ViewBag.Photos)
+				{
+
+				<img src="@photo.Photos" />
+
+				}
+			
+
+		</div>
+			</div>
+			@if (Session["UserName"] != null)
 			{
-			<img src="@photos" />
+				<td>@Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+				<td>@Html.ActionLink("Usuñ", "Delete", new { id = Model.Id }, new { onclick = "return confirm('Czy na pewno chcesz usun¹æ tego psa?')", @class = "btn-delete" })</td>
 			}
-
-	</div>
-	@if (Session["UserName"] != null)
-	{
-		<td>@Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn-edit" })</td>
-		<td>@Html.ActionLink("Usuñ", "Delete", new { id = Model.Id }, new { onclick = "return confirm('Czy na pewno chcesz usun¹æ tego psa?')", @class = "btn-delete" })</td>
-	}
 
 </div>
 

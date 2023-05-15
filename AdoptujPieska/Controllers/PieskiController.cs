@@ -158,7 +158,7 @@ namespace AdoptujPieska.Controllers
             return RedirectToAction("All");
         }
         
-        public new ActionResult Profile(int? id)
+        public new ActionResult Profile(int id)
         {
             using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
@@ -166,6 +166,13 @@ namespace AdoptujPieska.Controllers
                 if (pies == null)
                 {
                     return HttpNotFound();
+                }
+                else 
+                {
+                        var zdjecia = db.Photo.Where(p => p.IdDog == id).ToList();
+                        if (zdjecia != null)
+                            ViewBag.Photos = zdjecia;
+                    
                 }
                 return View(pies);
             }
@@ -205,7 +212,16 @@ namespace AdoptujPieska.Controllers
             }
            
         }
-
+        public ActionResult PrintPhotos(int id)
+        {
+            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
+            {
+                var zdjecia = db.Photo.Where(p => p.IdDog == id).ToList();
+                if (zdjecia != null)
+                    ViewBag.Photos = zdjecia;
+            }
+            return View();
+        }
 
 
 
