@@ -277,7 +277,7 @@
 
             @if (Session["UserName"] != null)
             {
-                <td>@Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+                <td>@Html.ActionLink("Edytuj", "Update", new { id = Model.Id }, new { @class = "btn-edit" })</td>
                 <td>@Html.ActionLink("Usuñ", "Delete", new { id = Model.Id }, new { onclick = "return confirm('Czy na pewno chcesz usun¹æ tego psa?')", @class = "btn-delete" })</td>
             }
         </div>

@@ -20,9 +20,9 @@ namespace AdoptujPieska.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
+    using System.ComponentModel.DataAnnotations;
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
 	public partial class DBUserModelDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -142,8 +142,9 @@ namespace AdoptujPieska.Models
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USERNAME", DbType="VarChar(50)")]
+        [DisplayName("Nazwa:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USERNAME", DbType="VarChar(50)")]
 		public string USERNAME
 		{
 			get
@@ -162,8 +163,10 @@ namespace AdoptujPieska.Models
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMAIL", DbType="VarChar(50)")]
+        [DisplayName("Email:")]
+        [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMAIL", DbType="VarChar(50)")]
 		public string EMAIL
 		{
 			get
@@ -182,8 +185,10 @@ namespace AdoptujPieska.Models
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="VarChar(50)")]
+        [DisplayName("Hasło:")]
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="VarChar(50)")]
 		public string PASSWORD
 		{
 			get

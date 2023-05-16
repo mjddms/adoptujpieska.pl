@@ -187,9 +187,7 @@ namespace AdoptujPieska.Controllers
                 }
                 else 
                 {
-                        var zdjecia = db.Photo.Where(p => p.IdDog == id).ToList();
-                        if (zdjecia != null)
-                            ViewBag.Photos = zdjecia;
+                    PrintPhotos(id);
                     
                 }
                 return View(pies);
@@ -226,19 +224,18 @@ namespace AdoptujPieska.Controllers
                     piesek.Photo.Add(photo);
                     db.SubmitChanges();
                 } 
-                return View("Profile",piesek);
+                return View(piesek);
             }
            
         }
-        public ActionResult PrintPhotos(int id)
+        public void PrintPhotos(int id)
         {
             using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
             {
                 var zdjecia = db.Photo.Where(p => p.IdDog == id).ToList();
-                if (zdjecia != null)
-                    ViewBag.Photos = zdjecia;
+                ViewBag.Photos = zdjecia;
             }
-            return View();
+
         }
 
 
