@@ -71,10 +71,10 @@
 
         .profil-container .all-img {
             display: flex;
+            flex-wrap: wrap;
             justify-content: flex-start;
             margin-bottom: 20px;
             grid-column: 2;
-            display: block;
             margin-bottom: 10px;
         }
 
@@ -159,30 +159,42 @@
                 input.style.boxShadow = '';
             });
         });
+
+
+        function displaySmallImage(imageSrc) {
+            const largeImageElement = document.getElementById('largeImage');
+            const originalSrc = largeImageElement.src;
+            largeImageElement.src = imageSrc;
+            largeImageElement.setAttribute('data-original-src', originalSrc);
+        }
+
+        function restoreProfileImage() {
+            const largeImageElement = document.getElementById('largeImage');
+            const originalSrc = largeImageElement.getAttribute('data-original-src');
+            largeImageElement.src = originalSrc;
+        }
+
+
     </script>
 </head>
 
 <body>
     <div class="profil-container">
-
-
         <h1>@Model.Imie</h1>
-
         <div class="profil-img">
-            <img src="@Model.Zdjecie" alt="Zdjêcie psa">
+            <img src="@Model.Zdjecie" alt="Zdjêcie psa" id="largeImage">
         </div>
 
         <div class="all-img">
             @foreach (var photo in ViewBag.Photos)
             {
-                <img src="@photo.Photos" />
-                <br />
+                <img src="@photo.Photos" onmouseover="displaySmallImage('@photo.Photos')" onmouseout="restoreProfileImage()">
             }
         </div>
 
         <div class="profil-details">
             <div class="column">
-                Rasa:
+                <dt>Rasa:</dt>
                 <dd>@Model.Rasa</dd>
                 <dt>Wiek:</dt>
                 <dd>@Model.Wiek</dd>
@@ -265,7 +277,7 @@
 
             @if (Session["UserName"] != null)
             {
-            
+
                 <td>@Html.ActionLink("Dodaj zdjecia", "Photos", new { id = Model.Id }, new { @class = "btn-edit" })</td>
             }
         </div>
