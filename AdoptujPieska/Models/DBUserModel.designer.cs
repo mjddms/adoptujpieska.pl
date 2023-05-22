@@ -20,9 +20,9 @@ namespace AdoptujPieska.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-    using System.ComponentModel.DataAnnotations;
-
-    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
+	
+	
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
 	public partial class DBUserModelDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -30,15 +30,15 @@ namespace AdoptujPieska.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
-    partial void InsertPieski(Pieski instance);
-    partial void UpdatePieski(Pieski instance);
-    partial void DeletePieski(Pieski instance);
     partial void InsertPhoto(Photo instance);
     partial void UpdatePhoto(Photo instance);
     partial void DeletePhoto(Photo instance);
+    partial void InsertPieski(Pieski instance);
+    partial void UpdatePieski(Pieski instance);
+    partial void DeletePieski(Pieski instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     #endregion
 		
 		public DBUserModelDataContext(string connection) : 
@@ -65,11 +65,11 @@ namespace AdoptujPieska.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<User> User
+		public System.Data.Linq.Table<Photo> Photo
 		{
 			get
 			{
-				return this.GetTable<User>();
+				return this.GetTable<Photo>();
 			}
 		}
 		
@@ -81,28 +81,28 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Photo> Photo
+		public System.Data.Linq.Table<User> User
 		{
 			get
 			{
-				return this.GetTable<Photo>();
+				return this.GetTable<User>();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Photo")]
+	public partial class Photo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Id;
 		
-		private string _USERNAME;
+		private string _Photos;
 		
-		private string _EMAIL;
+		private int _IdDog;
 		
-		private string _PASSWORD;
+		private EntityRef<Pieski> _Pieski;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -110,16 +110,15 @@ namespace AdoptujPieska.Models
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
-    partial void OnUSERNAMEChanging(string value);
-    partial void OnUSERNAMEChanged();
-    partial void OnEMAILChanging(string value);
-    partial void OnEMAILChanged();
-    partial void OnPASSWORDChanging(string value);
-    partial void OnPASSWORDChanged();
+    partial void OnPhotosChanging(string value);
+    partial void OnPhotosChanged();
+    partial void OnIdDogChanging(int value);
+    partial void OnIdDogChanged();
     #endregion
 		
-		public User()
+		public Photo()
 		{
+			this._Pieski = default(EntityRef<Pieski>);
 			OnCreated();
 		}
 		
@@ -142,68 +141,81 @@ namespace AdoptujPieska.Models
 				}
 			}
 		}
-        [DisplayName("Nazwa:")]
-        [Required(ErrorMessage = "To pole nie może być puste!")]
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USERNAME", DbType="VarChar(50)")]
-		public string USERNAME
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Photos", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Photos
 		{
 			get
 			{
-				return this._USERNAME;
+				return this._Photos;
 			}
 			set
 			{
-				if ((this._USERNAME != value))
+				if ((this._Photos != value))
 				{
-					this.OnUSERNAMEChanging(value);
+					this.OnPhotosChanging(value);
 					this.SendPropertyChanging();
-					this._USERNAME = value;
-					this.SendPropertyChanged("USERNAME");
-					this.OnUSERNAMEChanged();
+					this._Photos = value;
+					this.SendPropertyChanged("Photos");
+					this.OnPhotosChanged();
 				}
 			}
 		}
-        [DisplayName("Email:")]
-        [DataType(DataType.EmailAddress)]
-        [Required(ErrorMessage = "To pole nie może być puste!")]
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMAIL", DbType="VarChar(50)")]
-		public string EMAIL
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdDog", DbType="Int NOT NULL")]
+		public int IdDog
 		{
 			get
 			{
-				return this._EMAIL;
+				return this._IdDog;
 			}
 			set
 			{
-				if ((this._EMAIL != value))
+				if ((this._IdDog != value))
 				{
-					this.OnEMAILChanging(value);
+					if (this._Pieski.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdDogChanging(value);
 					this.SendPropertyChanging();
-					this._EMAIL = value;
-					this.SendPropertyChanged("EMAIL");
-					this.OnEMAILChanged();
+					this._IdDog = value;
+					this.SendPropertyChanged("IdDog");
+					this.OnIdDogChanged();
 				}
 			}
 		}
-        [DisplayName("Hasło:")]
-        [DataType(DataType.Password)]
-        [Required(ErrorMessage = "To pole nie może być puste!")]
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="VarChar(50)")]
-		public string PASSWORD
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Photo", Storage="_Pieski", ThisKey="IdDog", OtherKey="Id", IsForeignKey=true)]
+		public Pieski Pieski
 		{
 			get
 			{
-				return this._PASSWORD;
+				return this._Pieski.Entity;
 			}
 			set
 			{
-				if ((this._PASSWORD != value))
+				Pieski previousValue = this._Pieski.Entity;
+				if (((previousValue != value) 
+							|| (this._Pieski.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnPASSWORDChanging(value);
 					this.SendPropertyChanging();
-					this._PASSWORD = value;
-					this.SendPropertyChanged("PASSWORD");
-					this.OnPASSWORDChanged();
+					if ((previousValue != null))
+					{
+						this._Pieski.Entity = null;
+						previousValue.Photo.Remove(this);
+					}
+					this._Pieski.Entity = value;
+					if ((value != null))
+					{
+						value.Photo.Add(this);
+						this._IdDog = value.Id;
+					}
+					else
+					{
+						this._IdDog = default(int);
+					}
+					this.SendPropertyChanged("Pieski");
 				}
 			}
 		}
@@ -255,7 +267,11 @@ namespace AdoptujPieska.Models
 		
 		private string _Opis;
 		
+		private System.Nullable<int> _IdUser;
+		
 		private EntitySet<Photo> _Photo;
+		
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -281,11 +297,14 @@ namespace AdoptujPieska.Models
     partial void OnLubi_psyChanged();
     partial void OnOpisChanging(string value);
     partial void OnOpisChanged();
+    partial void OnIdUserChanging(System.Nullable<int> value);
+    partial void OnIdUserChanged();
     #endregion
 		
 		public Pieski()
 		{
 			this._Photo = new EntitySet<Photo>(new Action<Photo>(this.attach_Photo), new Action<Photo>(this.detach_Photo));
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -489,6 +508,30 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUser", DbType="Int")]
+		public System.Nullable<int> IdUser
+		{
+			get
+			{
+				return this._IdUser;
+			}
+			set
+			{
+				if ((this._IdUser != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdUserChanging(value);
+					this.SendPropertyChanging();
+					this._IdUser = value;
+					this.SendPropertyChanged("IdUser");
+					this.OnIdUserChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Photo", Storage="_Photo", ThisKey="Id", OtherKey="IdDog")]
 		public EntitySet<Photo> Photo
 		{
@@ -499,6 +542,40 @@ namespace AdoptujPieska.Models
 			set
 			{
 				this._Photo.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Pieski", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Pieski.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Pieski.Add(this);
+						this._IdUser = value.Id;
+					}
+					else
+					{
+						this._IdUser = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("User");
+				}
 			}
 		}
 		
@@ -535,19 +612,23 @@ namespace AdoptujPieska.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Photo")]
-	public partial class Photo : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Id;
 		
-		private string _Photos;
+		private string _USERNAME;
 		
-		private int _IdDog;
+		private string _EMAIL;
 		
-		private EntityRef<Pieski> _Pieski;
+		private string _PASSWORD;
+		
+		private System.Nullable<int> _ROLE;
+		
+		private EntitySet<Pieski> _Pieski;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -555,15 +636,19 @@ namespace AdoptujPieska.Models
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
-    partial void OnPhotosChanging(string value);
-    partial void OnPhotosChanged();
-    partial void OnIdDogChanging(int value);
-    partial void OnIdDogChanged();
+    partial void OnUSERNAMEChanging(string value);
+    partial void OnUSERNAMEChanged();
+    partial void OnEMAILChanging(string value);
+    partial void OnEMAILChanged();
+    partial void OnPASSWORDChanging(string value);
+    partial void OnPASSWORDChanged();
+    partial void OnROLEChanging(System.Nullable<int> value);
+    partial void OnROLEChanged();
     #endregion
 		
-		public Photo()
+		public User()
 		{
-			this._Pieski = default(EntityRef<Pieski>);
+			this._Pieski = new EntitySet<Pieski>(new Action<Pieski>(this.attach_Pieski), new Action<Pieski>(this.detach_Pieski));
 			OnCreated();
 		}
 		
@@ -587,81 +672,96 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Photos", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Photos
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USERNAME", DbType="VarChar(50)")]
+		public string USERNAME
 		{
 			get
 			{
-				return this._Photos;
+				return this._USERNAME;
 			}
 			set
 			{
-				if ((this._Photos != value))
+				if ((this._USERNAME != value))
 				{
-					this.OnPhotosChanging(value);
+					this.OnUSERNAMEChanging(value);
 					this.SendPropertyChanging();
-					this._Photos = value;
-					this.SendPropertyChanged("Photos");
-					this.OnPhotosChanged();
+					this._USERNAME = value;
+					this.SendPropertyChanged("USERNAME");
+					this.OnUSERNAMEChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdDog", DbType="Int NOT NULL")]
-		public int IdDog
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMAIL", DbType="VarChar(50)")]
+		public string EMAIL
 		{
 			get
 			{
-				return this._IdDog;
+				return this._EMAIL;
 			}
 			set
 			{
-				if ((this._IdDog != value))
+				if ((this._EMAIL != value))
 				{
-					if (this._Pieski.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdDogChanging(value);
+					this.OnEMAILChanging(value);
 					this.SendPropertyChanging();
-					this._IdDog = value;
-					this.SendPropertyChanged("IdDog");
-					this.OnIdDogChanged();
+					this._EMAIL = value;
+					this.SendPropertyChanged("EMAIL");
+					this.OnEMAILChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Photo", Storage="_Pieski", ThisKey="IdDog", OtherKey="Id", IsForeignKey=true)]
-		public Pieski Pieski
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="VarChar(50)")]
+		public string PASSWORD
 		{
 			get
 			{
-				return this._Pieski.Entity;
+				return this._PASSWORD;
 			}
 			set
 			{
-				Pieski previousValue = this._Pieski.Entity;
-				if (((previousValue != value) 
-							|| (this._Pieski.HasLoadedOrAssignedValue == false)))
+				if ((this._PASSWORD != value))
 				{
+					this.OnPASSWORDChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Pieski.Entity = null;
-						previousValue.Photo.Remove(this);
-					}
-					this._Pieski.Entity = value;
-					if ((value != null))
-					{
-						value.Photo.Add(this);
-						this._IdDog = value.Id;
-					}
-					else
-					{
-						this._IdDog = default(int);
-					}
-					this.SendPropertyChanged("Pieski");
+					this._PASSWORD = value;
+					this.SendPropertyChanged("PASSWORD");
+					this.OnPASSWORDChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ROLE", DbType="Int")]
+		public System.Nullable<int> ROLE
+		{
+			get
+			{
+				return this._ROLE;
+			}
+			set
+			{
+				if ((this._ROLE != value))
+				{
+					this.OnROLEChanging(value);
+					this.SendPropertyChanging();
+					this._ROLE = value;
+					this.SendPropertyChanged("ROLE");
+					this.OnROLEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Pieski", Storage="_Pieski", ThisKey="Id", OtherKey="IdUser")]
+		public EntitySet<Pieski> Pieski
+		{
+			get
+			{
+				return this._Pieski;
+			}
+			set
+			{
+				this._Pieski.Assign(value);
 			}
 		}
 		
@@ -683,6 +783,18 @@ namespace AdoptujPieska.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Pieski(Pieski entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Pieski(Pieski entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
 		}
 	}
 }

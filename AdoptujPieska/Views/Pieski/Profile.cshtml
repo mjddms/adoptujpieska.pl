@@ -275,7 +275,7 @@
 
         <div class="column">
 
-            @if (Session["UserName"] != null)
+            @if (Session["UserName"] != null && (int)Session["Role"] == 1 && Model.IdUser == (int)Session["Id"])
             {
 
                 <td>@Html.ActionLink("Dodaj zdjecia", "Photos", new { id = Model.Id }, new { @class = "btn-edit" })</td>
@@ -287,7 +287,7 @@
 
         <div class="columna" style="text-align: right;">
 
-            @if (Session["UserName"] != null)
+            @if (Session["UserName"] != null && (int)Session["Role"] == 1 && Model.IdUser == (int)Session["Id"])
             {
                 <td>@Html.ActionLink("Edytuj", "Update", new { id = Model.Id }, new { @class = "btn-edit" })</td>
                 <td>@Html.ActionLink("Usuñ", "Delete", new { id = Model.Id }, new { onclick = "return confirm('Czy na pewno chcesz usun¹æ tego psa?')", @class = "btn-delete" })</td>

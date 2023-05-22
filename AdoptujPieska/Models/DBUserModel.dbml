@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Database1" Class="DBUserModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Table Name="dbo.[User]" Member="User">
-    <Type Name="User">
+  <Table Name="dbo.Photo" Member="Photo">
+    <Type Name="Photo">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="USERNAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="EMAIL" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="PASSWORD" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Photos" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IdDog" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Pieski_Photo" Member="Pieski" ThisKey="IdDog" OtherKey="Id" Type="Pieski" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Pieski" Member="Pieski">
@@ -19,15 +19,19 @@
       <Column Name="[Lubi dzieci]" Member="Lubi_dzieci" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="[Lubi psy]" Member="Lubi_psy" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Opis" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IdUser" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Pieski_Photo" Member="Photo" ThisKey="Id" OtherKey="IdDog" Type="Photo" />
+      <Association Name="User_Pieski" Member="User" ThisKey="IdUser" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Photo" Member="Photo">
-    <Type Name="Photo">
+  <Table Name="dbo.[User]" Member="User">
+    <Type Name="User">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Photos" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="IdDog" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Pieski_Photo" Member="Pieski" ThisKey="IdDog" OtherKey="Id" Type="Pieski" IsForeignKey="true" />
+      <Column Name="USERNAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PASSWORD" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ROLE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="User_Pieski" Member="Pieski" ThisKey="Id" OtherKey="IdUser" Type="Pieski" />
     </Type>
   </Table>
 </Database>

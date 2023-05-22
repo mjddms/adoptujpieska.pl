@@ -201,9 +201,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Home.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPart.cshtml" />
     <Content Include="Views\Pieski\All.cshtml" />
     <Content Include="Views\Pieski\Index.cshtml" />
@@ -212,6 +210,8 @@
     <Content Include="Views\Pieski\Add.cshtml" />
     <Content Include="Views\Pieski\Update.cshtml" />
     <Content Include="Views\Pieski\Photos.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\uploads\" />

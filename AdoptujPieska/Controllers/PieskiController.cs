@@ -12,8 +12,10 @@ using System.IO;
 
 namespace AdoptujPieska.Controllers
 {
+   
     public class PieskiController : Controller
     {
+        DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString);
         // GET: Pieski
         public ActionResult Index()
         {
@@ -28,8 +30,8 @@ namespace AdoptujPieska.Controllers
         [HttpPost]
         public ActionResult Add(Pieski piesek, HttpPostedFileBase file)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
+            
+            
                 if (file != null && file.ContentLength > 0) 
                 {
                     var fileName = Path.GetFileName(file.FileName);
@@ -38,10 +40,11 @@ namespace AdoptujPieska.Controllers
 
                     piesek.Zdjecie = "/uploads/" + fileName;
                 }
-
+                int UserId = (int)Session["Id"];
+                piesek.IdUser = UserId;
                 db.Pieski.InsertOnSubmit(piesek);
                 db.SubmitChanges();
-            }
+            
 
             return RedirectToAction("All");
         }
@@ -49,8 +52,8 @@ namespace AdoptujPieska.Controllers
 
         public ActionResult All(Pieski piesek, string aktywny, string lubi_dzieci, string lubi_psy, string plec, string rasa, int? wiek)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
+           
+           
                 var pieski = db.Pieski.AsQueryable();
 
                 if (!string.IsNullOrEmpty(rasa))
@@ -91,44 +94,42 @@ namespace AdoptujPieska.Controllers
 
 
                 ViewBag.Pieski = pieski.ToList();
-            }
+            
 
             return View();
         }
 
         public ActionResult Edit(int id)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
+            
                 var piesek = db.Pieski.FirstOrDefault(p => p.Id == id);
                 if (piesek != null)
                 {
                     return View("Edit", piesek);
                 }
-            }
+            
             return RedirectToAction("All");
         }
 
 
         public ActionResult Update(int id)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
-                Pieski piesek = db.Pieski.SingleOrDefault(x => x.Id == id);
+         
+                 Pieski piesek = db.Pieski.SingleOrDefault(x => x.Id == id);
                 if (piesek == null)
                 {
                     return HttpNotFound();
                 }
 
                 return View(piesek);
-            }
+            
         }
 
         [HttpPost]
         public ActionResult Update(Pieski piesek, HttpPostedFileBase file)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
+           
+            
                 Pieski piesekToUpdate = db.Pieski.SingleOrDefault(x => x.Id == piesek.Id);
                 if (piesekToUpdate == null)
                 {
@@ -155,7 +156,7 @@ namespace AdoptujPieska.Controllers
 
 
                 db.SubmitChanges();
-            }
+            
 
             return RedirectToAction("All");
         }
@@ -163,23 +164,21 @@ namespace AdoptujPieska.Controllers
 
 
     public ActionResult Delete(int id)
-        {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
+        {    
                 var piesekToDelete = db.Pieski.FirstOrDefault(p => p.Id == id);
                 if (piesekToDelete != null)
                 {
                     db.Pieski.DeleteOnSubmit(piesekToDelete);
                     db.SubmitChanges();
                 }
-            }
+            
             return RedirectToAction("All");
         }
         
         public new ActionResult Profile(int id)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
+            
+            
                 var pies = db.Pieski.SingleOrDefault(p => p.Id == id);
                 if (pies == null)
                 {
@@ -191,12 +190,10 @@ namespace AdoptujPieska.Controllers
                     
                 }
                 return View(pies);
-            }
+            
         }
         public ActionResult Photos(int id)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
                 Pieski piesek = db.Pieski.SingleOrDefault(x => x.Id == id);
                 if (piesek == null)
                 {
@@ -204,13 +201,13 @@ namespace AdoptujPieska.Controllers
                 }
 
                 return View(piesek);
-            }
+            
         }
         [HttpPost]
         public ActionResult Photos(HttpPostedFileBase file, int id)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
+            
+            
                 var piesek = db.Pieski.FirstOrDefault(p => p.Id == id);
                 if (file != null && file.ContentLength > 0)
                 {
@@ -225,16 +222,15 @@ namespace AdoptujPieska.Controllers
                     db.SubmitChanges();
                 } 
                 return View(piesek);
-            }
+            
            
         }
         public void PrintPhotos(int id)
         {
-            using (var db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
+
                 var zdjecia = db.Photo.Where(p => p.IdDog == id).ToList();
                 ViewBag.Photos = zdjecia;
-            }
+            
 
         }
 

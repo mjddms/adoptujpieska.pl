@@ -2,29 +2,36 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DBUserModel">
   <DataContextMoniker Name="/DBUserModelDataContext" />
   <nestedChildShapes>
-    <classShape Id="bc1b017c-c4be-4cb3-9da5-b6ebf847f426" absoluteBounds="0.75, 0.5, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/DBUserModelDataContext/User" />
-      <nestedChildShapes>
-        <elementListCompartment Id="ddd3b617-f42b-4ec3-b79b-dbe3e7bad1a1" absoluteBounds="0.76500000000000012, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="b4a8487d-0e8b-4b29-9d30-354471ef2b2c" absoluteBounds="4, 0.875, 2, 2.7324039713541666">
-      <DataClassMoniker Name="/DBUserModelDataContext/Pieski" />
-      <nestedChildShapes>
-        <elementListCompartment Id="374a28e6-1298-4010-b383-a86055920448" absoluteBounds="4.015, 1.335, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="be2d8e6d-58f2-4adf-84c8-7d7ce4449be2" absoluteBounds="1.25, 2.75, 2, 1.3862939453125">
+    <classShape Id="133b82e6-2f60-486c-b1d4-390ba212f74d" absoluteBounds="1.625, 3, 2, 1.3862939453125">
       <DataClassMoniker Name="/DBUserModelDataContext/Photo" />
       <nestedChildShapes>
-        <elementListCompartment Id="e8604edb-8dc1-4c92-994d-cb5a1d50d9e4" absoluteBounds="1.2650000000000001, 3.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3e9a0fc2-bf7a-40f9-8d92-44190cd04af0" absoluteBounds="1.6400000000000001, 3.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4 : 3.17870198567708); (3.25 : 3.17870198567708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="7326ea4f-103c-46e4-9970-a17e21f80b28" absoluteBounds="4.875, 0.5, 2, 2.9247054036458331">
+      <DataClassMoniker Name="/DBUserModelDataContext/Pieski" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d7ddc4e2-3580-4edf-a4cc-f40d66345fbe" absoluteBounds="4.89, 0.96, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.875 : 3.21235270182292); (3.625 : 3.21235270182292)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DBUserModelDataContext/Pieski/Pieski_Photo" />
       <nodes>
-        <classShapeMoniker Id="b4a8487d-0e8b-4b29-9d30-354471ef2b2c" />
-        <classShapeMoniker Id="be2d8e6d-58f2-4adf-84c8-7d7ce4449be2" />
+        <classShapeMoniker Id="7326ea4f-103c-46e4-9970-a17e21f80b28" />
+        <classShapeMoniker Id="133b82e6-2f60-486c-b1d4-390ba212f74d" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="bce036ab-6206-4eaa-a86c-8c265a99e116" absoluteBounds="2, 0.625, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DBUserModelDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="485020ea-2273-46b3-8511-fc20d9504900" absoluteBounds="2.015, 1.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4 : 1.51044840494792); (4.875 : 1.51044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBUserModelDataContext/User/User_Pieski" />
+      <nodes>
+        <classShapeMoniker Id="bce036ab-6206-4eaa-a86c-8c265a99e116" />
+        <classShapeMoniker Id="7326ea4f-103c-46e4-9970-a17e21f80b28" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

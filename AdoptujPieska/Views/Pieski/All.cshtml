@@ -87,8 +87,7 @@
 
 <body>
 
-
-    @if (Session["UserName"] != null)
+    @if (Session["UserName"] != null && (int)Session["Role"] == 1)
     {
 
         <div class="btn-edit">@Html.ActionLink("+ Dodaj Pieska", "Add")</div>

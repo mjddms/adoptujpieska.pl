@@ -10,9 +10,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AdoptujPieska.Controllers
 {
-
+   
     public class UserController : Controller
     {
+        DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString);
         // GET: User
         public ActionResult Register(int id = 0)
         {
@@ -22,14 +23,12 @@ namespace AdoptujPieska.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
-
             if (!ModelState.IsValid)
             {
                 return View("Register", user);
             }
+            user.ROLE = 2;
 
-            using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-            {
                 if (db.User.Any(x => x.USERNAME == user.USERNAME))
                 {
                     ViewBag.DuplicateMessage = "Użytkownik o takiej nazwie już istnieje!";
@@ -40,21 +39,20 @@ namespace AdoptujPieska.Controllers
                     db.User.InsertOnSubmit(user);
                     db.SubmitChanges();
                 }
-
-            }
+                
+            
             ModelState.Clear();
             ViewBag.SuccessMessage = "Zarejestrowano pomyślnie!";
             return View("Login", new User());
         }
         public ActionResult Login(User user)
         {
-            DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString);
-
-
-            var users = db.User.Where(x => x.USERNAME == user.USERNAME && x.PASSWORD == user.PASSWORD).Count();
-            if (users > 0)
+            var loggedInUser = db.User.FirstOrDefault(x => x.USERNAME == user.USERNAME && x.PASSWORD == user.PASSWORD);
+            if (loggedInUser != null)
             {
-                Session["UserName"] = user.USERNAME;
+                Session["UserName"] = loggedInUser.USERNAME;
+                Session["Role"] = loggedInUser.ROLE;
+                Session["Id"] = loggedInUser.Id;
                 return RedirectToAction("Home");
             }
             else
@@ -97,8 +95,6 @@ namespace AdoptujPieska.Controllers
             {
                 string username = Session["UserName"].ToString();
 
-                using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-                {
                     User user = db.User.SingleOrDefault(x => x.USERNAME == username);
 
                     if (user == null)
@@ -109,7 +105,7 @@ namespace AdoptujPieska.Controllers
                     {
                         return View(user);
                     }
-                }
+                
             }
         }
 
@@ -128,8 +124,8 @@ namespace AdoptujPieska.Controllers
             {
                 string username = Session["UserName"].ToString();
 
-                using (DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString1"].ConnectionString))
-                {
+               
+                
                     User existingUser = db.User.SingleOrDefault(x => x.USERNAME == username);
 
                     if (existingUser == null)
@@ -154,7 +150,7 @@ namespace AdoptujPieska.Controllers
                         ViewBag.SuccessMessage = "Dane użytkownika zostały zaktualizowane.";
                         return View("Home", existingUser);
                     }
-                }
+                
             }
         }
 

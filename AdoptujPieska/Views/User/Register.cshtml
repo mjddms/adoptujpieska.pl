@@ -1,64 +1,57 @@
 ﻿@model AdoptujPieska.Models.User
 
 @{
-	ViewBag.Title = "Registration";
+    ViewBag.Title = "Register";
 }
 
-<h2>Zarejestruj się</h2>
+<h2>Register</h2>
 
-
-@using (Html.BeginForm("Register", "User", FormMethod.Post))
+@using (Html.BeginForm()) 
 {
-	@Html.AntiForgeryToken()
-
-	<div class="form-horizontal">
-		<h4>User</h4>
-		<hr />
-		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-		<div class="form-group">
-			@Html.LabelFor(model => model.USERNAME, htmlAttributes: new { @class = "control-label col-md-2" })
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.USERNAME, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.USERNAME, "", new { @class = "text-danger" })
-			</div>
-		</div>
-
-		<div class="form-group">
-			@Html.LabelFor(model => model.EMAIL, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>User</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.USERNAME, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control", data_val_email = "Proszę wprowadzić poprawny adres e-mail" } })
+                @Html.EditorFor(model => model.USERNAME, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.USERNAME, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EMAIL, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
             </div>
-		</div>
+        </div>
 
-		<div class="form-group">
-			@Html.LabelFor(model => model.PASSWORD, htmlAttributes: new { @class = "control-label col-md-2" })
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
-			</div>
-		</div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PASSWORD, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" value="Zarejestruj się!" class="btn btn-default" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-2">
-				<label class=" label-success">@ViewBag.SuccessMessage</label>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-md-offset-2 col-md-2">
-				<label class=" label-success">@ViewBag.DuplicateMessage</label>
-			</div>
-		</div>
-	</div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ROLE, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ROLE, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ROLE, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
 }
 
 
-
-@section Scripts {
-	@Scripts.Render("~/bundles/jqueryval")
-}
