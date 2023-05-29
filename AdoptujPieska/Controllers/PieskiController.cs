@@ -227,9 +227,8 @@ namespace AdoptujPieska.Controllers
 
         public ActionResult Like(int id) 
         {
-            
+
             Pieski piesek = db.Pieski.SingleOrDefault(x => x.Id == id);
-            
             int Uid = (int)Session["Id"];
             Like like = new Like();
             Like iflike = db.Like.SingleOrDefault(x => x.IdUser == Uid && x.LikeDog == id);
@@ -238,6 +237,12 @@ namespace AdoptujPieska.Controllers
                 like.Pieski = piesek;
                 like.IdUser = Uid;
                 piesek.Like.Add(like);
+                db.SubmitChanges();
+                
+            }
+            else
+            {
+                db.Like.DeleteOnSubmit(iflike);
                 db.SubmitChanges();
             }
             return View("Profile", piesek);

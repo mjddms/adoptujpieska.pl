@@ -1,5 +1,19 @@
 ﻿@model AdoptujPieska.Models.Pieski
-@if (Session["UserName"] != null && (int)Session["Role"] == 2)
+@{
+	bool isLiked = Model.Like.Any(x => x.IdUser == (int)Session["Id"] && x.LikeDog == Model.Id);
+}
+@if (isLiked)
 {
-	<td>@Html.ActionLink("Like", "Like", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+	if (Session["UserName"] != null && (int)Session["Role"] == 2)
+	{
+		<td>@Html.ActionLink("Dislike", "Like", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+	}
+}
+else
+{
+	if (Session["UserName"] != null && (int)Session["Role"] == 2)
+	{
+		<td>@Html.ActionLink("Like", "Like", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+	}
+
 }

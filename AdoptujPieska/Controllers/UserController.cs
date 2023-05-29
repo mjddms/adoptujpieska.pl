@@ -124,8 +124,6 @@ namespace AdoptujPieska.Controllers
             {
                 string username = Session["UserName"].ToString();
 
-               
-                
                     User existingUser = db.User.SingleOrDefault(x => x.USERNAME == username);
 
                     if (existingUser == null)
