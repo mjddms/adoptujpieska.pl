@@ -39,6 +39,9 @@ namespace AdoptujPieska.Models
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void InsertLike(Like instance);
+    partial void UpdateLike(Like instance);
+    partial void DeleteLike(Like instance);
     #endregion
 		
 		public DBUserModelDataContext(string connection) : 
@@ -86,6 +89,14 @@ namespace AdoptujPieska.Models
 			get
 			{
 				return this.GetTable<User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Like> Like
+		{
+			get
+			{
+				return this.GetTable<Like>();
 			}
 		}
 	}
@@ -271,6 +282,8 @@ namespace AdoptujPieska.Models
 		
 		private EntitySet<Photo> _Photo;
 		
+		private EntitySet<Like> _Like;
+		
 		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
@@ -304,6 +317,7 @@ namespace AdoptujPieska.Models
 		public Pieski()
 		{
 			this._Photo = new EntitySet<Photo>(new Action<Photo>(this.attach_Photo), new Action<Photo>(this.detach_Photo));
+			this._Like = new EntitySet<Like>(new Action<Like>(this.attach_Like), new Action<Like>(this.detach_Like));
 			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -545,6 +559,19 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Like", Storage="_Like", ThisKey="Id", OtherKey="LikeDog")]
+		public EntitySet<Like> Like
+		{
+			get
+			{
+				return this._Like;
+			}
+			set
+			{
+				this._Like.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Pieski", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
 		public User User
 		{
@@ -610,6 +637,18 @@ namespace AdoptujPieska.Models
 			this.SendPropertyChanging();
 			entity.Pieski = null;
 		}
+		
+		private void attach_Like(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pieski = this;
+		}
+		
+		private void detach_Like(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pieski = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
@@ -630,6 +669,8 @@ namespace AdoptujPieska.Models
 		
 		private EntitySet<Pieski> _Pieski;
 		
+		private EntitySet<Like> _Like;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -649,6 +690,7 @@ namespace AdoptujPieska.Models
 		public User()
 		{
 			this._Pieski = new EntitySet<Pieski>(new Action<Pieski>(this.attach_Pieski), new Action<Pieski>(this.detach_Pieski));
+			this._Like = new EntitySet<Like>(new Action<Like>(this.attach_Like), new Action<Like>(this.detach_Like));
 			OnCreated();
 		}
 		
@@ -765,6 +807,19 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_Like", ThisKey="Id", OtherKey="IdUser")]
+		public EntitySet<Like> Like
+		{
+			get
+			{
+				return this._Like;
+			}
+			set
+			{
+				this._Like.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -795,6 +850,210 @@ namespace AdoptujPieska.Models
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
+		}
+		
+		private void attach_Like(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Like(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Like]")]
+	public partial class Like : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _IdUser;
+		
+		private int _LikeDog;
+		
+		private EntityRef<User> _User;
+		
+		private EntityRef<Pieski> _Pieski;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnIdUserChanging(int value);
+    partial void OnIdUserChanged();
+    partial void OnLikeDogChanging(int value);
+    partial void OnLikeDogChanged();
+    #endregion
+		
+		public Like()
+		{
+			this._User = default(EntityRef<User>);
+			this._Pieski = default(EntityRef<Pieski>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUser", DbType="Int NOT NULL")]
+		public int IdUser
+		{
+			get
+			{
+				return this._IdUser;
+			}
+			set
+			{
+				if ((this._IdUser != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdUserChanging(value);
+					this.SendPropertyChanging();
+					this._IdUser = value;
+					this.SendPropertyChanged("IdUser");
+					this.OnIdUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LikeDog", DbType="Int NOT NULL")]
+		public int LikeDog
+		{
+			get
+			{
+				return this._LikeDog;
+			}
+			set
+			{
+				if ((this._LikeDog != value))
+				{
+					if (this._Pieski.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLikeDogChanging(value);
+					this.SendPropertyChanging();
+					this._LikeDog = value;
+					this.SendPropertyChanged("LikeDog");
+					this.OnLikeDogChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Like.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Like.Add(this);
+						this._IdUser = value.Id;
+					}
+					else
+					{
+						this._IdUser = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Like", Storage="_Pieski", ThisKey="LikeDog", OtherKey="Id", IsForeignKey=true)]
+		public Pieski Pieski
+		{
+			get
+			{
+				return this._Pieski.Entity;
+			}
+			set
+			{
+				Pieski previousValue = this._Pieski.Entity;
+				if (((previousValue != value) 
+							|| (this._Pieski.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Pieski.Entity = null;
+						previousValue.Like.Remove(this);
+					}
+					this._Pieski.Entity = value;
+					if ((value != null))
+					{
+						value.Like.Add(this);
+						this._LikeDog = value.Id;
+					}
+					else
+					{
+						this._LikeDog = default(int);
+					}
+					this.SendPropertyChanged("Pieski");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

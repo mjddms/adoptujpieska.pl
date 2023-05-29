@@ -1,0 +1,5 @@
+﻿@model AdoptujPieska.Models.Pieski
+@if (Session["UserName"] != null && (int)Session["Role"] == 2)
+{
+	<td>@Html.ActionLink("Like", "Like", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+}

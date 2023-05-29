@@ -9,6 +9,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Security.Cryptography;
 using System.IO;
+using System.Runtime.CompilerServices;
+using System.Xml.Schema;
+using System.Data.Linq;
 
 namespace AdoptujPieska.Controllers
 {
@@ -184,11 +187,7 @@ namespace AdoptujPieska.Controllers
                 {
                     return HttpNotFound();
                 }
-                else 
-                {
-                    PrintPhotos(id);
-                    
-                }
+
                 return View(pies);
             
         }
@@ -207,7 +206,6 @@ namespace AdoptujPieska.Controllers
         public ActionResult Photos(HttpPostedFileBase file, int id)
         {
             
-            
                 var piesek = db.Pieski.FirstOrDefault(p => p.Id == id);
                 if (file != null && file.ContentLength > 0)
                 {
@@ -221,20 +219,29 @@ namespace AdoptujPieska.Controllers
                     piesek.Photo.Add(photo);
                     db.SubmitChanges();
                 } 
-                return View(piesek);
+                return View("Profile", piesek);
             
            
         }
-        public void PrintPhotos(int id)
+
+
+        public ActionResult Like(int id) 
         {
-
-                var zdjecia = db.Photo.Where(p => p.IdDog == id).ToList();
-                ViewBag.Photos = zdjecia;
             
-
+            Pieski piesek = db.Pieski.SingleOrDefault(x => x.Id == id);
+            
+            int Uid = (int)Session["Id"];
+            Like like = new Like();
+            Like iflike = db.Like.SingleOrDefault(x => x.IdUser == Uid && x.LikeDog == id);
+            if (iflike == null)
+            {
+                like.Pieski = piesek;
+                like.IdUser = Uid;
+                piesek.Like.Add(like);
+                db.SubmitChanges();
+            }
+            return View("Profile", piesek);
         }
-
-
 
     }
 }

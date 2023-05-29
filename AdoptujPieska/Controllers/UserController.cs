@@ -14,7 +14,7 @@ namespace AdoptujPieska.Controllers
     public class UserController : Controller
     {
         DBUserModelDataContext db = new DBUserModelDataContext(ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString);
-        // GET: User
+
         public ActionResult Register(int id = 0)
         {
             User user = new User();
