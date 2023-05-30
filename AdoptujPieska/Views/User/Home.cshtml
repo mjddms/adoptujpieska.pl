@@ -228,6 +228,21 @@
 
 				</ul>
 			}
+			else
+			{
+		<div class="container-fota">
+
+			@foreach (var pies in Model.Pieski)
+			{
+				<div class="fota">
+					<a href="@Url.Action("Profile", "Pieski", new { id = pies.Id})">
+						<img src="@pies.Zdjecie">
+				</div>
+			}
+
+		</div>
+
+			}
 		</div>
 
 	</div>
