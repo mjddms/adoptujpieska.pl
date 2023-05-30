@@ -1,17 +1,17 @@
 ﻿@using AdoptujPieska.Controllers
 @if (Session["UserName"] != null)
 {
-	
-	
-		@Html.AntiForgeryToken()
 
-		<ul class="nav navbar-nav navbar-right">
-			<li>
-				@Html.ActionLink($"Witaj, {Session["UserName"]}!", "Manage", "User/Home", new { area = "" }, new { @class = "nav-link" })
-			</li>
-			<li>@Html.ActionLink("Wyloguj", "LogOut", "User" , new { area = "" }, new { @class = "nav-link" })</li>
-		</ul>
-	
+
+	@Html.AntiForgeryToken()
+
+	<ul class="nav navbar-nav navbar-right">
+		<li>
+			@Html.ActionLink($"Witaj, {Session["UserName"]}!","Home", "User", new { id = Session["Id"] }, new { @class = "nav-link" })
+		</li>
+		<li>@Html.ActionLink("Wyloguj", "LogOut", "User", new { area = "" }, new { @class = "nav-link" })</li>
+	</ul>
+
 }
 else
 {

@@ -1,4 +1,21 @@
 ﻿@model AdoptujPieska.Models.Pieski
+<style>
+	.btn-like {
+		display: inline-block;
+		padding: 10px 15px;
+		position: absolute; 
+		right: 150px;
+		background-color: white;
+		color: white;
+		text-decoration: none;
+		border: 1px solid grey;
+		border-radius: 5px;
+		cursor: pointer;
+		margin-top: 10px;
+		margin-right: 10px;
+		transition: transform 0.2s ease-in-out;
+	}
+</style>
 @{
 	bool isLiked = Model.Like.Any(x => x.IdUser == (int)Session["Id"] && x.LikeDog == Model.Id);
 }
@@ -6,14 +23,14 @@
 {
 	if (Session["UserName"] != null && (int)Session["Role"] == 2)
 	{
-		<td>@Html.ActionLink("Dislike", "Like", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+		<td>@Html.ActionLink("💔", "Like", new { id = Model.Id }, new { @class = "btn-like" })</td>
 	}
 }
 else
 {
 	if (Session["UserName"] != null && (int)Session["Role"] == 2)
 	{
-		<td>@Html.ActionLink("Like", "Like", new { id = Model.Id }, new { @class = "btn-edit" })</td>
+		<td>@Html.ActionLink("❤", "Like", new { id = Model.Id }, new { @class = "btn-like" })</td>
 	}
 
 }

@@ -53,7 +53,7 @@ namespace AdoptujPieska.Controllers
                 Session["UserName"] = loggedInUser.USERNAME;
                 Session["Role"] = loggedInUser.ROLE;
                 Session["Id"] = loggedInUser.Id;
-                return RedirectToAction("Home");
+                return RedirectToAction("Home", loggedInUser);
             }
             else
             {
@@ -62,15 +62,16 @@ namespace AdoptujPieska.Controllers
 
         }
 
-        public ActionResult Home()
-        {
+        public ActionResult Home(int id)
+        {   
+            User user =  db.User.SingleOrDefault(x=>x.Id == id);
             if (Session["UserName"] == null)
             {
                 return RedirectToAction("Login");
             }
             else
             {
-                return View();
+                return View(user);
             }
         }
 
@@ -156,7 +157,7 @@ namespace AdoptujPieska.Controllers
         public ActionResult LogOut()
         {
             Session.Abandon();
-            return RedirectToAction("Home/Index");
+            return RedirectToAction("Login");
         }
         
 
