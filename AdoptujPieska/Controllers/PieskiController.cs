@@ -12,6 +12,8 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Xml.Schema;
 using System.Data.Linq;
+using System.Diagnostics;
+
 
 namespace AdoptujPieska.Controllers
 {
@@ -247,6 +249,22 @@ namespace AdoptujPieska.Controllers
             }
             return View("Profile", piesek);
         }
+
+        public ActionResult RemovePhoto(int Id)
+        {
+            Debug.WriteLine("Metoda RemovePhoto została wywołana.");
+
+            var photo = db.Photo.SingleOrDefault(p => p.Id == Id);
+            if (photo != null)
+            {
+                db.Photo.DeleteOnSubmit(photo);
+                db.SubmitChanges();
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
 
     }
 }
