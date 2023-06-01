@@ -72,14 +72,16 @@
             border-radius: 5px;
             margin-top: 10px;
             margin-right: 10px;
+            margin-bottom: 10px;
             transition: transform 0.2s ease-in-out;
+            text-decoration: none;
         }
 
             .btn-edit:hover {
                 transform: scale(1.05);
                 color: white;
             }
-        }
+        
     </style>
 
 </head>
@@ -90,9 +92,10 @@
     @if (Session["UserName"] != null && (int)Session["Role"] == 1)
     {
 
-        <div class="btn-edit">@Html.ActionLink("+ Dodaj Pieska", "Add")</div>
+        <div class="btn-edit">@Html.ActionLink("Dodaj Pieska", "Add", null, new { style = "color: white;" })</div>
 
     }
+
 
     <form method="get" style="display: flex; gap: 10px; margin-bottom: 10px;">
         <div style="display: flex; align-items: center;">
