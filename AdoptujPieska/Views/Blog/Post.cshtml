@@ -93,6 +93,21 @@
         font-weight: bold;
         font-size: 24px;
     }
+
+    .button-group {
+        margin-top: 10px;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        border:none;
+    }
+
+    .custom-green {
+        background-color: #86A612;
+        border: none;
+        margin-right: 10px;
+    }
+
 </style>
 
 @using (Html.BeginForm("Post", "Blog", new { id = Model.Id }))
@@ -102,8 +117,10 @@
 
     if (Session["Role"] != null && (int)Session["Id"] == Model.author)
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success custom-green" })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger", onclick = "return confirm('Czy na pewno chcesz usunąć ten wpis?');" })
     }
+
 
     <div class="image-container">
         <img src="@Html.DisplayFor(model => model.photo)" alt="Zdjęcie" />

@@ -76,5 +76,54 @@ namespace AdoptujPieska.Controllers
             return View("Post",post);
         }
 
+        public ActionResult Edit(int id)
+        {
+            var post = db.Blog.SingleOrDefault(p => p.Id == id);
+
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(post);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Blog post)
+        {
+            if ((int)Session["Role"] == 1)
+            {
+                var existingPost = db.Blog.SingleOrDefault(p => p.Id == post.Id);
+
+                if (existingPost == null)
+                {
+                    return HttpNotFound();
+                }
+
+                existingPost.title = post.title;
+                existingPost.content = post.content;
+
+                db.SubmitChanges();
+            }
+
+            return RedirectToAction("Blog");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var post = db.Blog.SingleOrDefault(p => p.Id == id);
+
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Blog.DeleteOnSubmit(post);
+            db.SubmitChanges();
+
+            return RedirectToAction("Blog");
+        }
+
+
     }
 }

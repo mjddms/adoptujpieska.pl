@@ -1,0 +1,30 @@
+﻿@model AdoptujPieska.Models.Blog
+
+<h2>Delete</h2>
+
+<div>
+    <h4>Blog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Tytuł:</dt>
+        <dd>@Html.DisplayFor(model => model.title)</dd>
+        <dt>Autor:</dt>
+        <dd>@Html.DisplayFor(model => model.author)</dd>
+        <dt>Data:</dt>
+        <dd>@Html.DisplayFor(model => model.date)</dd>
+        <dt>Zdjęcie:</dt>
+        <dd>@Html.DisplayFor(model => model.photo)</dd>
+        <dt>Treść:</dt>
+        <dd>@Html.DisplayFor(model => model.content)</dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Blog", new { id = Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
