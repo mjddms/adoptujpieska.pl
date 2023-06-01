@@ -77,7 +77,7 @@ namespace AdoptujPieska.Controllers
                 return View(user);
             }
         }
-        public ActionResult Profile(int id)
+        public new ActionResult Profile(int id)
         {
             User user = db.User.SingleOrDefault(x => x.Id == id);
 
