@@ -47,6 +47,21 @@
       <Column Name="DESCRIPTION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Association Name="User_Pieski" Member="Pieski" ThisKey="Id" OtherKey="IdUser" Type="Pieski" />
       <Association Name="User_Like" Member="Like" ThisKey="Id" OtherKey="IdUser" Type="Like" />
+      <Association Name="User_FormSchel" Member="FormSchel" ThisKey="Id" OtherKey="idUser" Type="FormSchel" />
+      <Association Name="User_FormSchel1" Member="FormSchel1" ThisKey="Id" OtherKey="idDog" Type="FormSchel" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormSchel" Member="FormSchel">
+    <Type Name="FormSchel">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUser" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="surname" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="idDog" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="User_FormSchel" Member="User" ThisKey="idUser" OtherKey="Id" Type="User" IsForeignKey="true" />
+      <Association Name="User_FormSchel1" Member="User1" ThisKey="idDog" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

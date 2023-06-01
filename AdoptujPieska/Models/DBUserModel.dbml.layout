@@ -2,10 +2,10 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DBUserModel">
   <DataContextMoniker Name="/DBUserModelDataContext" />
   <nestedChildShapes>
-    <classShape Id="133b82e6-2f60-486c-b1d4-390ba212f74d" absoluteBounds="5.625, 2.625, 2, 1.3862939453125">
+    <classShape Id="133b82e6-2f60-486c-b1d4-390ba212f74d" absoluteBounds="5.375, 3.125, 2, 1.3862939453125">
       <DataClassMoniker Name="/DBUserModelDataContext/Photo" />
       <nestedChildShapes>
-        <elementListCompartment Id="3e9a0fc2-bf7a-40f9-8d92-44190cd04af0" absoluteBounds="5.6400000000000006, 3.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3e9a0fc2-bf7a-40f9-8d92-44190cd04af0" absoluteBounds="5.3900000000000006, 3.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="7326ea4f-103c-46e4-9970-a17e21f80b28" absoluteBounds="3, 1.875, 2, 2.9247054036458331">
@@ -14,7 +14,7 @@
         <elementListCompartment Id="d7ddc4e2-3580-4edf-a4cc-f40d66345fbe" absoluteBounds="3.0149999999999997, 2.335, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5 : 3.31814697265625); (5.625 : 3.31814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5 : 3.81814697265625); (5.375 : 3.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DBUserModelDataContext/Pieski/Pieski_Photo" />
       <nodes>
         <classShapeMoniker Id="7326ea4f-103c-46e4-9970-a17e21f80b28" />
@@ -27,7 +27,7 @@
         <elementListCompartment Id="450729ee-2c01-4fd3-bf06-0fec6cc65b1c" absoluteBounds="0.76500000000000012, 0.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4 : 1.875); (4 : 1.1874995); (2.75 : 1.1874995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.8749995 : 1.875); (3.8749995 : 1.1874995); (2.75 : 1.1874995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DBUserModelDataContext/Pieski/Pieski_Like" />
       <nodes>
         <classShapeMoniker Id="7326ea4f-103c-46e4-9970-a17e21f80b28" />
@@ -40,7 +40,7 @@
         <elementListCompartment Id="c1600593-549a-4083-a3ae-121bcd1f457a" absoluteBounds="0.51500000000000012, 2.835, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.5 : 3.58735270182292); (3 : 3.58735270182292)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 3.58735270182292); (3 : 3.58735270182292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DBUserModelDataContext/User/User_Pieski" />
       <nodes>
         <classShapeMoniker Id="f582f287-7968-494d-8f87-1df042c4abc0" />
@@ -52,6 +52,26 @@
       <nodes>
         <classShapeMoniker Id="f582f287-7968-494d-8f87-1df042c4abc0" />
         <classShapeMoniker Id="7f6e4634-6529-4b53-b0f0-6dac68388ea7" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="74340f27-bf2c-47f6-98b6-98d09fd3e6df" absoluteBounds="5.375, 0.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/DBUserModelDataContext/FormSchel" />
+      <nestedChildShapes>
+        <elementListCompartment Id="514993df-0e51-41d1-854d-1a56164d630f" absoluteBounds="5.39, 0.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.093752 : 2.375); (2.093752 : 1.9487939453125); (2.875 : 1.9487939453125); (2.875 : 1.49999975); (3.79166616666667 : 1.49999975 : JumpStart); (3.95833283333333 : 1.49999975 : JumpEnd); (5.375 : 1.49999975)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBUserModelDataContext/User/User_FormSchel" />
+      <nodes>
+        <classShapeMoniker Id="f582f287-7968-494d-8f87-1df042c4abc0" />
+        <classShapeMoniker Id="74340f27-bf2c-47f6-98b6-98d09fd3e6df" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.031248 : 2.375); (1.031248 : 1.9487939453125); (2.8125 : 1.9487939453125); (2.8125 : 0.84375025); (5.375 : 0.84375025)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBUserModelDataContext/User/User_FormSchel1" />
+      <nodes>
+        <classShapeMoniker Id="f582f287-7968-494d-8f87-1df042c4abc0" />
+        <classShapeMoniker Id="74340f27-bf2c-47f6-98b6-98d09fd3e6df" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

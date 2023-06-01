@@ -42,6 +42,9 @@ namespace AdoptujPieska.Models
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void InsertFormSchel(FormSchel instance);
+    partial void UpdateFormSchel(FormSchel instance);
+    partial void DeleteFormSchel(FormSchel instance);
     #endregion
 		
 		public DBUserModelDataContext(string connection) : 
@@ -97,6 +100,14 @@ namespace AdoptujPieska.Models
 			get
 			{
 				return this.GetTable<User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<FormSchel> FormSchel
+		{
+			get
+			{
+				return this.GetTable<FormSchel>();
 			}
 		}
 	}
@@ -871,6 +882,10 @@ namespace AdoptujPieska.Models
 		
 		private EntitySet<Like> _Like;
 		
+		private EntitySet<FormSchel> _FormSchel;
+		
+		private EntitySet<FormSchel> _FormSchel1;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -899,6 +914,8 @@ namespace AdoptujPieska.Models
 		{
 			this._Pieski = new EntitySet<Pieski>(new Action<Pieski>(this.attach_Pieski), new Action<Pieski>(this.detach_Pieski));
 			this._Like = new EntitySet<Like>(new Action<Like>(this.attach_Like), new Action<Like>(this.detach_Like));
+			this._FormSchel = new EntitySet<FormSchel>(new Action<FormSchel>(this.attach_FormSchel), new Action<FormSchel>(this.detach_FormSchel));
+			this._FormSchel1 = new EntitySet<FormSchel>(new Action<FormSchel>(this.attach_FormSchel1), new Action<FormSchel>(this.detach_FormSchel1));
 			OnCreated();
 		}
 		
@@ -1108,6 +1125,32 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_FormSchel", Storage="_FormSchel", ThisKey="Id", OtherKey="idUser")]
+		public EntitySet<FormSchel> FormSchel
+		{
+			get
+			{
+				return this._FormSchel;
+			}
+			set
+			{
+				this._FormSchel.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_FormSchel1", Storage="_FormSchel1", ThisKey="Id", OtherKey="idDog")]
+		public EntitySet<FormSchel> FormSchel1
+		{
+			get
+			{
+				return this._FormSchel1;
+			}
+			set
+			{
+				this._FormSchel1.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1150,6 +1193,318 @@ namespace AdoptujPieska.Models
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
+		}
+		
+		private void attach_FormSchel(FormSchel entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_FormSchel(FormSchel entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_FormSchel1(FormSchel entity)
+		{
+			this.SendPropertyChanging();
+			entity.User1 = this;
+		}
+		
+		private void detach_FormSchel1(FormSchel entity)
+		{
+			this.SendPropertyChanging();
+			entity.User1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FormSchel")]
+	public partial class FormSchel : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _idUser;
+		
+		private string _name;
+		
+		private string _surname;
+		
+		private string _phone;
+		
+		private string _message;
+		
+		private System.Nullable<int> _idDog;
+		
+		private EntityRef<User> _User;
+		
+		private EntityRef<User> _User1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnidUserChanging(System.Nullable<int> value);
+    partial void OnidUserChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnsurnameChanging(string value);
+    partial void OnsurnameChanged();
+    partial void OnphoneChanging(string value);
+    partial void OnphoneChanged();
+    partial void OnmessageChanging(string value);
+    partial void OnmessageChanged();
+    partial void OnidDogChanging(System.Nullable<int> value);
+    partial void OnidDogChanged();
+    #endregion
+		
+		public FormSchel()
+		{
+			this._User = default(EntityRef<User>);
+			this._User1 = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUser", DbType="Int")]
+		public System.Nullable<int> idUser
+		{
+			get
+			{
+				return this._idUser;
+			}
+			set
+			{
+				if ((this._idUser != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidUserChanging(value);
+					this.SendPropertyChanging();
+					this._idUser = value;
+					this.SendPropertyChanged("idUser");
+					this.OnidUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_surname", DbType="NVarChar(50)")]
+		public string surname
+		{
+			get
+			{
+				return this._surname;
+			}
+			set
+			{
+				if ((this._surname != value))
+				{
+					this.OnsurnameChanging(value);
+					this.SendPropertyChanging();
+					this._surname = value;
+					this.SendPropertyChanged("surname");
+					this.OnsurnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone", DbType="NVarChar(50)")]
+		public string phone
+		{
+			get
+			{
+				return this._phone;
+			}
+			set
+			{
+				if ((this._phone != value))
+				{
+					this.OnphoneChanging(value);
+					this.SendPropertyChanging();
+					this._phone = value;
+					this.SendPropertyChanged("phone");
+					this.OnphoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="NVarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this.OnmessageChanging(value);
+					this.SendPropertyChanging();
+					this._message = value;
+					this.SendPropertyChanged("message");
+					this.OnmessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idDog", DbType="Int")]
+		public System.Nullable<int> idDog
+		{
+			get
+			{
+				return this._idDog;
+			}
+			set
+			{
+				if ((this._idDog != value))
+				{
+					if (this._User1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidDogChanging(value);
+					this.SendPropertyChanging();
+					this._idDog = value;
+					this.SendPropertyChanged("idDog");
+					this.OnidDogChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_FormSchel", Storage="_User", ThisKey="idUser", OtherKey="Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.FormSchel.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.FormSchel.Add(this);
+						this._idUser = value.Id;
+					}
+					else
+					{
+						this._idUser = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_FormSchel1", Storage="_User1", ThisKey="idDog", OtherKey="Id", IsForeignKey=true)]
+		public User User1
+		{
+			get
+			{
+				return this._User1.Entity;
+			}
+			set
+			{
+				User previousValue = this._User1.Entity;
+				if (((previousValue != value) 
+							|| (this._User1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User1.Entity = null;
+						previousValue.FormSchel1.Remove(this);
+					}
+					this._User1.Entity = value;
+					if ((value != null))
+					{
+						value.FormSchel1.Add(this);
+						this._idDog = value.Id;
+					}
+					else
+					{
+						this._idDog = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("User1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

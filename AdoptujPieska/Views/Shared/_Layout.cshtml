@@ -37,10 +37,6 @@
 					<li>@Html.ActionLink("Strona główna", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
 					<li>@Html.ActionLink("Pieski", "Index", "Pieski/All", new { area = "" }, new { @class = "nav-link" })</li>
 					<li>@Html.ActionLink("Schroniska", "Shelters", "User", new { area = "" }, new { @class = "nav-link" })</li>
-					@if (User.Identity.Name != null )
-					{
-						<li>@Html.ActionLink("Użytkownicy", "Users", "User", new { area = "" }, new { @class = "nav-link" })</li>
-					}
 				</ul>
 				@Html.Partial("_LoginPart")
 			</div>

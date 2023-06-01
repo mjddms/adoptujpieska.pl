@@ -9,6 +9,7 @@ using AdoptujPieska.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.IO;
+using System.Web.Security;
 
 namespace AdoptujPieska.Controllers
 {
