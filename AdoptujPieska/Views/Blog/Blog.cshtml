@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AdoptujPieska.Models.Blog>
+
+@{
+    ViewBag.Title = "Blog";
+}
+
+<h2>Blog</h2>
+
+<p>
+	@if (Session["Role"]!=null && (int)Session["Role"] == 1)
+	{
+		@Html.ActionLink("Create New", "AddPost")
+	}
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.photo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.content)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.USERNAME)
+        </td>
+        <td>
+           @item.date
+        </td>
+        <td>
+            <img src="@item.photo" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.content)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Post", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

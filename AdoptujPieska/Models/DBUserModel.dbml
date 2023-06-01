@@ -66,17 +66,24 @@
       <Association Name="User_FormSchel1" Member="User1" ThisKey="idDog" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.PhotosBlog" Member="PhotosBlog">
+    <Type Name="PhotosBlog">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PhotosPost" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IdPost" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Blog_PhotosBlog" Member="Blog" ThisKey="IdPost" OtherKey="Id" Type="Blog" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Blog" Member="Blog">
     <Type Name="Blog">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="title" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="author" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="photo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="content" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Blog_Comments" Member="Comments1" ThisKey="Id" OtherKey="IdPost" Type="Comments" />
       <Association Name="Blog_PhotosBlog" Member="PhotosBlog" ThisKey="Id" OtherKey="IdPost" Type="PhotosBlog" />
+      <Association Name="Blog_Comments" Member="Comments" ThisKey="Id" OtherKey="IdPost" Type="Comments" />
       <Association Name="User_Blog" Member="User" ThisKey="author" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
@@ -84,19 +91,11 @@
     <Type Name="Comments">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="author" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="comment" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="IdPost" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="User_Comments" Member="User" ThisKey="author" OtherKey="Id" Type="User" IsForeignKey="true" />
       <Association Name="Blog_Comments" Member="Blog" ThisKey="IdPost" OtherKey="Id" Type="Blog" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.PhotosBlog" Member="PhotosBlog">
-    <Type Name="PhotosBlog">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="PhotosPost" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="IdPost" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Blog_PhotosBlog" Member="Blog" ThisKey="IdPost" OtherKey="Id" Type="Blog" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

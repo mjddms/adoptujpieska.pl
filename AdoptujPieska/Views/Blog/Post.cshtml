@@ -1,0 +1,78 @@
+﻿@model AdoptujPieska.Models.Blog
+@{
+	ViewBag.Title = "Post";
+
+}
+@using (Html.BeginForm("Post", "Blog", new { id = Model.Id }))
+{
+	<h2>Post</h2>
+	if (Session["Role"] != null && (int)Session["Id"] == Model.author)
+	{
+		@Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+	}
+
+	<div>
+		<h4>Blog</h4>
+		<hr />
+		<dl class="dl-horizontal">
+			<dt>
+				@Html.DisplayNameFor(model => model.title)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.title)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.author)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.User.USERNAME)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.date)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.date)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.photo)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.photo)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.content)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.content)
+			</dd>
+
+		</dl>
+	</div>
+
+}
+<p>
+	@foreach (var comments in Model.Comments)
+	{
+		@comments.User.USERNAME
+		@comments.date
+		@comments.comment
+	}
+	@if (Session["Role"] != null && ((int)Session["Role"] == 1 || (int)Session["Role"] == 2))
+	{
+		using (Html.BeginForm("AddComment", "Blog", new { id = Model.Id }, FormMethod.Post))
+		{
+			<input type="text" name="comm" />
+			<input type="submit" value="Dodaj komentarz" />
+		}
+	}
+
+</p>
