@@ -4,60 +4,96 @@
     ViewBag.Title = "Blog";
 }
 
+<style>
+    .post-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 20px;
+    }
+
+    .post-box {
+        width: 25%;
+        max-width: 300px;
+        flex-basis: 25%;
+        border: 1px solid #eaeaea;
+        background-color: #ffffff;
+        border-radius: 5px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+        .post-box:hover {
+            transform: translateY(-5px);
+        }
+
+    .post-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 5px 5px 0 0;
+        max-height: 400px;
+        flex-grow: 1;
+        margin-bottom: 5px;
+    }
+
+    .post-details {
+        padding: 10px;
+    }
+
+    .post-title {
+        font-weight: bold;
+        font-size: 18px;
+        text-align: center;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        flex-grow: 0;
+    }
+
+    .post-date {
+        color: #888888;
+        font-size: 14px;
+        text-align: le;
+    }
+
+
+    .post-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+        .post-link:hover .post-title {
+            color: #009688;
+        }
+
+</style>
+
 <h2>Blog</h2>
 
 <p>
-	@if (Session["Role"]!=null && (int)Session["Role"] == 1)
-	{
-		@Html.ActionLink("Create New", "AddPost")
-	}
-
+    @if (Session["Role"] != null && (int)Session["Role"] == 1)
+    {
+        @Html.ActionLink("Dodaj nowy wpis!", "AddPost")
+    }
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.author)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.photo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.content)
-        </th>
 
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.USERNAME)
-        </td>
-        <td>
-           @item.date
-        </td>
-        <td>
-            <img src="@item.photo" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.content)
-        </td>
-
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Post", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="post-container">
+    @foreach (var item in Model.Reverse())
+    {
+        <a href="@Url.Action("Post", new { id = item.Id })" class="post-box post-link">
+            <img class="post-image" src="@item.photo" />
+            <div class="post-details">
+                <div class="post-title">
+                    @Html.DisplayFor(modelItem => item.title)
+                </div>
+                <div class="post-date">
+                    @item.date
+                </div>
+            </div>
+        </a>
+    }
+</div>

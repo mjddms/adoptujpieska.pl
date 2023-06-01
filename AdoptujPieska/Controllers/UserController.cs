@@ -195,7 +195,8 @@ namespace AdoptujPieska.Controllers
             Session.Abandon();
             return RedirectToAction("Login");
         }
-        
+
+
 
     }
 }

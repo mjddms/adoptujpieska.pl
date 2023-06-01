@@ -24,10 +24,12 @@ namespace AdoptujPieska.Controllers
 
             return View(post);
         }
+
+
         [HttpPost]
         public ActionResult AddPost(Blog post, HttpPostedFileBase file)
         {
-            if ((int)Session["Role"]==1)
+            if ((int)Session["Role"] == 1)
             {
                 if (file != null && file.ContentLength > 0)
                 {
@@ -44,8 +46,10 @@ namespace AdoptujPieska.Controllers
                 db.SubmitChanges();
             }
 
-            return View("Blog",post);
+            return RedirectToAction("Blog");
         }
+
+
         public ActionResult Post(int id)
         {
             var post = db.Blog.SingleOrDefault(p => p.Id == id);
