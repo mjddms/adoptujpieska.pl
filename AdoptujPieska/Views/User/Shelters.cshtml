@@ -75,12 +75,14 @@
 						</a>
 					}
 				</div>
-				<div class="shelter-info">
-					<a href="@Url.Action("Profile", new { id = item.Id })">
-						<h3>@item.USERNAME</h3>
-					</a>
-					<p>Email: @item.EMAIL</p>
-				</div>
+                <div class="shelter-info">
+                    <a href="@Url.Action("Profile", new { id = item.Id })">
+                        <h3>@item.USERNAME</h3>
+                    </a>
+                    <p>Email: @item.EMAIL</p>
+                    <p>Numer telefonu: @item.PHONE</p>
+                    <p>Adres: @item.ADDRESS</p>
+                </div>
 			</div>
 			}
 	</div>

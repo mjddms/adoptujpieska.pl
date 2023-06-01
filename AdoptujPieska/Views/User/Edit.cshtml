@@ -43,9 +43,10 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.PHOTO, new { @class = "control-label" })
-        <input type="file" name="file" />
+        <input type="file" name="file" class="form-control"/>
         @Html.ValidationMessageFor(model => model.PHOTO, "", new { @class = "text-danger" })
     </div>
+
     @if(Model.ROLE == 1)
     {
     <div class="form-group">
