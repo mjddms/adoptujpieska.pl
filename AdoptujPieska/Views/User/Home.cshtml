@@ -145,13 +145,15 @@
 				color: #1d1d1d;
 				line-height: 1.8em;
 			}
-
-			.header .container .content ul {
-				gap: 30px;
-				justify-content: center;
-				align-items: center;
-				margin-top: 25px;
+			.header .container .content .p html {
+				color: black;
 			}
+				.header .container .content ul {
+					gap: 30px;
+					justify-content: center;
+					align-items: center;
+					margin-top: 25px;
+				}
 
 				.header .container .content ul li {
 					display: flex;
@@ -176,7 +178,16 @@
 		<div class="left_col">
 			<br></br>
 			<div class="zdjecie">
-				<img src="~/Pictures/Logo.png" alt=" " />
+				@if (Model.PHOTO == null)
+				{
+					<img src="~/Pictures/Logo.png" alt=" " />
+
+				}
+				else
+				{
+					<img src="@Model.PHOTO" alt=" " />
+				}
+
 				<span></span>
 			</div>
 
@@ -184,25 +195,25 @@
 			@if (Session["UserName"] != null && (int)Session["Role"] == 1)
 			{
 				<p>Schronisko dla psów</p>
-				<p>adoptuj.pieska@gmail.com</p>
-
-				<ul class="ile">
-					<li><span>75</span>Dom znalazło</li>
-				</ul>
+				<p>@Model.EMAIL</p>
+				<p>@Model.PHONE</p>
+				<p>@Model.ADDRESS</p>
 
 				<div class="content">
 					<p>
-						Pomóż naszym czworonożnym przyjacielom znaleźć ciepły dom!
-						Podaruj im miłość na jaką zasługują!
-						Pokaż mu, że jest życie poza schroniskiem. Nie pozwól,
-						aby resztę lat życia, które mu pozostały, spędził w zimnym,
-						betonowym boksie. Jeśli okażesz mu trochę serca, on odpłaci Ci z nawiązką.
+					<p>@Model.DESCRIPTION</p>
 					</p>
 				</div>
 			}
 			else
 			{
-				<p>User</p>
+				<p>Użytkownik</p>
+				if(Model.ROLE==0)
+				{
+		<p>
+			@Html.ActionLink("Użytkownicy", "Users", "User")
+		</p>
+				}
 
 			}
 

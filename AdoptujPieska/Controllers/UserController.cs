@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using AdoptujPieska.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace AdoptujPieska.Controllers
 {
@@ -74,6 +76,13 @@ namespace AdoptujPieska.Controllers
                 return View(user);
             }
         }
+        public ActionResult Profile(int id)
+        {
+            User user = db.User.SingleOrDefault(x => x.Id == id);
+
+                return View(user);
+
+        }
 
         public ActionResult Manage()
         {
@@ -111,7 +120,7 @@ namespace AdoptujPieska.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(User user)
+        public ActionResult Edit(User user, HttpPostedFileBase file)
         {
             if (Session["UserName"] == null)
             {
@@ -138,10 +147,24 @@ namespace AdoptujPieska.Controllers
                         ViewBag.DuplicateMessage = "Użytkownik o takiej nazwie już istnieje!";
                         return View("Edit", user);
                      }
-                        existingUser.USERNAME = user.USERNAME;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/uploads/"), fileName);
+                        file.SaveAs(path);
+
+                        existingUser.PHOTO = "/uploads/" + fileName;
+                    }
+                    existingUser.USERNAME = user.USERNAME;
                         
                         existingUser.EMAIL = user.EMAIL;
                         existingUser.PASSWORD = user.PASSWORD;
+                        if(existingUser.ROLE == 1)
+                        {
+                            existingUser.PHONE = user.PHONE;
+                            existingUser.ADDRESS = user.ADDRESS;
+                            existingUser.DESCRIPTION = user.DESCRIPTION; 
+                        }
                         db.SubmitChanges();
 
                         Session["UserName"] = user.USERNAME;
@@ -153,6 +176,18 @@ namespace AdoptujPieska.Controllers
             }
         }
 
+        public ActionResult Shelters()
+        {
+            List<User> shelters = db.User.Where(x => x.ROLE == 1).ToList();
+            return View(shelters);
+
+        }
+        public ActionResult Users()
+        {
+            List<User> users = db.User.ToList();
+            return View(users);
+
+        }
 
         public ActionResult LogOut()
         {

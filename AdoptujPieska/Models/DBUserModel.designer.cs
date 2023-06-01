@@ -20,9 +20,9 @@ namespace AdoptujPieska.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-    using System.ComponentModel.DataAnnotations;
-
-    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
+	
+	
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
 	public partial class DBUserModelDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -36,12 +36,12 @@ namespace AdoptujPieska.Models
     partial void InsertPieski(Pieski instance);
     partial void UpdatePieski(Pieski instance);
     partial void DeletePieski(Pieski instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
     partial void InsertLike(Like instance);
     partial void UpdateLike(Like instance);
     partial void DeleteLike(Like instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     #endregion
 		
 		public DBUserModelDataContext(string connection) : 
@@ -84,19 +84,19 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<User> User
-		{
-			get
-			{
-				return this.GetTable<User>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Like> Like
 		{
 			get
 			{
 				return this.GetTable<Like>();
+			}
+		}
+		
+		public System.Data.Linq.Table<User> User
+		{
+			get
+			{
+				return this.GetTable<User>();
 			}
 		}
 	}
@@ -343,8 +343,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rasa", DbType="VarChar(50)")]
-        [DisplayName("Rasa:")]
-        public string Rasa
+		public string Rasa
 		{
 			get
 			{
@@ -364,8 +363,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Imie", DbType="VarChar(50)")]
-        [DisplayName("Imie:")]
-        public string Imie
+		public string Imie
 		{
 			get
 			{
@@ -385,8 +383,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Wiek", DbType="Int")]
-        [DisplayName("Wiek:")]
-        public System.Nullable<int> Wiek
+		public System.Nullable<int> Wiek
 		{
 			get
 			{
@@ -406,8 +403,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plec", DbType="Bit")]
-        [DisplayName("Płeć:")]
-        public System.Nullable<bool> Plec
+		public System.Nullable<bool> Plec
 		{
 			get
 			{
@@ -427,8 +423,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zdjecie", DbType="NVarChar(MAX)")]
-        [DisplayName("Zdjęcie:")]
-        public string Zdjecie
+		public string Zdjecie
 		{
 			get
 			{
@@ -448,8 +443,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aktywny", DbType="Bit")]
-        [DisplayName("Czy jest aktywny?")]
-        public System.Nullable<bool> Aktywny
+		public System.Nullable<bool> Aktywny
 		{
 			get
 			{
@@ -469,8 +463,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Lubi dzieci]", Storage="_Lubi_dzieci", DbType="Bit")]
-        [DisplayName("Czy lubi dzieci?")]
-        public System.Nullable<bool> Lubi_dzieci
+		public System.Nullable<bool> Lubi_dzieci
 		{
 			get
 			{
@@ -490,8 +483,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Lubi psy]", Storage="_Lubi_psy", DbType="Bit")]
-        [DisplayName("Czy toleruje inne psy?")]
-        public System.Nullable<bool> Lubi_psy
+		public System.Nullable<bool> Lubi_psy
 		{
 			get
 			{
@@ -511,8 +503,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Opis", DbType="NVarChar(MAX)")]
-        [DisplayName("Opis:")]
-        public string Opis
+		public string Opis
 		{
 			get
 			{
@@ -660,6 +651,198 @@ namespace AdoptujPieska.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Like]")]
+	public partial class Like : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _IdUser;
+		
+		private int _LikeDog;
+		
+		private EntityRef<Pieski> _Pieski;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnIdUserChanging(int value);
+    partial void OnIdUserChanged();
+    partial void OnLikeDogChanging(int value);
+    partial void OnLikeDogChanged();
+    #endregion
+		
+		public Like()
+		{
+			this._Pieski = default(EntityRef<Pieski>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUser", DbType="Int NOT NULL")]
+		public int IdUser
+		{
+			get
+			{
+				return this._IdUser;
+			}
+			set
+			{
+				if ((this._IdUser != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdUserChanging(value);
+					this.SendPropertyChanging();
+					this._IdUser = value;
+					this.SendPropertyChanged("IdUser");
+					this.OnIdUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LikeDog", DbType="Int NOT NULL")]
+		public int LikeDog
+		{
+			get
+			{
+				return this._LikeDog;
+			}
+			set
+			{
+				if ((this._LikeDog != value))
+				{
+					if (this._Pieski.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLikeDogChanging(value);
+					this.SendPropertyChanging();
+					this._LikeDog = value;
+					this.SendPropertyChanged("LikeDog");
+					this.OnLikeDogChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Like", Storage="_Pieski", ThisKey="LikeDog", OtherKey="Id", IsForeignKey=true)]
+		public Pieski Pieski
+		{
+			get
+			{
+				return this._Pieski.Entity;
+			}
+			set
+			{
+				Pieski previousValue = this._Pieski.Entity;
+				if (((previousValue != value) 
+							|| (this._Pieski.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Pieski.Entity = null;
+						previousValue.Like.Remove(this);
+					}
+					this._Pieski.Entity = value;
+					if ((value != null))
+					{
+						value.Like.Add(this);
+						this._LikeDog = value.Id;
+					}
+					else
+					{
+						this._LikeDog = default(int);
+					}
+					this.SendPropertyChanged("Pieski");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Like.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Like.Add(this);
+						this._IdUser = value.Id;
+					}
+					else
+					{
+						this._IdUser = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -675,6 +858,14 @@ namespace AdoptujPieska.Models
 		private string _PASSWORD;
 		
 		private System.Nullable<int> _ROLE;
+		
+		private string _PHOTO;
+		
+		private string _PHONE;
+		
+		private string _ADDRESS;
+		
+		private string _DESCRIPTION;
 		
 		private EntitySet<Pieski> _Pieski;
 		
@@ -694,6 +885,14 @@ namespace AdoptujPieska.Models
     partial void OnPASSWORDChanged();
     partial void OnROLEChanging(System.Nullable<int> value);
     partial void OnROLEChanged();
+    partial void OnPHOTOChanging(string value);
+    partial void OnPHOTOChanged();
+    partial void OnPHONEChanging(string value);
+    partial void OnPHONEChanged();
+    partial void OnADDRESSChanging(string value);
+    partial void OnADDRESSChanged();
+    partial void OnDESCRIPTIONChanging(string value);
+    partial void OnDESCRIPTIONChanged();
     #endregion
 		
 		public User()
@@ -724,9 +923,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USERNAME", DbType="VarChar(50)")]
-        [DisplayName("Nazwa:")]
-        [Required(ErrorMessage = "To pole nie może być puste!")]
-        public string USERNAME
+		public string USERNAME
 		{
 			get
 			{
@@ -746,10 +943,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMAIL", DbType="VarChar(50)")]
-        [DisplayName("Email:")]
-        [DataType(DataType.EmailAddress)]
-        [Required(ErrorMessage = "To pole nie może być puste!")]
-        public string EMAIL
+		public string EMAIL
 		{
 			get
 			{
@@ -769,10 +963,7 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="VarChar(50)")]
-        [DisplayName("Hasło:")]
-        [DataType(DataType.Password)]
-        [Required(ErrorMessage = "To pole nie może być puste!")]
-        public string PASSWORD
+		public string PASSWORD
 		{
 			get
 			{
@@ -807,6 +998,86 @@ namespace AdoptujPieska.Models
 					this._ROLE = value;
 					this.SendPropertyChanged("ROLE");
 					this.OnROLEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PHOTO", DbType="NVarChar(MAX)")]
+		public string PHOTO
+		{
+			get
+			{
+				return this._PHOTO;
+			}
+			set
+			{
+				if ((this._PHOTO != value))
+				{
+					this.OnPHOTOChanging(value);
+					this.SendPropertyChanging();
+					this._PHOTO = value;
+					this.SendPropertyChanged("PHOTO");
+					this.OnPHOTOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PHONE", DbType="NVarChar(50)")]
+		public string PHONE
+		{
+			get
+			{
+				return this._PHONE;
+			}
+			set
+			{
+				if ((this._PHONE != value))
+				{
+					this.OnPHONEChanging(value);
+					this.SendPropertyChanging();
+					this._PHONE = value;
+					this.SendPropertyChanged("PHONE");
+					this.OnPHONEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ADDRESS", DbType="NVarChar(50)")]
+		public string ADDRESS
+		{
+			get
+			{
+				return this._ADDRESS;
+			}
+			set
+			{
+				if ((this._ADDRESS != value))
+				{
+					this.OnADDRESSChanging(value);
+					this.SendPropertyChanging();
+					this._ADDRESS = value;
+					this.SendPropertyChanged("ADDRESS");
+					this.OnADDRESSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRIPTION", DbType="NVarChar(MAX)")]
+		public string DESCRIPTION
+		{
+			get
+			{
+				return this._DESCRIPTION;
+			}
+			set
+			{
+				if ((this._DESCRIPTION != value))
+				{
+					this.OnDESCRIPTIONChanging(value);
+					this.SendPropertyChanging();
+					this._DESCRIPTION = value;
+					this.SendPropertyChanged("DESCRIPTION");
+					this.OnDESCRIPTIONChanged();
 				}
 			}
 		}
@@ -879,198 +1150,6 @@ namespace AdoptujPieska.Models
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Like]")]
-	public partial class Like : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _IdUser;
-		
-		private int _LikeDog;
-		
-		private EntityRef<User> _User;
-		
-		private EntityRef<Pieski> _Pieski;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnIdUserChanging(int value);
-    partial void OnIdUserChanged();
-    partial void OnLikeDogChanging(int value);
-    partial void OnLikeDogChanged();
-    #endregion
-		
-		public Like()
-		{
-			this._User = default(EntityRef<User>);
-			this._Pieski = default(EntityRef<Pieski>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUser", DbType="Int NOT NULL")]
-		public int IdUser
-		{
-			get
-			{
-				return this._IdUser;
-			}
-			set
-			{
-				if ((this._IdUser != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdUserChanging(value);
-					this.SendPropertyChanging();
-					this._IdUser = value;
-					this.SendPropertyChanged("IdUser");
-					this.OnIdUserChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LikeDog", DbType="Int NOT NULL")]
-		public int LikeDog
-		{
-			get
-			{
-				return this._LikeDog;
-			}
-			set
-			{
-				if ((this._LikeDog != value))
-				{
-					if (this._Pieski.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnLikeDogChanging(value);
-					this.SendPropertyChanging();
-					this._LikeDog = value;
-					this.SendPropertyChanged("LikeDog");
-					this.OnLikeDogChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Like.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Like.Add(this);
-						this._IdUser = value.Id;
-					}
-					else
-					{
-						this._IdUser = default(int);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Like", Storage="_Pieski", ThisKey="LikeDog", OtherKey="Id", IsForeignKey=true)]
-		public Pieski Pieski
-		{
-			get
-			{
-				return this._Pieski.Entity;
-			}
-			set
-			{
-				Pieski previousValue = this._Pieski.Entity;
-				if (((previousValue != value) 
-							|| (this._Pieski.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Pieski.Entity = null;
-						previousValue.Like.Remove(this);
-					}
-					this._Pieski.Entity = value;
-					if ((value != null))
-					{
-						value.Like.Add(this);
-						this._LikeDog = value.Id;
-					}
-					else
-					{
-						this._LikeDog = default(int);
-					}
-					this.SendPropertyChanged("Pieski");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }

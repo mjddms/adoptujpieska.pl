@@ -1,0 +1,86 @@
+﻿@model IEnumerable<AdoptujPieska.Models.User>
+
+@{
+	ViewBag.Title = "Shelters";
+}
+
+<h2>Schroniska:</h2>
+<style>
+	.shelter-list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		gap: 20px;
+	}
+
+	.shelter-tile {
+		width: 100%;
+		background-color: #f0f0f0;
+		padding: 20px;
+		border-radius: 5px;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		display: flex;
+		align-items: flex-start;
+	}
+
+	.shelter-image {
+		flex: 0 0 150px;
+		margin-right: 20px;
+	}
+
+		.shelter-image img {
+			width: 100%;
+			height: auto;
+			border-radius: 5px;
+		}
+
+	.shelter-info {
+		flex: 1;
+	}
+
+		.shelter-info h3 {
+			font-size: 18px;
+			margin-top: 0;
+		}
+
+		.shelter-info p {
+			margin: 5px 0;
+		}
+		.shelter-info a{
+			color:black;
+			text-decoration: none;
+		}
+</style>
+
+
+
+
+
+
+<div class="shelter-list">
+	@foreach (var item in Model)
+	{
+			<div class="shelter-tile">
+				<div class="shelter-image">
+					@if (item.PHOTO == null)
+					{
+						<a href="@Url.Action("Profile", new { id = item.Id })">
+							<img src="~/Pictures/Logo.png" alt=" " />
+						</a>
+					}
+					else
+					{
+						<a href="@Url.Action("Profile", new { id = item.Id })">
+							<img src="@item.PHOTO" alt=" " />
+						</a>
+					}
+				</div>
+				<div class="shelter-info">
+					<a href="@Url.Action("Profile", new { id = item.Id })">
+						<h3>@item.USERNAME</h3>
+					</a>
+					<p>Email: @item.EMAIL</p>
+				</div>
+			</div>
+			}
+	</div>

@@ -213,6 +213,10 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Pieski\Like.cshtml" />
     <Content Include="Views\User\Home.cshtml" />
+    <Content Include="Views\User\Shelters.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\User\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\uploads\" />
