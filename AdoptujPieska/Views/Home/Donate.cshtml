@@ -4,89 +4,96 @@
     ViewBag.Title = "Shelters";
 }
 <style>
-    .donation-form {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f5f5f5;
-        border: 1px solid #ddd;
-        border-radius: 5px;
+ .box{
+     margin-top:60px;
+ }
+
+    .form-check-input:checked {
+        background-color: #8BC34A;
+        border-color: #8BC34A;
+        box-shadow: 0 0 7px #8BC34A;
     }
 
-    .form-group {
-        margin-bottom: 20px;
+    .form-control-lg:checked {
+        background-color: #8BC34A;
+        border-color: #8BC34A;
+        box-shadow: 0 0 7px #8BC34A;
     }
 
-        .form-group label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
+    .btn-delete:hover {
+        transform: scale(1.05);
+        color: white;
+    }
 
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-        }
-
-        .form-group textarea {
-            width: 100%;
-            height: 100px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-        }
-
-        .form-group input[type="submit"] {
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-            .form-group input[type="submit"]:hover {
-                background-color: #45a049;
-            }
+    .form-control:focus {
+        border-color: #8BC34A;
+        box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, 0.25);
+    }
+    .form-control,
+    .form-check-label {
+        color: gray;
+    }
 </style>
 
-<div class="donation-form">
-    <h2>Przekaż darowiznę</h2>
-    <form action="#" method="post">
-        <div class="form-group">
-            <label for="amount">Kwota darowizny:</label>
-            <input type="text" id="amount" name="amount" placeholder="Podaj kwotę darowizny" required>
+<div class="box", style="display: flex; justify-content: center;">
+    <div style="max-width: 600px;">
+        <div class="ps-xl-3">
+            <div class="card border-0 shadow mb-5">
+                <div class="card-header bg-gray-50" style="height: 50px; text-align: center;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 style="font-weight: bold; text-align: center;">Przekaż darowiznę</h4>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form id="form">
+                        <div class="mb-4">
+                            <input class="form-control form-control-lg rounded-pill" name="formName" id="formName" type="text" placeholder="Imię" autocomplete="off" required data-msg="Podaj swoje imię" style="font-size: 14px;">
+                        </div>
+                        <div class="mb-4">
+                            <input class="form-control form-control-lg rounded-pill" name="formPhone" id="formPhone" type="number" min="1" placeholder="Podaj kwotę" autocomplete="off" required data-msg="Podaj kwotę" style="font-size: 14px;">
+                        </div>
+                        <div class="mb-4">
+                            <select class="form-control form-control-lg rounded-pill" id="shelter" name="shelter" placeholder="Wybierz schronisko" required data-msg="Wybierz schronisko" style="font-size: 14px;">
+                                <option value="">Wybierz schronisko</option>
+                                @foreach (var shelter in Model)
+                                {
+                                    <option value="@shelter.Id">@shelter.USERNAME</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-group">
+                                <select class="form-control form-control-lg rounded-pill" id="payment-method" name="payment-method" required data-msg="Wybierz metodę płatności" style="font-size: 14px;">
+                                    <option value="">Wybierz metodę płatności</option>
+                                    <option value="method1">Przelewy24</option>
+                                    <option value="method2">PayPal</option>
+                                    <option value="method3">Rachunek bankowy</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <textarea class="form-control form-control-lg rounded" rows="4" name="formMessage" id="formMessage" placeholder="Wpisz swoją wiadomość" required data-msg="Wpisz swoją wiadomość" style="font-size: 14px;"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <input class="form-check-input" id="formAgree" type="checkbox" required>
+                            <label class="form-check-label text-muted" for="formAgree">
+                                <span class="text-sm" data-localize="contact-agree" style="font-size: 15px;">
+                                    Akceptuję <a href='/assets/pp.pdf'>politykę prywatności</a> adoptujpieska.pl
+                                </span>
+                            </label>
+                        </div>
+                        <div class="mb-4 d-none alert alert-success" role="alert" id="formAlert" data-localize="contact-success">Twoja wiadomość została wysłana!</div>
+                        <div class="d-grid text-center mb-2">
+                            <a class="btn btn-primary rounded-pill border-0" href="#" id="button-send" style="background-color: #8BC34A; border: 2px solid #8BC34A;">
+                                <i class="far fa-paper-plane me-2"></i>
+                                <span data-localize="contact-send">Przekaż darowiznę</span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="shelter">Wybierz schronisko:</label>
-            <select id="shelter" name="shelter" required>
-                <option value="">Wybierz schronisko</option>
-                @foreach (var shelter in Model)
-                {
-                    <option value="@shelter.Id">@shelter.USERNAME</option>
-                }
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="payment-method">Metoda płatności:</label>
-            <select id="payment-method" name="payment-method" required>
-                <option value="">Wybierz metodę płatności</option>
-                <option value="method1">Przelewy24</option>
-                <option value="method2">PayPal</option>
-                <option value="method3">Rachunek bankowy</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="message">Wiadomość dodatkowa:</label>
-            <textarea id="message" name="message" placeholder="Dodatkowe informacje lub wiadomość" required></textarea>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Prześlij darowiznę">
-        </div>
-    </form>
+    </div>
 </div>
 
