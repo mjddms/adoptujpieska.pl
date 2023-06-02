@@ -1,5 +1,7 @@
 ﻿@model AdoptujPieska.Models.Pieski
 
+
+
 <head>
 
     <style>
@@ -80,70 +82,15 @@
                 opacity: 1;
             }
     </style>
-    </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
-
-        // Pobranie elementów formularza
-        const searchForm = document.querySelector('#search-form');
-        const searchOptSubmit = document.querySelector('#search-opt-submit');
-        const searchOptionsType = document.querySelectorAll('input[name="search-options-type"]');
-        const searchOptionsGender = document.querySelectorAll('input[name="search-options-gender"]');
-
-        // Funkcja obsługująca wyszukiwanie
-        function handleSearch(event) {
-            event.preventDefault();
-
-            // Pobranie wybranych opcji
-            let selectedType;
-            let selectedGender;
-
-            searchOptionsType.forEach((option) => {
-                if (option.checked) {
-                    selectedType = option.value;
-                }
-            });
-
-            searchOptionsGender.forEach((option) => {
-                if (option.checked) {
-                    selectedGender = option.value;
-                }
-            });
-
-
-            // Przykładowe wyświetlenie wybranych opcji
-            console.log('Wybrany typ zwierzęcia:', selectedType);
-            console.log('Wybrana płeć:', selectedGender);
-        }
-
-        // Nasłuchuj zdarzenia kliknięcia przycisku "Szukaj"
-        searchOptSubmit.addEventListener('click', handleSearch);
-
-
-    </script>
-
-    <script>
-        // Obsługa kliknięcia przycisku "Szukaj"
-        document.getElementById("search-form").addEventListener("submit", function (event) {
-            event.preventDefault(); // Zapobieganie domyślnej akcji formularza (np. przeładowania strony)
-
-            // Przeniesienie do widoku "All" i przekazanie wartości z pól wyboru
-            var selectedType = document.querySelector('input[name="search-options-type"]:checked').value;
-            var selectedGender = document.querySelector('input[name="search-options-gender"]:checked').value;
-            window.location.href = "widok_all.html?type=" + selectedType + "&gender=" + selectedGender;
-        });
-    </script>
-
-
 </head>
 
 <body>
-
 
     <section class="pt-3 pt-md-5">
         <div class="container">
@@ -154,48 +101,57 @@
                         <p class="subtitle letter-spacing-4 mb-2 text-disabled text-shadow" data-localize="hero-text-secondary">Znajdź i pokochaj pupila</p>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12 col-md-10 col-lg-10" color=#8BC34A>
-                            <div class="row mt-4 mt-lg-4">
-                                <div class="col">
-                                    <input type="radio" class="btn-check" name="search-options-type" value="DOG" id="search-opt-dog" autocomplete="off">
-                                    <label class="btn btn-lg btn-outline-primary rounded-pill w-100" style="border-color: #8BC34A; " for="search-opt-dog"><i class="fa fa-dog me-1"></i><span data-localize="search-label-dog" style="color: #86A612;">Pies</span></label>
-                                </div>
+                        <form action="/Pieski/All" method="get">
+                            <div style="display: flex; align-items: center;">
+                                <label for="rasa" style="margin-right: 5px;">Rasa:</label>
+                                <input type="text" name="rasa" id="rasa" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;" list="rasa-list" value="@ViewBag.WybranaRasa">
+                                <datalist id="rasa-list">
+                                    <option value="">Wszystkie</option>
+                                    <option value="labrador">Labrador Retriever</option>
+                                    <option value="owczarek">Owczarek niemiecki</option>
+                                    <option value="golden">Golden Retriever</option>
+                                    <option value="yorkshire">Yorkshire Terrier</option>
+                                    <option value="buldog">Bulldog francuski</option>
+                                    <option value="jackrussell">Jack Russell Terrier</option>
+                                    <option value="bordercollie">Border Collie</option>
+                                    <option value="sznaucer">Sznaucer miniaturowy</option>
+                                    <option value="shihtzu">Shih Tzu</option>
+                                    <option value="chihuahua">Chihuahua</option>
+                                    <option value="beagle">Beagle</option>
+                                    <option value="cockerspaniel">Cocker Spaniel</option>
+                                    <option value="goldendoodle">Golden Doodle</option>
+                                    <option value="bernersennenhund">Berner Sennenhund</option>
+                                    <option value="amstaff">Amstaff</option>
+                                    <option value="westhighland">West Highland White Terrier</option>
+                                    <option value="husky">Siberian Husky</option>
+                                    <option value="boxer">Boxer</option>
+                                    <option value="cavalierkingcharles">Cavalier King Charles Spaniel</option>
+                                    <option value="rottweiler">Rottweiler</option>
+                                </datalist>
                             </div>
 
-                            <div class="row mt-4 mt-lg-4" style="border-color: #8BC34A;">
-                                <p class="subtitle letter-spacing-4 mb-2 text-disabled text-shadow" data-localize="hero-text-secondary"><strong>Płeć</strong></p>
+                            <br />
 
-
-                                <!--   Wybor płci   -->
-
-
-                                <div class="col-4 text-center" style="border-color: #8BC34A;">
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" name="search-options-gender" value="NONE" id="search-gender-none" id="search-gender-none" autocomplete="off" checked>
-                                        <label class="w-100" for="search-gender-none"><span data-localize="search-opt-none">Dowolnie</span></label>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-center">
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" style="color: #86A612;" name="search-options-gender" value="MALE" id="search-gender-male" autocomplete="off">
-                                        <label class="w-100" for="search-gender-male"><span data-localize="search-opt-male" style="border-color: #86A612;">Ona</span></label>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-center">
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" name="search-options-gender" value="FEMALE" id="search-gender-female" autocomplete="off">
-                                        <label class="w-100" for="search-gender-female"><span data-localize="search-opt-female">Nie</span></label>
-                                    </div>
-                                </div>
-
+                            <div style="display: flex; align-items: center;">
+                                <label for="plec" style="margin-right: 5px;">Płeć:</label>
+                                <select name="plec" id="plec" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;">
+                                    <option value="">Wszystkie</option>
+                                    <option value="samiec" @if (Request.QueryString["plec"] == "samiec") { <text> selected</text> }>Samiec</option>
+                                    <option value="samica" @if (Request.QueryString["plec"] == "samica") { <text> selected</text> }>Samica</option>
+                                </select>
                             </div>
-                            <div class="row mt-4 mt-lg-4">
-                                <div class="col">
-                                    @Html.ActionLink("Szukaj", "Index", "Pieski/All", new { area = "" }, new { @class = "btn btn-lg btn-primary rounded-pill h-100 w-100", style = "background-color: #8BC34A; border-color: #8BC34A;", id = "search-opt-submit", type = "submit", data_localize = "search-label-search" })
 
-                                </div>
+                            <br />
+
+                            <div style="display: flex; align-items: center;">
+                                <label for="wiek" style="margin-right: 5px;">Wiek:</label>
+                                <input type="number" name="wiek" id="wiek" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;" value="@ViewBag.WybranyWiek" min="0">
                             </div>
-                        </div>
+
+                            <br />
+
+                            <button type="submit" style="background-color: #86A612; color: #fff; border: none; padding: 7px; border-radius: 5px;">Szukaj</button>
+                        </form>
                     </div>
                 </div>
 
@@ -208,19 +164,6 @@
         </div>
     </section>
 
-    <script>
-        //Zmiana koloru napisu "Pies" po wcisnieciu przycisku
-        var searchOptDog = document.getElementById('search-opt-dog');
-        var labelDog = document.querySelector('label[for="search-opt-dog"] span');
-
-        searchOptDog.addEventListener('click', function () {
-            if (searchOptDog.checked) {
-                labelDog.style.color = "white";
-            } else {
-                labelDog.style.color = "#86A612";
-            }
-        });
-    </script>
 
     <br> <br />
 
@@ -246,7 +189,7 @@
                 Adopcja psa z naszego schroniska to wspaniałe doświadczenie. Nasze psy są wychodzone, w pełni zaszczepione
                 i gotowe na nowy dom.
             </p>
-            <p><a class="btn btn-default" href="#" role="button">Zobacz, jak adoptować &raquo;</a></p>
+            <p><a class="btn btn-default" href="/Pieski/All" role="button">Zobacz, jak adoptować &raquo;</a></p>
         </div>
 
         <div class="col-md-4">
@@ -255,15 +198,9 @@
                 Nasze schronisko działa dzięki pomocy wolontariuszy i darowizn. Jeśli chcesz pomóc nam w ratowaniu psich żyć,
                 możesz nas wesprzeć finansowo lub jako wolontariusz.
             </p>
-            <p><a class="btn btn-default" href="#" role="button">Dowiedz się więcej &raquo;</a></p>
+            <p><a class="btn btn-default" href="/Home/Donate" role="button">Dowiedz się więcej &raquo;</a></p>
         </div>
     </div>
-
-
-
-
-
-
 
 
 </body>
