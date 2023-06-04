@@ -1,0 +1,30 @@
+@model IEnumerable<AdoptujPieska.Models.FormSchel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Moje formularze</title>
+</head>
+<body>
+    <h1>Moje formularze</h1>
+
+    <table>
+        <tr>
+            <th>Imiê</th>
+            <th>Nazwisko</th>
+            <th>Numer telefonu</th>
+            <th>Wiadomoœæ</th>
+        </tr>
+
+        @foreach (var form in Model)
+        {
+            <tr>
+                <td>@form.name</td>
+                <td>@form.surname</td>
+                <td>@form.phone</td>
+                <td>@form.message</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

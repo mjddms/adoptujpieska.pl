@@ -242,36 +242,36 @@
 							</div>
 
 							<div class="card-body">
-								<form id="form">
-									<div class="mb-4">
-										<input class="form-control form-control-lg rounded-pill" name="formName" id="formName" type="text" placeholder="Imiê" autocomplete="off" required data-msg="Podaj swoje imiê" style="font-size: 14px; ">
-									</div>
-									<div class="mb-4">
-										<input class="form-control form-control-lg rounded-pill" name="formPhone" id="formPhone" type="tel" placeholder="numer telefonu" autocomplete="off" required data-msg="Podaj swój numer telefonu" style="font-size: 14px;">
-									</div>
-									<div class="mb-4">
-										<input class="form-control form-control-lg rounded-pill" name="formEmail" id="formEmail" type="email" placeholder="adres email" autocomplete="off" required data-msg="Podaj swój adres email" style="font-size: 14px;">
-									</div>
-									<div class="mb-2">
-										<textarea class="form-control form-control-lg rounded" rows="4" name="formMessage" id="formMessage" placeholder="Wpisz swoj¹ wiadomoœæ" required data-msg="Wpisz swoj¹ wiadomoœæ" style="font-size: 14px;"></textarea>
-									</div>
-									<div class="mb-4">
-										<input class="form-check-input" id="formAgree" type="checkbox" required>
-										<label class="form-check-label text-muted" for="formAgree">
-											<span class="text-sm" data-localize="contact-agree" style="font-size: 15px;">
-												Akceptujê <a href='/assets/pp.pdf'>warunki</a> przetwarzania moich danych osobowych
-											</span>
-										</label>
-									</div>
+                                <form action="@Url.Action("CreateForm", "Pieski")" method="POST">                                   
+                                    <div class="mb-4">
+                                        <input class="form-control form-control-lg rounded-pill" name="name" id="name" type="text" placeholder="Imiê" autocomplete="off" required data-msg="Podaj swoje imiê" style="font-size: 14px; ">
+                                    </div>
+                                    <div class="mb-4">
+                                        <input class="form-control form-control-lg rounded-pill" name="surname" id="surname" type="text" placeholder="Nazwisko" autocomplete="off" required data-msg="Podaj swoje nazwisko" style="font-size: 14px; ">
+                                    </div>
+                                    <div class="mb-4">
+                                        <input class="form-control form-control-lg rounded-pill" name="phone" id="phone" type="text" placeholder="numer telefonu" autocomplete="off" required data-msg="Podaj swój numer telefonu" style="font-size: 14px;">
+                                    </div>
+                                    <div class="mb-2">
+                                        <textarea class="form-control form-control-lg rounded" rows="4" name="message" id="message" type="text" placeholder="Wpisz swoj¹ wiadomoœæ" required data-msg="Wpisz swoj¹ wiadomoœæ" style="font-size: 14px;"></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <input class="form-check-input" id="formAgree" type="checkbox" required>
+                                        <label class="form-check-label text-muted" for="formAgree">
+                                            <span class="text-sm" data-localize="contact-agree" style="font-size: 15px;">
+                                                Akceptujê <a href='/assets/pp.pdf'>warunki</a> przetwarzania moich danych osobowych
+                                            </span>
+                                        </label>
+                                    </div>
 
-									<div class="mb-4 d-none alert alert-success" role="alert" id="formAlert" data-localize="contact-success">Twoja wiadomoœæ zosta³a wys³ana!</div>
-									<div class="d-grid text-center mb-2">
-										<a class="btn btn-primary rounded-pill border-0" href="#" id="button-send" style="background-color: #8BC34A; border: 2px solid #8BC34A; ">
-											<i class="far fa-paper-plane me-2"></i>
-											<span data-localize="contact-send">Wyœlij wiadomoœæ</span>
-										</a>
-									</div>
-								</form>
+                                    <div class="mb-4 d-none alert alert-success" role="alert" id="formAlert" data-localize="contact-success">Twoja wiadomoœæ zosta³a wys³ana!</div>
+                                    <div class="d-grid text-center mb-2">
+                                        <button type="submit" class="btn btn-primary rounded-pill border-0" id="button-send" style="background-color: #8BC34A; border: 2px solid #8BC34A; ">
+                                            <i class="far fa-paper-plane me-2"></i>
+                                            <span data-localize="contact-send">Wyœlij wiadomoœæ</span>
+                                        </button>
+                                    </div>
+                                </form>
 							</div>
 						</div>
 					</div>

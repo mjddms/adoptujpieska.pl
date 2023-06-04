@@ -1,6 +1,15 @@
 ﻿@model AdoptujPieska.Models.Pieski
 
-
+@{
+    var unikalneRasy = new HashSet<string>();
+    foreach (var piesek in ViewBag.Pieski)
+    {
+        if (!unikalneRasy.Contains(piesek.Rasa))
+        {
+            unikalneRasy.Add(piesek.Rasa);
+        }
+    }
+}
 
 <head>
 
@@ -107,26 +116,10 @@
                                 <input type="text" name="rasa" id="rasa" style="border: 1px solid #ccc; padding: 5px; border-radius: 5px;" list="rasa-list" value="@ViewBag.WybranaRasa">
                                 <datalist id="rasa-list">
                                     <option value="">Wszystkie</option>
-                                    <option value="labrador">Labrador Retriever</option>
-                                    <option value="owczarek">Owczarek niemiecki</option>
-                                    <option value="golden">Golden Retriever</option>
-                                    <option value="yorkshire">Yorkshire Terrier</option>
-                                    <option value="buldog">Bulldog francuski</option>
-                                    <option value="jackrussell">Jack Russell Terrier</option>
-                                    <option value="bordercollie">Border Collie</option>
-                                    <option value="sznaucer">Sznaucer miniaturowy</option>
-                                    <option value="shihtzu">Shih Tzu</option>
-                                    <option value="chihuahua">Chihuahua</option>
-                                    <option value="beagle">Beagle</option>
-                                    <option value="cockerspaniel">Cocker Spaniel</option>
-                                    <option value="goldendoodle">Golden Doodle</option>
-                                    <option value="bernersennenhund">Berner Sennenhund</option>
-                                    <option value="amstaff">Amstaff</option>
-                                    <option value="westhighland">West Highland White Terrier</option>
-                                    <option value="husky">Siberian Husky</option>
-                                    <option value="boxer">Boxer</option>
-                                    <option value="cavalierkingcharles">Cavalier King Charles Spaniel</option>
-                                    <option value="rottweiler">Rottweiler</option>
+                                    @foreach (var rasa in unikalneRasy)
+                                    {
+                                        <option value="@rasa">@rasa</option>
+                                    }
                                 </datalist>
                             </div>
 
@@ -180,7 +173,7 @@
                 Nasze schronisko dla psów działa od 2005 roku. Jesteśmy organizacją non-profit i naszym celem jest znalezienie
                 domu dla jak największej liczby bezdomnych psów.
             </p>
-            <p><a class="btn btn-default" href="#" role="button">Czytaj więcej &raquo;</a></p>
+            <p><a class="btn btn-default" href="/Home/About" role="button">Czytaj więcej &raquo;</a></p>
         </div>
 
         <div class="col-md-4">

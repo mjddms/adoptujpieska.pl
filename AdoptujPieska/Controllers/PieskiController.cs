@@ -13,6 +13,10 @@ using System.Runtime.CompilerServices;
 using System.Xml.Schema;
 using System.Data.Linq;
 using System.Diagnostics;
+using Microsoft.SqlServer.Server;
+using Newtonsoft.Json.Linq;
+using System.Security.Principal;
+using System.Web.UI.WebControls;
 
 
 namespace AdoptujPieska.Controllers
@@ -53,6 +57,7 @@ namespace AdoptujPieska.Controllers
 
             return RedirectToAction("All");
         }
+
 
 
         public ActionResult All(Pieski piesek, string aktywny, string lubi_dzieci, string lubi_psy, string plec, string rasa, int? wiek)
@@ -189,8 +194,9 @@ namespace AdoptujPieska.Controllers
                 {
                     return HttpNotFound();
                 }
+            
 
-                return View(pies);
+            return View(pies) ;
             
         }
         public ActionResult Photos(int id)
@@ -263,6 +269,36 @@ namespace AdoptujPieska.Controllers
 
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult CreateForm(Pieski pies, string name, string surname, string phone, string message)
+        {
+            if (Session["Username"]==null)
+            {
+                return RedirectToAction("Login", "User"); // Przekierowanie na akcję logowania w kontrolerze Account
+            }
+
+            
+            if (pies == null)
+            {
+                return View("~/Views/Shared/Error.cshtml"); // Przykład obsługi, jeśli nie znaleziono psa o podanym id
+            }
+
+            FormSchel formData = new FormSchel();
+
+            int userId = (int)Session["Id"];
+            formData.idDog = pies.Id;
+            formData.idUser = userId;
+            formData.name = name;
+            formData.surname = surname;
+            formData.phone = phone;
+            formData.message = message;
+
+            db.FormSchel.InsertOnSubmit(formData);
+            db.SubmitChanges();
+            return RedirectToAction("All");
+         
         }
 
 
