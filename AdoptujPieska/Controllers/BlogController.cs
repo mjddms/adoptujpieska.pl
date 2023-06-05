@@ -118,6 +118,7 @@ namespace AdoptujPieska.Controllers
                 return HttpNotFound();
             }
 
+            db.Comments.DeleteAllOnSubmit(post.Comments);
             db.Blog.DeleteOnSubmit(post);
             db.SubmitChanges();
 
