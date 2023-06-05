@@ -1,30 +1,204 @@
 @model IEnumerable<AdoptujPieska.Models.FormSchel>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Moje formularze</title>
-</head>
-<body>
-    <h1>Moje formularze</h1>
+@{
+    ViewBag.Title = "Forms";
+}
 
-    <table>
-        <tr>
-            <th>Imiê</th>
-            <th>Nazwisko</th>
-            <th>Numer telefonu</th>
-            <th>Wiadomoœæ</th>
-        </tr>
+<style>
+    body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        min-height: 100vh;
+        font-family: "Poppins", sans-serif;
+    }
 
-        @foreach (var form in Model)
-        {
-            <tr>
-                <td>@form.name</td>
-                <td>@form.surname</td>
-                <td>@form.phone</td>
-                <td>@form.message</td>
-            </tr>
+    .fota {
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+
+        .fota:hover img {
+            transform: scale(1.1);
         }
-    </table>
-</body>
-</html>
+
+
+        .fota:hover p {
+            opacity: 1;
+        }
+
+        .fota img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease-in-out;
+        }
+
+    .container-fota {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+
+    .header .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .header .container .left_col {
+            padding: 25px 20px;
+            text-align: center;
+            max-width: 350px;
+            position: relative;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+            .header .container .left_col .zdjecie {
+                position: absolute;
+                top: 50px;
+                left: 50%;
+                transform: translatex(-50%);
+            }
+
+                .header .container .left_col .zdjecie img {
+                    width: 120px;
+                    height: 120px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    display: block;
+                    box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.18);
+                }
+
+            .header .container .left_col h2 {
+                margin-top: 110px;
+                font-weight: 600;
+                font-size: 22px;
+                margin-bottom: 5px;
+            }
+
+            .header .container .left_col p {
+                font-size: 0.9rem;
+                color: #818181;
+                margin: 0;
+            }
+
+            .header .container .left_col .ile {
+                justify-content: space-evenly;
+                position: relative;
+                margin: 35px 0;
+            }
+
+                .header .container .left_col .ile li {
+                    display: flex;
+                    flex-direction: column;
+                    color: #818181;
+                    font-size: 0.9rem;
+                }
+
+                    .header .container .left_col .ile li span {
+                        color: #1d1d1d;
+                        font-weight: 600;
+                    }
+
+                .header .container .left_col .ile:after {
+                    position: absolute;
+                    content: "";
+                    bottom: -16px;
+                    display: block;
+                    background: #cccccc;
+                    height: 1px;
+                    width: 100%;
+                }
+
+        .header .container .content p {
+            font-size: 1rem;
+            color: #1d1d1d;
+            line-height: 1.8em;
+        }
+
+        .header .container .content ul {
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+            .header .container .content ul li {
+                display: flex;
+            }
+
+            .header .container .content ul i {
+                font-size: 1.3rem;
+            }
+</style>
+
+<table class="table">
+    <tr>
+        <th>
+            Pies
+        </th>
+        <th>
+            Imie
+        </th>
+        <th>
+            Nazwisko
+        </th>
+        <th>
+            Telefon
+        </th>
+        <th>
+            Wiadomoœæ
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var form in Model)
+    {
+        <tr>
+            <td>
+                <div class="fota">
+                    <a href="@Url.Action("Profile", "Pieski", new { id = form.idDog })">
+                        <img src="@Url.Action("GetDogImageById", "Pieski", new { id = form.idDog })">
+                    </a>
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => form.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => form.surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => form.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => form.message)
+            </td>
+            <td>
+                @Html.ActionLink("Usuñ", "DeleteForm", "Pieski", new { id = form.Id }, new { onclick = "return confirm('Czy na pewno chcesz usun¹æ ten formularz?')" })
+            </td>
+        </tr>
+    }
+
+</table>
