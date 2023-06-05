@@ -20,9 +20,9 @@ namespace AdoptujPieska.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
+    using System.ComponentModel.DataAnnotations;
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Database1")]
 	public partial class DBUserModelDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -33,18 +33,12 @@ namespace AdoptujPieska.Models
     partial void InsertPhoto(Photo instance);
     partial void UpdatePhoto(Photo instance);
     partial void DeletePhoto(Photo instance);
-    partial void InsertPieski(Pieski instance);
-    partial void UpdatePieski(Pieski instance);
-    partial void DeletePieski(Pieski instance);
     partial void InsertLike(Like instance);
     partial void UpdateLike(Like instance);
     partial void DeleteLike(Like instance);
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
-    partial void InsertPhotosBlog(PhotosBlog instance);
-    partial void UpdatePhotosBlog(PhotosBlog instance);
-    partial void DeletePhotosBlog(PhotosBlog instance);
     partial void InsertBlog(Blog instance);
     partial void UpdateBlog(Blog instance);
     partial void DeleteBlog(Blog instance);
@@ -54,6 +48,9 @@ namespace AdoptujPieska.Models
     partial void InsertFormSchel(FormSchel instance);
     partial void UpdateFormSchel(FormSchel instance);
     partial void DeleteFormSchel(FormSchel instance);
+    partial void InsertPieski(Pieski instance);
+    partial void UpdatePieski(Pieski instance);
+    partial void DeletePieski(Pieski instance);
     #endregion
 		
 		public DBUserModelDataContext(string connection) : 
@@ -88,14 +85,6 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Pieski> Pieski
-		{
-			get
-			{
-				return this.GetTable<Pieski>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Like> Like
 		{
 			get
@@ -109,14 +98,6 @@ namespace AdoptujPieska.Models
 			get
 			{
 				return this.GetTable<User>();
-			}
-		}
-		
-		public System.Data.Linq.Table<PhotosBlog> PhotosBlog
-		{
-			get
-			{
-				return this.GetTable<PhotosBlog>();
 			}
 		}
 		
@@ -141,6 +122,14 @@ namespace AdoptujPieska.Models
 			get
 			{
 				return this.GetTable<FormSchel>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Pieski> Pieski
+		{
+			get
+			{
+				return this.GetTable<Pieski>();
 			}
 		}
 	}
@@ -296,433 +285,6 @@ namespace AdoptujPieska.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Pieski")]
-	public partial class Pieski : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Rasa;
-		
-		private string _Imie;
-		
-		private System.Nullable<int> _Wiek;
-		
-		private System.Nullable<bool> _Plec;
-		
-		private string _Zdjecie;
-		
-		private System.Nullable<bool> _Aktywny;
-		
-		private System.Nullable<bool> _Lubi_dzieci;
-		
-		private System.Nullable<bool> _Lubi_psy;
-		
-		private string _Opis;
-		
-		private System.Nullable<int> _IdUser;
-		
-		private EntitySet<Photo> _Photo;
-		
-		private EntitySet<Like> _Like;
-		
-		private EntitySet<FormSchel> _FormSchel;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnRasaChanging(string value);
-    partial void OnRasaChanged();
-    partial void OnImieChanging(string value);
-    partial void OnImieChanged();
-    partial void OnWiekChanging(System.Nullable<int> value);
-    partial void OnWiekChanged();
-    partial void OnPlecChanging(System.Nullable<bool> value);
-    partial void OnPlecChanged();
-    partial void OnZdjecieChanging(string value);
-    partial void OnZdjecieChanged();
-    partial void OnAktywnyChanging(System.Nullable<bool> value);
-    partial void OnAktywnyChanged();
-    partial void OnLubi_dzieciChanging(System.Nullable<bool> value);
-    partial void OnLubi_dzieciChanged();
-    partial void OnLubi_psyChanging(System.Nullable<bool> value);
-    partial void OnLubi_psyChanged();
-    partial void OnOpisChanging(string value);
-    partial void OnOpisChanged();
-    partial void OnIdUserChanging(System.Nullable<int> value);
-    partial void OnIdUserChanged();
-    #endregion
-		
-		public Pieski()
-		{
-			this._Photo = new EntitySet<Photo>(new Action<Photo>(this.attach_Photo), new Action<Photo>(this.detach_Photo));
-			this._Like = new EntitySet<Like>(new Action<Like>(this.attach_Like), new Action<Like>(this.detach_Like));
-			this._FormSchel = new EntitySet<FormSchel>(new Action<FormSchel>(this.attach_FormSchel), new Action<FormSchel>(this.detach_FormSchel));
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rasa", DbType="VarChar(50)")]
-		public string Rasa
-		{
-			get
-			{
-				return this._Rasa;
-			}
-			set
-			{
-				if ((this._Rasa != value))
-				{
-					this.OnRasaChanging(value);
-					this.SendPropertyChanging();
-					this._Rasa = value;
-					this.SendPropertyChanged("Rasa");
-					this.OnRasaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Imie", DbType="VarChar(50)")]
-		public string Imie
-		{
-			get
-			{
-				return this._Imie;
-			}
-			set
-			{
-				if ((this._Imie != value))
-				{
-					this.OnImieChanging(value);
-					this.SendPropertyChanging();
-					this._Imie = value;
-					this.SendPropertyChanged("Imie");
-					this.OnImieChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Wiek", DbType="Int")]
-		public System.Nullable<int> Wiek
-		{
-			get
-			{
-				return this._Wiek;
-			}
-			set
-			{
-				if ((this._Wiek != value))
-				{
-					this.OnWiekChanging(value);
-					this.SendPropertyChanging();
-					this._Wiek = value;
-					this.SendPropertyChanged("Wiek");
-					this.OnWiekChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plec", DbType="Bit")]
-		public System.Nullable<bool> Plec
-		{
-			get
-			{
-				return this._Plec;
-			}
-			set
-			{
-				if ((this._Plec != value))
-				{
-					this.OnPlecChanging(value);
-					this.SendPropertyChanging();
-					this._Plec = value;
-					this.SendPropertyChanged("Plec");
-					this.OnPlecChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zdjecie", DbType="NVarChar(MAX)")]
-		public string Zdjecie
-		{
-			get
-			{
-				return this._Zdjecie;
-			}
-			set
-			{
-				if ((this._Zdjecie != value))
-				{
-					this.OnZdjecieChanging(value);
-					this.SendPropertyChanging();
-					this._Zdjecie = value;
-					this.SendPropertyChanged("Zdjecie");
-					this.OnZdjecieChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aktywny", DbType="Bit")]
-		public System.Nullable<bool> Aktywny
-		{
-			get
-			{
-				return this._Aktywny;
-			}
-			set
-			{
-				if ((this._Aktywny != value))
-				{
-					this.OnAktywnyChanging(value);
-					this.SendPropertyChanging();
-					this._Aktywny = value;
-					this.SendPropertyChanged("Aktywny");
-					this.OnAktywnyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Lubi dzieci]", Storage="_Lubi_dzieci", DbType="Bit")]
-		public System.Nullable<bool> Lubi_dzieci
-		{
-			get
-			{
-				return this._Lubi_dzieci;
-			}
-			set
-			{
-				if ((this._Lubi_dzieci != value))
-				{
-					this.OnLubi_dzieciChanging(value);
-					this.SendPropertyChanging();
-					this._Lubi_dzieci = value;
-					this.SendPropertyChanged("Lubi_dzieci");
-					this.OnLubi_dzieciChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Lubi psy]", Storage="_Lubi_psy", DbType="Bit")]
-		public System.Nullable<bool> Lubi_psy
-		{
-			get
-			{
-				return this._Lubi_psy;
-			}
-			set
-			{
-				if ((this._Lubi_psy != value))
-				{
-					this.OnLubi_psyChanging(value);
-					this.SendPropertyChanging();
-					this._Lubi_psy = value;
-					this.SendPropertyChanged("Lubi_psy");
-					this.OnLubi_psyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Opis", DbType="NVarChar(MAX)")]
-		public string Opis
-		{
-			get
-			{
-				return this._Opis;
-			}
-			set
-			{
-				if ((this._Opis != value))
-				{
-					this.OnOpisChanging(value);
-					this.SendPropertyChanging();
-					this._Opis = value;
-					this.SendPropertyChanged("Opis");
-					this.OnOpisChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUser", DbType="Int")]
-		public System.Nullable<int> IdUser
-		{
-			get
-			{
-				return this._IdUser;
-			}
-			set
-			{
-				if ((this._IdUser != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdUserChanging(value);
-					this.SendPropertyChanging();
-					this._IdUser = value;
-					this.SendPropertyChanged("IdUser");
-					this.OnIdUserChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Photo", Storage="_Photo", ThisKey="Id", OtherKey="IdDog")]
-		public EntitySet<Photo> Photo
-		{
-			get
-			{
-				return this._Photo;
-			}
-			set
-			{
-				this._Photo.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Like", Storage="_Like", ThisKey="Id", OtherKey="LikeDog")]
-		public EntitySet<Like> Like
-		{
-			get
-			{
-				return this._Like;
-			}
-			set
-			{
-				this._Like.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_FormSchel", Storage="_FormSchel", ThisKey="Id", OtherKey="idDog")]
-		public EntitySet<FormSchel> FormSchel
-		{
-			get
-			{
-				return this._FormSchel;
-			}
-			set
-			{
-				this._FormSchel.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Pieski", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Pieski.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Pieski.Add(this);
-						this._IdUser = value.Id;
-					}
-					else
-					{
-						this._IdUser = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Photo(Photo entity)
-		{
-			this.SendPropertyChanging();
-			entity.Pieski = this;
-		}
-		
-		private void detach_Photo(Photo entity)
-		{
-			this.SendPropertyChanging();
-			entity.Pieski = null;
-		}
-		
-		private void attach_Like(Like entity)
-		{
-			this.SendPropertyChanging();
-			entity.Pieski = this;
-		}
-		
-		private void detach_Like(Like entity)
-		{
-			this.SendPropertyChanging();
-			entity.Pieski = null;
-		}
-		
-		private void attach_FormSchel(FormSchel entity)
-		{
-			this.SendPropertyChanging();
-			entity.Pieski = this;
-		}
-		
-		private void detach_FormSchel(FormSchel entity)
-		{
-			this.SendPropertyChanging();
-			entity.Pieski = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Like]")]
 	public partial class Like : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -735,9 +297,9 @@ namespace AdoptujPieska.Models
 		
 		private int _LikeDog;
 		
-		private EntityRef<Pieski> _Pieski;
-		
 		private EntityRef<User> _User;
+		
+		private EntityRef<Pieski> _Pieski;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -753,8 +315,8 @@ namespace AdoptujPieska.Models
 		
 		public Like()
 		{
-			this._Pieski = default(EntityRef<Pieski>);
 			this._User = default(EntityRef<User>);
+			this._Pieski = default(EntityRef<Pieski>);
 			OnCreated();
 		}
 		
@@ -826,40 +388,6 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Like", Storage="_Pieski", ThisKey="LikeDog", OtherKey="Id", IsForeignKey=true)]
-		public Pieski Pieski
-		{
-			get
-			{
-				return this._Pieski.Entity;
-			}
-			set
-			{
-				Pieski previousValue = this._Pieski.Entity;
-				if (((previousValue != value) 
-							|| (this._Pieski.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Pieski.Entity = null;
-						previousValue.Like.Remove(this);
-					}
-					this._Pieski.Entity = value;
-					if ((value != null))
-					{
-						value.Like.Add(this);
-						this._LikeDog = value.Id;
-					}
-					else
-					{
-						this._LikeDog = default(int);
-					}
-					this.SendPropertyChanged("Pieski");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Like", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
 		public User User
 		{
@@ -890,6 +418,40 @@ namespace AdoptujPieska.Models
 						this._IdUser = default(int);
 					}
 					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Like", Storage="_Pieski", ThisKey="LikeDog", OtherKey="Id", IsForeignKey=true)]
+		public Pieski Pieski
+		{
+			get
+			{
+				return this._Pieski.Entity;
+			}
+			set
+			{
+				Pieski previousValue = this._Pieski.Entity;
+				if (((previousValue != value) 
+							|| (this._Pieski.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Pieski.Entity = null;
+						previousValue.Like.Remove(this);
+					}
+					this._Pieski.Entity = value;
+					if ((value != null))
+					{
+						value.Like.Add(this);
+						this._LikeDog = value.Id;
+					}
+					else
+					{
+						this._LikeDog = default(int);
+					}
+					this.SendPropertyChanged("Pieski");
 				}
 			}
 		}
@@ -939,8 +501,6 @@ namespace AdoptujPieska.Models
 		
 		private string _DESCRIPTION;
 		
-		private EntitySet<Pieski> _Pieski;
-		
 		private EntitySet<Like> _Like;
 		
 		private EntitySet<Blog> _Blog;
@@ -948,6 +508,8 @@ namespace AdoptujPieska.Models
 		private EntitySet<Comments> _Comments;
 		
 		private EntitySet<FormSchel> _FormSchel;
+		
+		private EntitySet<Pieski> _Pieski;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -975,11 +537,11 @@ namespace AdoptujPieska.Models
 		
 		public User()
 		{
-			this._Pieski = new EntitySet<Pieski>(new Action<Pieski>(this.attach_Pieski), new Action<Pieski>(this.detach_Pieski));
 			this._Like = new EntitySet<Like>(new Action<Like>(this.attach_Like), new Action<Like>(this.detach_Like));
 			this._Blog = new EntitySet<Blog>(new Action<Blog>(this.attach_Blog), new Action<Blog>(this.detach_Blog));
 			this._Comments = new EntitySet<Comments>(new Action<Comments>(this.attach_Comments), new Action<Comments>(this.detach_Comments));
 			this._FormSchel = new EntitySet<FormSchel>(new Action<FormSchel>(this.attach_FormSchel), new Action<FormSchel>(this.detach_FormSchel));
+			this._Pieski = new EntitySet<Pieski>(new Action<Pieski>(this.attach_Pieski), new Action<Pieski>(this.detach_Pieski));
 			OnCreated();
 		}
 		
@@ -1004,7 +566,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USERNAME", DbType="VarChar(50)")]
-		public string USERNAME
+        [DisplayName("Nazwa:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string USERNAME
 		{
 			get
 			{
@@ -1024,7 +588,10 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMAIL", DbType="VarChar(50)")]
-		public string EMAIL
+        [DisplayName("Email:")]
+        [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string EMAIL
 		{
 			get
 			{
@@ -1044,7 +611,10 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="VarChar(50)")]
-		public string PASSWORD
+        [DisplayName("Hasło:")]
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string PASSWORD
 		{
 			get
 			{
@@ -1064,7 +634,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ROLE", DbType="Int")]
-		public System.Nullable<int> ROLE
+        [DisplayName("Rola:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<int> ROLE
 		{
 			get
 			{
@@ -1084,7 +656,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PHOTO", DbType="NVarChar(MAX)")]
-		public string PHOTO
+        [DisplayName("Zdjęcie:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string PHOTO
 		{
 			get
 			{
@@ -1104,7 +678,8 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PHONE", DbType="NVarChar(50)")]
-		public string PHONE
+        [DisplayName("Numer telefonu:")]
+        public string PHONE
 		{
 			get
 			{
@@ -1124,7 +699,8 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ADDRESS", DbType="NVarChar(50)")]
-		public string ADDRESS
+        [DisplayName("Adres:")]
+        public string ADDRESS
 		{
 			get
 			{
@@ -1144,7 +720,8 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRIPTION", DbType="NVarChar(MAX)")]
-		public string DESCRIPTION
+        [DisplayName("Opis:")]
+        public string DESCRIPTION
 		{
 			get
 			{
@@ -1160,19 +737,6 @@ namespace AdoptujPieska.Models
 					this.SendPropertyChanged("DESCRIPTION");
 					this.OnDESCRIPTIONChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Pieski", Storage="_Pieski", ThisKey="Id", OtherKey="IdUser")]
-		public EntitySet<Pieski> Pieski
-		{
-			get
-			{
-				return this._Pieski;
-			}
-			set
-			{
-				this._Pieski.Assign(value);
 			}
 		}
 		
@@ -1228,6 +792,19 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Pieski", Storage="_Pieski", ThisKey="Id", OtherKey="IdUser")]
+		public EntitySet<Pieski> Pieski
+		{
+			get
+			{
+				return this._Pieski;
+			}
+			set
+			{
+				this._Pieski.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1246,18 +823,6 @@ namespace AdoptujPieska.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Pieski(Pieski entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Pieski(Pieski entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
 		}
 		
 		private void attach_Like(Like entity)
@@ -1307,156 +872,17 @@ namespace AdoptujPieska.Models
 			this.SendPropertyChanging();
 			entity.User = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PhotosBlog")]
-	public partial class PhotosBlog : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _PhotosPost;
-		
-		private System.Nullable<int> _IdPost;
-		
-		private EntityRef<Blog> _Blog;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnPhotosPostChanging(string value);
-    partial void OnPhotosPostChanged();
-    partial void OnIdPostChanging(System.Nullable<int> value);
-    partial void OnIdPostChanged();
-    #endregion
-		
-		public PhotosBlog()
+		private void attach_Pieski(Pieski entity)
 		{
-			this._Blog = default(EntityRef<Blog>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.User = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		private void detach_Pieski(Pieski entity)
 		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhotosPost", DbType="NVarChar(MAX)")]
-		public string PhotosPost
-		{
-			get
-			{
-				return this._PhotosPost;
-			}
-			set
-			{
-				if ((this._PhotosPost != value))
-				{
-					this.OnPhotosPostChanging(value);
-					this.SendPropertyChanging();
-					this._PhotosPost = value;
-					this.SendPropertyChanged("PhotosPost");
-					this.OnPhotosPostChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPost", DbType="Int")]
-		public System.Nullable<int> IdPost
-		{
-			get
-			{
-				return this._IdPost;
-			}
-			set
-			{
-				if ((this._IdPost != value))
-				{
-					if (this._Blog.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdPostChanging(value);
-					this.SendPropertyChanging();
-					this._IdPost = value;
-					this.SendPropertyChanged("IdPost");
-					this.OnIdPostChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Blog_PhotosBlog", Storage="_Blog", ThisKey="IdPost", OtherKey="Id", IsForeignKey=true)]
-		public Blog Blog
-		{
-			get
-			{
-				return this._Blog.Entity;
-			}
-			set
-			{
-				Blog previousValue = this._Blog.Entity;
-				if (((previousValue != value) 
-							|| (this._Blog.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Blog.Entity = null;
-						previousValue.PhotosBlog.Remove(this);
-					}
-					this._Blog.Entity = value;
-					if ((value != null))
-					{
-						value.PhotosBlog.Add(this);
-						this._IdPost = value.Id;
-					}
-					else
-					{
-						this._IdPost = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Blog");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.User = null;
 		}
 	}
 	
@@ -1477,8 +903,6 @@ namespace AdoptujPieska.Models
 		private string _photo;
 		
 		private string _content;
-		
-		private EntitySet<PhotosBlog> _PhotosBlog;
 		
 		private EntitySet<Comments> _Comments;
 		
@@ -1504,7 +928,6 @@ namespace AdoptujPieska.Models
 		
 		public Blog()
 		{
-			this._PhotosBlog = new EntitySet<PhotosBlog>(new Action<PhotosBlog>(this.attach_PhotosBlog), new Action<PhotosBlog>(this.detach_PhotosBlog));
 			this._Comments = new EntitySet<Comments>(new Action<Comments>(this.attach_Comments), new Action<Comments>(this.detach_Comments));
 			this._User = default(EntityRef<User>);
 			OnCreated();
@@ -1551,7 +974,8 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_author", DbType="Int")]
-		public System.Nullable<int> author
+        [DisplayName("Autor:")]
+        public System.Nullable<int> author
 		{
 			get
 			{
@@ -1634,19 +1058,6 @@ namespace AdoptujPieska.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Blog_PhotosBlog", Storage="_PhotosBlog", ThisKey="Id", OtherKey="IdPost")]
-		public EntitySet<PhotosBlog> PhotosBlog
-		{
-			get
-			{
-				return this._PhotosBlog;
-			}
-			set
-			{
-				this._PhotosBlog.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Blog_Comments", Storage="_Comments", ThisKey="Id", OtherKey="IdPost")]
 		public EntitySet<Comments> Comments
 		{
@@ -1712,18 +1123,6 @@ namespace AdoptujPieska.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_PhotosBlog(PhotosBlog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Blog = this;
-		}
-		
-		private void detach_PhotosBlog(PhotosBlog entity)
-		{
-			this.SendPropertyChanging();
-			entity.Blog = null;
 		}
 		
 		private void attach_Comments(Comments entity)
@@ -2051,7 +1450,8 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUser", DbType="Int")]
-		public System.Nullable<int> idUser
+        [DisplayName("Id użytkownika:")]
+        public System.Nullable<int> idUser
 		{
 			get
 			{
@@ -2075,7 +1475,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
-		public string name
+        [DisplayName("Imie:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string name
 		{
 			get
 			{
@@ -2095,7 +1497,8 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_surname", DbType="NVarChar(50)")]
-		public string surname
+        [DisplayName("Nazwisko:")]
+        public string surname
 		{
 			get
 			{
@@ -2115,7 +1518,8 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone", DbType="NVarChar(50)")]
-		public string phone
+        [DisplayName("Numer telefonu:")]
+        public string phone
 		{
 			get
 			{
@@ -2135,7 +1539,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="NVarChar(MAX)")]
-		public string message
+        [DisplayName("Wiadomość:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string message
 		{
 			get
 			{
@@ -2155,7 +1561,9 @@ namespace AdoptujPieska.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idDog", DbType="Int")]
-		public System.Nullable<int> idDog
+        [DisplayName("Id Pieska:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<int> idDog
 		{
 			get
 			{
@@ -2264,6 +1672,476 @@ namespace AdoptujPieska.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Pieski")]
+
+	public partial class Pieski : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Rasa;
+		
+		private string _Imie;
+		
+		private System.Nullable<int> _Wiek;
+		
+		private System.Nullable<bool> _Plec;
+		
+		private string _Zdjecie;
+		
+		private System.Nullable<bool> _Aktywny;
+		
+		private System.Nullable<bool> _Lubi_dzieci;
+		
+		private System.Nullable<bool> _Lubi_psy;
+		
+		private string _Opis;
+		
+		private System.Nullable<int> _IdUser;
+		
+		private System.Nullable<int> _Likes;
+		
+		private EntitySet<Photo> _Photo;
+		
+		private EntitySet<Like> _Like;
+		
+		private EntitySet<FormSchel> _FormSchel;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnRasaChanging(string value);
+    partial void OnRasaChanged();
+    partial void OnImieChanging(string value);
+    partial void OnImieChanged();
+    partial void OnWiekChanging(System.Nullable<int> value);
+    partial void OnWiekChanged();
+    partial void OnPlecChanging(System.Nullable<bool> value);
+    partial void OnPlecChanged();
+    partial void OnZdjecieChanging(string value);
+    partial void OnZdjecieChanged();
+    partial void OnAktywnyChanging(System.Nullable<bool> value);
+    partial void OnAktywnyChanged();
+    partial void OnLubi_dzieciChanging(System.Nullable<bool> value);
+    partial void OnLubi_dzieciChanged();
+    partial void OnLubi_psyChanging(System.Nullable<bool> value);
+    partial void OnLubi_psyChanged();
+    partial void OnOpisChanging(string value);
+    partial void OnOpisChanged();
+    partial void OnIdUserChanging(System.Nullable<int> value);
+    partial void OnIdUserChanged();
+    partial void OnLikesChanging(System.Nullable<int> value);
+    partial void OnLikesChanged();
+    #endregion
+		
+		public Pieski()
+		{
+			this._Photo = new EntitySet<Photo>(new Action<Photo>(this.attach_Photo), new Action<Photo>(this.detach_Photo));
+			this._Like = new EntitySet<Like>(new Action<Like>(this.attach_Like), new Action<Like>(this.detach_Like));
+			this._FormSchel = new EntitySet<FormSchel>(new Action<FormSchel>(this.attach_FormSchel), new Action<FormSchel>(this.detach_FormSchel));
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rasa", DbType="VarChar(50)")]
+        [DisplayName("Rasa:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string Rasa
+		{
+			get
+			{
+				return this._Rasa;
+			}
+			set
+			{
+				if ((this._Rasa != value))
+				{
+					this.OnRasaChanging(value);
+					this.SendPropertyChanging();
+					this._Rasa = value;
+					this.SendPropertyChanged("Rasa");
+					this.OnRasaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Imie", DbType="VarChar(50)")]
+        [DisplayName("Imie:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string Imie
+		{
+			get
+			{
+				return this._Imie;
+			}
+			set
+			{
+				if ((this._Imie != value))
+				{
+					this.OnImieChanging(value);
+					this.SendPropertyChanging();
+					this._Imie = value;
+					this.SendPropertyChanged("Imie");
+					this.OnImieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Wiek", DbType="Int")]
+        [DisplayName("Wiek:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<int> Wiek
+		{
+			get
+			{
+				return this._Wiek;
+			}
+			set
+			{
+				if ((this._Wiek != value))
+				{
+					this.OnWiekChanging(value);
+					this.SendPropertyChanging();
+					this._Wiek = value;
+					this.SendPropertyChanged("Wiek");
+					this.OnWiekChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plec", DbType="Bit")]
+        [DisplayName("Płeć:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<bool> Plec
+		{
+			get
+			{
+				return this._Plec;
+			}
+			set
+			{
+				if ((this._Plec != value))
+				{
+					this.OnPlecChanging(value);
+					this.SendPropertyChanging();
+					this._Plec = value;
+					this.SendPropertyChanged("Plec");
+					this.OnPlecChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zdjecie", DbType="NVarChar(MAX)")]
+        [DisplayName("Zdjęcie:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string Zdjecie
+		{
+			get
+			{
+				return this._Zdjecie;
+			}
+			set
+			{
+				if ((this._Zdjecie != value))
+				{
+					this.OnZdjecieChanging(value);
+					this.SendPropertyChanging();
+					this._Zdjecie = value;
+					this.SendPropertyChanged("Zdjecie");
+					this.OnZdjecieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Aktywny", DbType="Bit")]
+        [DisplayName("Czy jest aktywny?")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<bool> Aktywny
+		{
+			get
+			{
+				return this._Aktywny;
+			}
+			set
+			{
+				if ((this._Aktywny != value))
+				{
+					this.OnAktywnyChanging(value);
+					this.SendPropertyChanging();
+					this._Aktywny = value;
+					this.SendPropertyChanged("Aktywny");
+					this.OnAktywnyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Lubi dzieci]", Storage="_Lubi_dzieci", DbType="Bit")]
+        [DisplayName("Czy lubi dzieci?")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<bool> Lubi_dzieci
+		{
+			get
+			{
+				return this._Lubi_dzieci;
+			}
+			set
+			{
+				if ((this._Lubi_dzieci != value))
+				{
+					this.OnLubi_dzieciChanging(value);
+					this.SendPropertyChanging();
+					this._Lubi_dzieci = value;
+					this.SendPropertyChanged("Lubi_dzieci");
+					this.OnLubi_dzieciChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Lubi psy]", Storage="_Lubi_psy", DbType="Bit")]
+        [DisplayName("Czy toleruje inne psy?")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public System.Nullable<bool> Lubi_psy
+		{
+			get
+			{
+				return this._Lubi_psy;
+			}
+			set
+			{
+				if ((this._Lubi_psy != value))
+				{
+					this.OnLubi_psyChanging(value);
+					this.SendPropertyChanging();
+					this._Lubi_psy = value;
+					this.SendPropertyChanged("Lubi_psy");
+					this.OnLubi_psyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Opis", DbType="NVarChar(MAX)")]
+        [DisplayName("Opis:")]
+        [Required(ErrorMessage = "To pole nie może być puste!")]
+        public string Opis
+		{
+			get
+			{
+				return this._Opis;
+			}
+			set
+			{
+				if ((this._Opis != value))
+				{
+					this.OnOpisChanging(value);
+					this.SendPropertyChanging();
+					this._Opis = value;
+					this.SendPropertyChanged("Opis");
+					this.OnOpisChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUser", DbType="Int")]
+		public System.Nullable<int> IdUser
+		{
+			get
+			{
+				return this._IdUser;
+			}
+			set
+			{
+				if ((this._IdUser != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdUserChanging(value);
+					this.SendPropertyChanging();
+					this._IdUser = value;
+					this.SendPropertyChanged("IdUser");
+					this.OnIdUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Likes", DbType="Int")]
+		public System.Nullable<int> Likes
+		{
+			get
+			{
+				return this._Likes;
+			}
+			set
+			{
+				if ((this._Likes != value))
+				{
+					this.OnLikesChanging(value);
+					this.SendPropertyChanging();
+					this._Likes = value;
+					this.SendPropertyChanged("Likes");
+					this.OnLikesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Photo", Storage="_Photo", ThisKey="Id", OtherKey="IdDog")]
+		public EntitySet<Photo> Photo
+		{
+			get
+			{
+				return this._Photo;
+			}
+			set
+			{
+				this._Photo.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_Like", Storage="_Like", ThisKey="Id", OtherKey="LikeDog")]
+		public EntitySet<Like> Like
+		{
+			get
+			{
+				return this._Like;
+			}
+			set
+			{
+				this._Like.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pieski_FormSchel", Storage="_FormSchel", ThisKey="Id", OtherKey="idDog")]
+		public EntitySet<FormSchel> FormSchel
+		{
+			get
+			{
+				return this._FormSchel;
+			}
+			set
+			{
+				this._FormSchel.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Pieski", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Pieski.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Pieski.Add(this);
+						this._IdUser = value.Id;
+					}
+					else
+					{
+						this._IdUser = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Photo(Photo entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pieski = this;
+		}
+		
+		private void detach_Photo(Photo entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pieski = null;
+		}
+		
+		private void attach_Like(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pieski = this;
+		}
+		
+		private void detach_Like(Like entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pieski = null;
+		}
+		
+		private void attach_FormSchel(FormSchel entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pieski = this;
+		}
+		
+		private void detach_FormSchel(FormSchel entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pieski = null;
 		}
 	}
 }

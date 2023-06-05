@@ -1,0 +1,7 @@
+﻿
+<h2>Czy na pewno chcesz usunąć konto?</h2>
+
+@using (Html.BeginForm("Delete", "User", new { id = Model.Id }))
+{
+	<button type="submit" class="btn btn-danger">Usuń</button>
+}

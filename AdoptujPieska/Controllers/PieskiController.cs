@@ -51,6 +51,7 @@ namespace AdoptujPieska.Controllers
                 }
                 int UserId = (int)Session["Id"];
                 piesek.IdUser = UserId;
+                piesek.Likes = 0;
                 db.Pieski.InsertOnSubmit(piesek);
                 db.SubmitChanges();
             
@@ -244,12 +245,14 @@ namespace AdoptujPieska.Controllers
             {
                 like.Pieski = piesek;
                 like.IdUser = Uid;
+                piesek.Likes++;
                 piesek.Like.Add(like);
                 db.SubmitChanges();
                 
             }
             else
             {
+                piesek.Likes--;
                 db.Like.DeleteOnSubmit(iflike);
                 db.SubmitChanges();
             }

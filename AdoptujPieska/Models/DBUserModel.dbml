@@ -7,32 +7,13 @@
       <Association Name="Pieski_Photo" Member="Pieski" ThisKey="IdDog" OtherKey="Id" Type="Pieski" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Pieski" Member="Pieski">
-    <Type Name="Pieski">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Rasa" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Imie" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Wiek" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Plec" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Zdjecie" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Aktywny" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[Lubi dzieci]" Member="Lubi_dzieci" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="[Lubi psy]" Member="Lubi_psy" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Opis" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="IdUser" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Pieski_Photo" Member="Photo" ThisKey="Id" OtherKey="IdDog" Type="Photo" />
-      <Association Name="Pieski_Like" Member="Like" ThisKey="Id" OtherKey="LikeDog" Type="Like" />
-      <Association Name="Pieski_FormSchel" Member="FormSchel" ThisKey="Id" OtherKey="idDog" Type="FormSchel" />
-      <Association Name="User_Pieski" Member="User" ThisKey="IdUser" OtherKey="Id" Type="User" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.[Like]" Member="Like">
     <Type Name="Like">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdUser" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="LikeDog" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Pieski_Like" Member="Pieski" ThisKey="LikeDog" OtherKey="Id" Type="Pieski" IsForeignKey="true" />
       <Association Name="User_Like" Member="User" ThisKey="IdUser" OtherKey="Id" Type="User" IsForeignKey="true" />
+      <Association Name="Pieski_Like" Member="Pieski" ThisKey="LikeDog" OtherKey="Id" Type="Pieski" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.[User]" Member="User">
@@ -46,19 +27,11 @@
       <Column Name="PHONE" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ADDRESS" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="DESCRIPTION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="User_Pieski" Member="Pieski" ThisKey="Id" OtherKey="IdUser" Type="Pieski" />
       <Association Name="User_Like" Member="Like" ThisKey="Id" OtherKey="IdUser" Type="Like" />
       <Association Name="User_Blog" Member="Blog" ThisKey="Id" OtherKey="author" Type="Blog" />
       <Association Name="User_Comments" Member="Comments" ThisKey="Id" OtherKey="author" Type="Comments" />
       <Association Name="User_FormSchel" Member="FormSchel" ThisKey="Id" OtherKey="idUser" Type="FormSchel" />
-    </Type>
-  </Table>
-  <Table Name="dbo.PhotosBlog" Member="PhotosBlog">
-    <Type Name="PhotosBlog">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="PhotosPost" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="IdPost" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Blog_PhotosBlog" Member="Blog" ThisKey="IdPost" OtherKey="Id" Type="Blog" IsForeignKey="true" />
+      <Association Name="User_Pieski" Member="Pieski" ThisKey="Id" OtherKey="IdUser" Type="Pieski" />
     </Type>
   </Table>
   <Table Name="dbo.Blog" Member="Blog">
@@ -69,7 +42,6 @@
       <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="photo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="content" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Association Name="Blog_PhotosBlog" Member="PhotosBlog" ThisKey="Id" OtherKey="IdPost" Type="PhotosBlog" />
       <Association Name="Blog_Comments" Member="Comments" ThisKey="Id" OtherKey="IdPost" Type="Comments" />
       <Association Name="User_Blog" Member="User" ThisKey="author" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
@@ -96,6 +68,26 @@
       <Column Name="idDog" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="User_FormSchel" Member="User" ThisKey="idUser" OtherKey="Id" Type="User" IsForeignKey="true" />
       <Association Name="Pieski_FormSchel" Member="Pieski" ThisKey="idDog" OtherKey="Id" Type="Pieski" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pieski" Member="Pieski">
+    <Type Name="Pieski">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Rasa" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Imie" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Wiek" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Plec" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Zdjecie" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Aktywny" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[Lubi dzieci]" Member="Lubi_dzieci" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[Lubi psy]" Member="Lubi_psy" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Opis" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IdUser" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Likes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Pieski_Photo" Member="Photo" ThisKey="Id" OtherKey="IdDog" Type="Photo" />
+      <Association Name="Pieski_Like" Member="Like" ThisKey="Id" OtherKey="LikeDog" Type="Like" />
+      <Association Name="Pieski_FormSchel" Member="FormSchel" ThisKey="Id" OtherKey="idDog" Type="FormSchel" />
+      <Association Name="User_Pieski" Member="User" ThisKey="IdUser" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

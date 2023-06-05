@@ -226,6 +226,8 @@
     <Content Include="Views\Blog\Delete.cshtml" />
     <Content Include="Views\Home\Donate.cshtml" />
     <Content Include="Views\Home\Forms.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\Shared\_Forms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\uploads\" />

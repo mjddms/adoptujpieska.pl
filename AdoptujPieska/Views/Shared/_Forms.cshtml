@@ -1,0 +1,8 @@
+﻿@if (Session["UserName"] != null && (int)Session["Role"] == 1)
+{
+	<li>@Html.ActionLink("Formularze", "Forms", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+}
+else if (Session["UserName"] != null && (int)Session["Role"] == 0)
+{
+	<li>@Html.ActionLink("Użytkownicy", "Users", "User", new { area = "" }, new { @class = "nav-link" })</li>
+}

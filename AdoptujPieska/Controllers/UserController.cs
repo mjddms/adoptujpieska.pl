@@ -189,6 +189,67 @@ namespace AdoptujPieska.Controllers
             return View(users);
 
         }
+        public ActionResult Delete(int id)
+        {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                User user = db.User.SingleOrDefault(x => x.Id == id);
+
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    List<Like> likes = db.Like.Where(x => x.IdUser == id).ToList();
+                    db.Like.DeleteAllOnSubmit(likes);
+                    List<Comments> com = db.Comments.Where(x => x.author == id).ToList();
+                    db.Comments.DeleteAllOnSubmit(com);
+                    db.User.DeleteOnSubmit(user);
+                    db.SubmitChanges();
+
+                    if ((int)Session["Role"]==0)
+                    {
+                        return RedirectToAction("Users");
+                    }
+                    else
+                    {
+                        Session.Abandon();
+                        return RedirectToAction("Login");
+                    }
+                    
+                }
+            }
+        }
+        public ActionResult ChangeUserRole(int id, int role)
+        {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                User user = db.User.SingleOrDefault(x => x.Id == id);
+
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    user.ROLE = role;
+                    db.SubmitChanges();
+
+                    TempData["SuccessMessage"] = "Rola użytkownika została zmieniona.";
+                    return RedirectToAction("Users");
+                }
+            }
+        }
+
 
         public ActionResult LogOut()
         {

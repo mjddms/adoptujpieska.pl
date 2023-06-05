@@ -181,6 +181,7 @@
 <body>
 	<div class="profil-container">
 		<div class="column"">
+			<h5>&#10084;: @Model.Likes </h5>
 			@if (Session["UserName"] != null && (int)Session["Role"] == 2)
 			{
 				@Html.Partial("Like")

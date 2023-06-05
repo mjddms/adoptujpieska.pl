@@ -1,72 +1,56 @@
 ﻿@model IEnumerable<AdoptujPieska.Models.User>
 
 @{
-    ViewBag.Title = "Users";
+	ViewBag.Title = "Users";
 }
+@if (Session["Role"]!=null && (int)Session["Role"] == 0)
+{
+	<h2>Users</h2>
 
-<h2>Users</h2>
+	<table class="table">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.USERNAME)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.EMAIL)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ROLE)
+			</th>
+			<th></th>
+		</tr>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.USERNAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EMAIL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PASSWORD)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ROLE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PHOTO)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PHONE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ADDRESS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DESCRIPTION)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.USERNAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMAIL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PASSWORD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ROLE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PHOTO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PHONE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ADDRESS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DESCRIPTION)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Profile", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.USERNAME)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.EMAIL)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.ROLE)
+				</td>
+				<td>
+					@using (Html.BeginForm("ChangeUserRole", "User", new { id = item.Id }, FormMethod.Post))
+					{
+						<div class="form-group">
+							@Html.DropDownList("ROLE", new SelectList(new[]
+					{
+					new SelectListItem { Text = "0", Value = "0" },
+					new SelectListItem { Text = "1", Value = "1" },
+					new SelectListItem { Text = "2", Value = "2" }
+				}, "Value", "Text"), new { @class = "form-control" })
+						</div>
+						<button type="submit" class="btn btn-primary">Change Role</button>
+					}
+					|
+					@Html.ActionLink("Profil", "Profile", new { id = item.Id }) |
+					@Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { onclick = "return confirm('Czy na pewno chcesz usunąć konto?')", @class = "btn-delete" })
+				</td>
+			</tr>
+		}
+	</table>
 }
-
-</table>

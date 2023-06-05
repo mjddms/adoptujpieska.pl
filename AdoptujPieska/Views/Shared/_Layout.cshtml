@@ -33,17 +33,14 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Strona główna", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Pieski", "Index", "Pieski/All", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Schroniska", "Shelters", "User", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Blog", "Blog", "Blog", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Darowizny", "Donate", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    @if (Session["UserName"] != null && (int)Session["Role"] == 1)
-                    {
-                        <li>@Html.ActionLink("Formularze", "Forms", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    }
-                </ul>
+				<ul class="navbar-nav flex-grow-1">
+					<li>@Html.ActionLink("Strona główna", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+					<li>@Html.ActionLink("Pieski", "Index", "Pieski/All", new { area = "" }, new { @class = "nav-link" })</li>
+					<li>@Html.ActionLink("Schroniska", "Shelters", "User", new { area = "" }, new { @class = "nav-link" })</li>
+					<li>@Html.ActionLink("Blog", "Blog", "Blog", new { area = "" }, new { @class = "nav-link" })</li>
+					<li>@Html.ActionLink("Darowizny", "Donate", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+					@Html.Partial("_Forms")
+				</ul>
 				@Html.Partial("_LoginPart")
 			</div>
 		</div>
